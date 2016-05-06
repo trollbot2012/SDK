@@ -30,7 +30,11 @@ namespace PrideStalker_Rengar.Handlers
                     if(Spells.E.IsReady() && Target.Distance(Player) <= Player.AttackRange)
                     {
                         Spells.E.Cast(Target);
-                    }   
+                    }
+                    if (Spells.Q.IsReady() && Target.Distance(Player) <= Player.AttackRange && !Spells.E.IsReady())
+                    {
+                        Spells.Q.Cast(Target);
+                    }
                 }
                 if(Player.Mana < 5)
                 {
@@ -135,11 +139,11 @@ namespace PrideStalker_Rengar.Handlers
             {
                 if (Player.Mana == 5)
                 {
-                    if (MenuConfig.UseItem && Spells.Q.IsReady() && Spells.W.IsReady())
+                    if (MenuConfig.UseItem && Spells.Q.IsReady() && hasPassive)
                     {
                         ITEM.CastYomu();
                     }
-                    if (Spells.Q.IsReady() && Target.Distance(Player) <= Player.AttackRange)
+                    if (Spells.Q.IsReady() && Target.Distance(Player) <= Spells.W.Range)
                     {
                         Spells.Q.Cast(Target);
                     }
@@ -193,13 +197,23 @@ namespace PrideStalker_Rengar.Handlers
             {
                 if (Player.Mana == 5)
                 {
-                    if (Spells.Q.IsReady() && m.Distance(Player) <= Player.AttackRange)
+                    if (MenuConfig.ComboMode.SelectedValue == "Ap Combo")
                     {
-                        if (MenuConfig.UseItem)
+                        if (Spells.W.IsReady() && m.Distance(Player) <= Spells.W.Range)
                         {
-                            ITEM.CastHydra();
+                            Spells.W.Cast(m.ServerPosition);
                         }
-                        Spells.Q.Cast(m);
+                    }
+                    else
+                    {
+                        if (Spells.Q.IsReady() && m.Distance(Player) <= Player.AttackRange)
+                        {
+                            if (MenuConfig.UseItem)
+                            {
+                                ITEM.CastHydra();
+                            }
+                            Spells.Q.Cast(m);
+                        }
                     }
                 }
                 if (Player.Mana < 5)
@@ -241,17 +255,27 @@ namespace PrideStalker_Rengar.Handlers
             {
                 if (Player.Mana == 5)
                 {
-                    if (Spells.Q.IsReady() && Player.HealthPercent >= 80)
+                    if(MenuConfig.ComboMode.SelectedValue == "Ap Combo")
                     {
-                        Spells.Q.Cast(m.ServerPosition);
-                    }
-                    if (Spells.W.IsReady() && m.Distance(Player) <= Spells.W.Range && Player.HealthPercent < 80)
-                    {
-                        if (MenuConfig.UseItem)
+                        if(Spells.W.IsReady() && m.Distance(Player) <= Spells.W.Range)
                         {
-                            ITEM.CastHydra();
+                            Spells.W.Cast(m.ServerPosition);
                         }
-                        Spells.W.Cast(m.ServerPosition);
+                    }
+                    else
+                    {
+                        if (Spells.Q.IsReady() && Player.HealthPercent >= 80)
+                        {
+                            Spells.Q.Cast(m.ServerPosition);
+                        }
+                        if (Spells.W.IsReady() && m.Distance(Player) <= Spells.W.Range && Player.HealthPercent < 80)
+                        {
+                            if (MenuConfig.UseItem)
+                            {
+                                ITEM.CastHydra();
+                            }
+                            Spells.W.Cast(m.ServerPosition);
+                        }
                     }
                 }
                 if (Player.Mana < 5)
