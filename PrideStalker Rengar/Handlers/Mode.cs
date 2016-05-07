@@ -12,11 +12,10 @@ namespace PrideStalker_Rengar.Handlers
 {
     class Mode : Core
     {
+        public static bool hasPassive => Player.Buffs.Any(x => x.Name.ToLower().Contains("rengarpassivebuff"));
         #region Combo
         public static void Combo()
-        {
-            var hasPassive = Player.HasBuff("RengarRBuff") || Player.HasBuff("RengarPassiveBuff");
-            
+        {   
             var Target = Variables.TargetSelector.GetTarget(Spells.E.Range, DamageType.Physical);
             
 
@@ -53,12 +52,12 @@ namespace PrideStalker_Rengar.Handlers
                         {
                             Spells.Q.Cast(Target);
                         }
+                        if (MenuConfig.UseItem)
+                        {
+                            ITEM.CastHydra();
+                        }
                         if (Spells.W.IsReady())
                         {
-                            if (MenuConfig.UseItem)
-                            {
-                                ITEM.CastHydra();
-                            }
                             Spells.W.Cast(Target);
                         }
                     }
@@ -69,8 +68,6 @@ namespace PrideStalker_Rengar.Handlers
         #region ApCombo
         public static void ApCombo()
         {
-            var hasPassive = Player.HasBuff("RengarRBuff") || Player.HasBuff("RengarPassiveBuff");
-
             var Target = Variables.TargetSelector.GetTarget(Spells.E.Range, DamageType.Magical);
 
             if (Target != null && Target.IsValidTarget() && !Target.IsZombie)
@@ -132,8 +129,6 @@ namespace PrideStalker_Rengar.Handlers
         #region TripleQ
         public static void TripleQ()
         {
-            var hasPassive = Player.HasBuff("RengarRBuff") || Player.HasBuff("RengarPassiveBuff");
-
             var Target = Variables.TargetSelector.GetTarget(Spells.E.Range, DamageType.Physical);
 
             if (Target != null && Target.IsValidTarget() && !Target.IsZombie)
@@ -189,12 +184,64 @@ namespace PrideStalker_Rengar.Handlers
             }
         }
         #endregion
+        #region OneShot
+        public static void OneShot()
+        {
+            var Target = Variables.TargetSelector.GetTarget(Spells.E.Range, DamageType.Physical);
+
+            if (Target != null && Target.IsValidTarget() && !Target.IsZombie)
+            {
+                if (Player.Mana == 5)
+                {
+                    if (MenuConfig.UseItem && Spells.Q.IsReady() && hasPassive)
+                    {
+                        ITEM.CastYomu();
+                    }
+
+                    if (Spells.Q.IsReady() && Target.Distance(Player) <= Spells.W.Range)
+                    {
+                        Spells.Q.Cast();   
+                    }
+                }
+                if (Player.Mana < 5)
+                {
+                    if (MenuConfig.UseItem && Spells.Q.IsReady() && Spells.W.IsReady())
+                    {
+                        ITEM.CastYomu();
+                    }
+                    if (Spells.E.IsReady() && !hasPassive && Player.Distance(Target) <= Spells.W.Range)
+                    {
+                        if (MenuConfig.IgnoreE)
+                        {
+                            Spells.E.Cast(Target.Position);
+                        }
+                        else
+                        {
+                            Spells.E.Cast(Target);
+                        }
+                    }
+                    if (Spells.Q.IsReady() && Target.Distance(Player) <= Spells.W.Range)
+                    {
+                        Spells.Q.Cast();
+                    }
+                    if (Spells.W.IsReady() && Player.Distance(Target) <= Spells.W.Range)
+                    {
+                        if (MenuConfig.UseItem)
+                        {
+                            ITEM.CastHydra();
+                        }
+                        Spells.W.Cast(Target);
+                    }
+                }
+            }
+         }
+        
+        #endregion
 
         #region Lane
         public static void Lane()
         {
             var minions = GameObjects.EnemyMinions.Where(m => m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral && m.IsValidTarget(Spells.W.Range)).ToList();
-            var hasPassive = Player.HasBuff("RengarRBuff") || Player.HasBuff("RengarPassiveBuff");
 
             if (minions == null || Player.Mana == 5 && MenuConfig.Passive.Active)
             {
@@ -252,8 +299,6 @@ namespace PrideStalker_Rengar.Handlers
         {
             var mob = ObjectManager.Get<Obj_AI_Minion>().Where(m => !m.IsDead && !m.IsZombie && m.Team == GameObjectTeam.Neutral && m.IsValidTarget(Spells.W.Range)).ToList();
 
-            var hasPassive = Player.HasBuff("RengarRBuff") || Player.HasBuff("RengarPassiveBuff");
-
             if (mob == null || Player.Mana == 5 && MenuConfig.Passive.Active)
             {
                 return;
@@ -293,7 +338,7 @@ namespace PrideStalker_Rengar.Handlers
                         }
                         Spells.W.Cast(m.ServerPosition);
                     }
-                   else if (Spells.E.IsReady() && !hasPassive && !Spells.Q.IsReady() && !Spells.W.IsReady())
+                   else if (Spells.E.IsReady() && !Spells.Q.IsReady() && !Spells.W.IsReady())
                     {
                         Spells.E.Cast(m.ServerPosition);
                     }
@@ -338,6 +383,9 @@ namespace PrideStalker_Rengar.Handlers
                         DelayAction.Add(200, () => MenuConfig.ComboMode.SelectedValue = "Ap Combo");
                         break;
                     case "Ap Combo":
+                        DelayAction.Add(200, () => MenuConfig.ComboMode.SelectedValue = "OneShot");
+                        break;
+                    case "OneShot":
                         DelayAction.Add(200, () => MenuConfig.ComboMode.SelectedValue = "Gank");
                         break;
                 }

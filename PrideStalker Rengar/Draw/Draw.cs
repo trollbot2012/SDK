@@ -30,15 +30,19 @@ namespace PrideStalker_Rengar.Draw
             {
                 if(MenuConfig.ComboMode.SelectedValue == "Ap Combo")
                 {
-                    Drawing.DrawText(heropos.X - 15, heropos.Y + 40, System.Drawing.Color.White, "Ap Combo");
+                    Drawing.DrawText(heropos.X - 15, heropos.Y + 40, System.Drawing.Color.White, "AP COMBO");
                 }
                 if (MenuConfig.ComboMode.SelectedValue == "Triple Q")
                 {
-                    Drawing.DrawText(heropos.X - 15, heropos.Y + 40, System.Drawing.Color.White, "Triple Q");
+                    Drawing.DrawText(heropos.X - 15, heropos.Y + 40, System.Drawing.Color.White, "TRIPLE Q");
                 }
                 if (MenuConfig.ComboMode.SelectedValue == "Gank")
                 {
-                    Drawing.DrawText(heropos.X - 15, heropos.Y + 40, System.Drawing.Color.White, "Gank");
+                    Drawing.DrawText(heropos.X - 15, heropos.Y + 40, System.Drawing.Color.White, "GANK");
+                }
+                if (MenuConfig.ComboMode.SelectedValue == "OneShot")
+                {
+                    Drawing.DrawText(heropos.X - 15, heropos.Y + 40, System.Drawing.Color.White, "ONESHOT");
                 }
             }
             if (MenuConfig.EngageDraw)
