@@ -16,10 +16,11 @@ namespace PrideStalker_Rengar.Handlers
         public static void Combo()
         {
             var hasPassive = Player.HasBuff("RengarRBuff") || Player.HasBuff("RengarPassiveBuff");
-
+            
             var Target = Variables.TargetSelector.GetTarget(Spells.E.Range, DamageType.Physical);
+            
 
-            if(Target != null && Target.IsValidTarget() && !Target.IsZombie)
+            if (Target != null && Target.IsValidTarget() && !Target.IsZombie)
             {
                 if(Player.Mana == 5)
                 {
@@ -27,9 +28,9 @@ namespace PrideStalker_Rengar.Handlers
                     {
                         ITEM.CastYomu();
                     }
-                    if(Spells.E.IsReady() && Target.Distance(Player) <= Player.AttackRange)
+                    if(Spells.E.IsReady() && Target.Distance(Player) <= Spells.E.Range)
                     {
-                        Spells.E.Cast(Target);
+                       Spells.E.Cast(Target);
                     }
                     if (Spells.Q.IsReady() && Target.Distance(Player) <= Player.AttackRange && !Spells.E.IsReady())
                     {
@@ -42,7 +43,7 @@ namespace PrideStalker_Rengar.Handlers
                     {
                         ITEM.CastYomu();
                     }
-                    if (Spells.E.IsReady() && !hasPassive)
+                    if (Spells.E.IsReady() && !hasPassive && Target.Distance(Player) <= Spells.E.Range)
                     {
                         Spells.E.Cast(Target);
                     }
@@ -143,9 +144,13 @@ namespace PrideStalker_Rengar.Handlers
                     {
                         ITEM.CastYomu();
                     }
+                    
                     if (Spells.Q.IsReady() && Target.Distance(Player) <= Spells.W.Range)
                     {
-                        Spells.Q.Cast(Target);
+                        if(!MenuConfig.TripleQAAReset)
+                        {
+                            Spells.Q.Cast();
+                        }
                     }
                 }
                 if (Player.Mana < 5)
@@ -154,9 +159,12 @@ namespace PrideStalker_Rengar.Handlers
                     {
                         ITEM.CastYomu();
                     }
-                    if (Spells.Q.IsReady())
+                    if (Spells.Q.IsReady() && Target.Distance(Player) <= Spells.W.Range)
                     {
-                        Spells.Q.Cast(Target);
+                        if (!MenuConfig.TripleQAAReset)
+                        {
+                            Spells.Q.Cast();
+                        }
                     }
                     if (Spells.E.IsReady() && !Spells.Q.IsReady() && !hasPassive)
                     {

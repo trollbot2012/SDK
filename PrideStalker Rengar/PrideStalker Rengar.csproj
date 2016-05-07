@@ -64,6 +64,7 @@
     <Compile Include="Draw\Draw.cs" />
     <Compile Include="Draw\HpBarDraw.cs" />
     <Compile Include="Handlers\AfterAA.cs" />
+    <Compile Include="Handlers\BeforeAA.cs" />
     <Compile Include="Handlers\Dmg.cs" />
     <Compile Include="Handlers\Items.cs" />
     <Compile Include="Handlers\KillSteal.cs" />
