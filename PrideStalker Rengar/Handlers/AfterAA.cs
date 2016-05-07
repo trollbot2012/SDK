@@ -31,6 +31,13 @@ namespace PrideStalker_Rengar.Handlers
                         Spells.Q.Cast();
                     }
                 }
+                if(MenuConfig.ComboMode.SelectedValue == "Ap Combo")
+                {
+                    if(Player.Mana < 5)
+                    {
+                        Spells.Q.Cast();
+                    }
+                }
             }
         }
     }
