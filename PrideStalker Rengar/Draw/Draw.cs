@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PrideStalker_Rengar.Main;
 using LeagueSharp.SDK.Utils;
+using Nechrito_Rengar;
 
 namespace PrideStalker_Rengar.Draw
 {

@@ -12,17 +12,9 @@ namespace PrideStalker_Rengar
     class Core
     {
        public static Obj_AI_Hero Player => ObjectManager.Player;
-       
+
         public class Spells
         {
-            public static SpellSlot GetSmiteSlot()
-            {
-                foreach (var spell in ObjectManager.Player.Spellbook.Spells.Where(s => s.Name.ToLower().Contains("smite")))
-                {
-                    return spell.Slot;
-                }
-                return SpellSlot.Unknown;
-            }
             public static SpellSlot Ignite;
             public static Spell Q { get; set; }
             public static Spell W { get; set; }

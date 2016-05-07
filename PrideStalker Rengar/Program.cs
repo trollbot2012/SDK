@@ -18,7 +18,10 @@ namespace PrideStalker_Rengar
         {
             Events.OnLoad += Load;
         }
-
+        private static Orbwalker Orbwalker
+        {
+            get { return Variables.Orbwalker; }
+        }
         private static void Load(object sender, EventArgs e)
         {
             if (GameObjects.Player.ChampionName != "Rengar")
@@ -26,11 +29,14 @@ namespace PrideStalker_Rengar
                 return;
             }
 
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Nechrito Rengar</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Version: 2 (Date: 5/6/2016)</font></b>");
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Ap Combo Logic</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Nechrito Rengar</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Version: 3 (Date: 5/7/2016)</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Q AA Jungle</font></b>");
 
             Spells.Load();
             MenuConfig.Load();
+
+            Orbwalker.OnAction += AfterAA.OnAction;
+           
             
             Drawing.OnDraw += DRAW.OnDraw;
             Drawing.OnEndScene += Drawing_OnEndScene;
@@ -80,8 +86,8 @@ namespace PrideStalker_Rengar
                     var EasyKill = Spells.Q.IsReady() && Dmg.IsLethal(enemy)
                        ? new ColorBGRA(0, 255, 0, 120)
                        : new ColorBGRA(255, 255, 0, 120);
-                    DRAW.DrawHpBar.Unit = enemy;
-                    DRAW.DrawHpBar.DrawDmg(Dmg.ComboDmg(enemy), EasyKill);
+                    DRAW.DrawHpBar.unit = enemy;
+                    DRAW.DrawHpBar.drawDmg(Dmg.ComboDmg(enemy), EasyKill);
                 }
             }
         }

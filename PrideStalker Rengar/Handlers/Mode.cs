@@ -23,7 +23,7 @@ namespace PrideStalker_Rengar.Handlers
             {
                 if(Player.Mana == 5)
                 {
-                    if(MenuConfig.UseItem && Spells.Q.IsReady() && Spells.W.IsReady())
+                    if(MenuConfig.UseItem && Spells.Q.IsReady() && Spells.W.IsReady() && hasPassive)
                     {
                         ITEM.CastYomu();
                     }
@@ -38,7 +38,7 @@ namespace PrideStalker_Rengar.Handlers
                 }
                 if(Player.Mana < 5)
                 {
-                    if (MenuConfig.UseItem && Spells.Q.IsReady() && Spells.W.IsReady())
+                    if (MenuConfig.UseItem && Spells.Q.IsReady() && Spells.W.IsReady() && hasPassive)
                     {
                         ITEM.CastYomu();
                     }
@@ -185,7 +185,7 @@ namespace PrideStalker_Rengar.Handlers
         #region Lane
         public static void Lane()
         {
-            var minions = GameObjects.EnemyMinions.Where(m => m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral && m.IsValidTarget(Player.AttackRange)).ToList();
+            var minions = GameObjects.EnemyMinions.Where(m => m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral && m.IsValidTarget(Spells.W.Range)).ToList();
             var hasPassive = Player.HasBuff("RengarRBuff") || Player.HasBuff("RengarPassiveBuff");
 
             if (minions == null || Player.Mana == 5 && MenuConfig.Passive.Active)
@@ -264,10 +264,6 @@ namespace PrideStalker_Rengar.Handlers
                     }
                     else
                     {
-                        if (Spells.Q.IsReady() && Player.HealthPercent >= 80)
-                        {
-                            Spells.Q.Cast(m.ServerPosition);
-                        }
                         if (Spells.W.IsReady() && m.Distance(Player) <= Spells.W.Range && Player.HealthPercent < 80)
                         {
                             if (MenuConfig.UseItem)
@@ -280,11 +276,8 @@ namespace PrideStalker_Rengar.Handlers
                 }
                 if (Player.Mana < 5)
                 {
-                    if (Spells.Q.IsReady())
-                    {
-                        Spells.Q.Cast(m.ServerPosition);
-                    }
-                   else if (Spells.W.IsReady() && m.Distance(Player) <= Spells.W.Range)
+                   
+                    if (Spells.W.IsReady() && m.Distance(Player) <= Spells.W.Range)
                     {
                         if (MenuConfig.UseItem)
                         {
@@ -292,7 +285,7 @@ namespace PrideStalker_Rengar.Handlers
                         }
                         Spells.W.Cast(m.ServerPosition);
                     }
-                   else if (Spells.E.IsReady() && !hasPassive)
+                   else if (Spells.E.IsReady() && !hasPassive && !Spells.Q.IsReady() && !Spells.W.IsReady())
                     {
                         Spells.E.Cast(m.ServerPosition);
                     }

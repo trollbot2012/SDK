@@ -1,105 +1,106 @@
-﻿namespace PrideStalker_Rengar.Draw
+﻿using System;
+using LeagueSharp;
+using SharpDX;
+using SharpDX.Direct3D9;
+using Color = System.Drawing.Color;
+
+namespace Nechrito_Rengar
 {
-    using LeagueSharp;
-    using SharpDX;
-    using SharpDX.Direct3D9;
-    using System;
-    using Color = System.Drawing.Color;
-
-    public class HpBarDraw
+    internal class HpBarDraw
     {
-        public static Device DxDevice = Drawing.Direct3DDevice;
-        public static Line DxLine;
-        public float Hight = 9;
-        public float Width = 104;
+        public static Device dxDevice = Drawing.Direct3DDevice;
+        public static Line dxLine;
 
-        public Obj_AI_Hero Unit { get; set; }
+        public float hight = 9;
+        public float width = 104;
+
+
+        public HpBarDraw()
+        {
+            dxLine = new Line(dxDevice) { Width = 9 };
+
+            Drawing.OnPreReset += DrawingOnOnPreReset;
+            Drawing.OnPostReset += DrawingOnOnPostReset;
+            AppDomain.CurrentDomain.DomainUnload += CurrentDomainOnDomainUnload;
+            AppDomain.CurrentDomain.ProcessExit += CurrentDomainOnDomainUnload;
+        }
+
+        public Obj_AI_Hero unit { get; set; }
 
         private Vector2 Offset
         {
             get
             {
-                if (Unit != null)
+                if (unit != null)
                 {
-                    return Unit.IsAlly ? new Vector2(34, 9) : new Vector2(10, 20);
+                    return unit.IsAlly ? new Vector2(34, 9) : new Vector2(10, 20);
                 }
 
                 return new Vector2();
             }
         }
 
-        public Vector2 StartPosition
+        public Vector2 startPosition
         {
-            get { return new Vector2(Unit.HPBarPosition.X + Offset.X, Unit.HPBarPosition.Y + Offset.Y); }
-        }
-
-        public HpBarDraw()
-        {
-            DxLine = new Line(DxDevice) { Width = 9 };
-
-            Drawing.OnPreReset += OnPreReset;
-            Drawing.OnPostReset += OnPostReset;
-            AppDomain.CurrentDomain.DomainUnload += Unload;
-            AppDomain.CurrentDomain.ProcessExit += Unload;
-        }
-
-        private static void Unload(object sender, EventArgs eventArgs)
-        {
-            DxLine.Dispose();
-        }
-
-        private static void OnPostReset(EventArgs args)
-        {
-            DxLine.OnResetDevice();
-        }
-
-        private static void OnPreReset(EventArgs args)
-        {
-            DxLine.OnLostDevice();
+            get { return new Vector2(unit.HPBarPosition.X + Offset.X, unit.HPBarPosition.Y + Offset.Y); }
         }
 
 
-        private float GetHpProc(float dmg = 0)
+        private static void CurrentDomainOnDomainUnload(object sender, EventArgs eventArgs)
         {
-            float Health = ((Unit.Health - dmg) > 0) ? (Unit.Health - dmg) : 0;
-            return (Health / Unit.MaxHealth);
+            dxLine.Dispose();
         }
 
-        private Vector2 GetHpPosAfterDmg(float dmg)
+        private static void DrawingOnOnPostReset(EventArgs args)
         {
-            float w = GetHpProc(dmg) * Width;
-            return new Vector2(StartPosition.X + w, StartPosition.Y);
+            dxLine.OnResetDevice();
         }
 
-        public void DrawDmg(float dmg, ColorBGRA color)
+        private static void DrawingOnOnPreReset(EventArgs args)
         {
-            Vector2 hpPosNow = GetHpPosAfterDmg(0);
-            Vector2 hpPosAfter = GetHpPosAfterDmg(dmg);
-
-            FullHPBar(hpPosNow, hpPosAfter, color);
+            dxLine.OnLostDevice();
         }
 
-        private void FullHPBar(int to, int from, Color color)
-        {
-            var sPos = StartPosition;
 
+        private float getHpProc(float dmg = 0)
+        {
+            float health = ((unit.Health - dmg) > 0) ? (unit.Health - dmg) : 0;
+            return (health / unit.MaxHealth);
+        }
+
+        private Vector2 getHpPosAfterDmg(float dmg)
+        {
+            float w = getHpProc(dmg) * width;
+            return new Vector2(startPosition.X + w, startPosition.Y);
+        }
+
+        public void drawDmg(float dmg, ColorBGRA color)
+        {
+            Vector2 hpPosNow = getHpPosAfterDmg(0);
+            Vector2 hpPosAfter = getHpPosAfterDmg(dmg);
+
+            fillHPBar(hpPosNow, hpPosAfter, color);
+            //fillHPBar((int)(hpPosNow.X - startPosition.X), (int)(hpPosAfter.X- startPosition.X), color);
+        }
+
+        private void fillHPBar(int to, int from, Color color)
+        {
+            var sPos = startPosition;
             for (var i = from; i < to; i++)
             {
                 Drawing.DrawLine(sPos.X + i, sPos.Y, sPos.X + i, sPos.Y + 9, 1, color);
             }
         }
 
-        private void FullHPBar(Vector2 from, Vector2 to, ColorBGRA color)
+        private void fillHPBar(Vector2 from, Vector2 to, ColorBGRA color)
         {
-            DxLine.Begin();
+            dxLine.Begin();
 
-            DxLine.Draw(new[]
-            {
+            dxLine.Draw(new[] {
                 new Vector2((int) from.X, (int) from.Y + 4f),
-                new Vector2((int) to.X, (int) to.Y + 4f)
-            }, color);
+                new Vector2((int) to.X, (int) to.Y + 4f) }, color);
 
-            DxLine.End();
+            dxLine.End();
         }
     }
 }
