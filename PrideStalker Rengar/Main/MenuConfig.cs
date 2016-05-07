@@ -23,10 +23,12 @@ namespace PrideStalker_Rengar.Main
             KillStealSummoner = Misc.Add(new MenuBool("KillStealSummoner", "KillSteal Summoner", true));
             UseItem = Misc.Add(new MenuBool("UseItem", "Use Items", true));
             StackLastHit = Misc.Add(new MenuBool("StackLastHit", "Stack In Lasthit", true));
+            ChangeComboMode = Misc.Add(new MenuKeyBind("ChangeComboMode", "Change ComboMode", System.Windows.Forms.Keys.L, KeyBindType.Press));
             Passive = Misc.Add(new MenuKeyBind("Passive", "Passive", System.Windows.Forms.Keys.G, KeyBindType.Toggle));
                 
             // Draw
             Draw = MainMenu.Add(new Menu("Draw", "Draw"));
+            DrawCombo = Draw.Add(new MenuBool("DrawCombo", "Draw ComboMode", true));
             dind = Draw.Add(new MenuBool("dind", "Damage Indicator", true));
             EngageDraw = Draw.Add(new MenuBool("EngageDraw", "Draw Engage", true));
 
@@ -46,6 +48,7 @@ namespace PrideStalker_Rengar.Main
         public static MenuList<string> SkinChanger;
 
         public static MenuKeyBind Passive;
+        public static MenuKeyBind ChangeComboMode;
 
         public static MenuBool TripleQAAReset;
         public static MenuBool StackLastHit;
@@ -53,6 +56,7 @@ namespace PrideStalker_Rengar.Main
         public static MenuBool UseSkin;
         public static MenuBool KillStealSummoner;
         public static MenuBool UseItem;
+        public static MenuBool DrawCombo;
         public static MenuBool dind;
         public static MenuBool EngageDraw;
     }

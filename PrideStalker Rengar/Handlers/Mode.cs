@@ -324,6 +324,26 @@ namespace PrideStalker_Rengar.Handlers
         }
         #endregion
 
+        #region ComboMode
+        public static void ChangeComboMode()
+        {
+            if(MenuConfig.ChangeComboMode.Active)
+            {
+                switch(MenuConfig.ComboMode.SelectedValue)
+                {
+                    case "Gank":
+                        DelayAction.Add(200, () => MenuConfig.ComboMode.SelectedValue = "Triple Q");
+                        break;
+                    case "Triple Q":
+                        DelayAction.Add(200, () => MenuConfig.ComboMode.SelectedValue = "Ap Combo");
+                        break;
+                    case "Ap Combo":
+                        DelayAction.Add(200, () => MenuConfig.ComboMode.SelectedValue = "Gank");
+                        break;
+                }
+            }
+        }
+        #endregion
         #region Skin
         public static void SKIN()
         {
