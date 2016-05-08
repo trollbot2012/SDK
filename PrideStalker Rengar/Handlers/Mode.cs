@@ -209,7 +209,7 @@ namespace PrideStalker_Rengar.Handlers
                     {
                         ITEM.CastYomu();
                     }
-                    if (Spells.E.IsReady() && !hasPassive && Player.Distance(Target) <= Spells.W.Range)
+                    if (Spells.E.IsReady() && !hasPassive && Player.Distance(Target) <= Spells.E.Range)
                     {
                         if (MenuConfig.IgnoreE)
                         {
