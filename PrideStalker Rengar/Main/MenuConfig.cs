@@ -15,7 +15,7 @@ namespace PrideStalker_Rengar.Main
             ComboMenu = MainMenu.Add(new Menu("ComboMenu", "Combo"));
             ComboMode = ComboMenu.Add(new MenuList<string>("ComboMode", "Combo Mode", new[] { "Gank", "Triple Q", "Ap Combo", "OneShot" }));
             IgnoreE = ComboMenu.Add(new MenuBool("IgnoreE", "Ignore E Collision In TripleQ/Ap Combo/OneShot", true));
-            TripleQAAReset = ComboMenu.Add(new MenuBool("TripleQAAReset", "Q AA Reset In Triple Q", true));
+            TripleQAAReset = ComboMenu.Add(new MenuBool("TripleQAAReset", "AA Q Reset In Triple Q", true));
 
 
             // Misc

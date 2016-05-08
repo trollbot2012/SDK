@@ -188,6 +188,7 @@ namespace PrideStalker_Rengar.Handlers
         public static void OneShot()
         {
             var Target = Variables.TargetSelector.GetTarget(Spells.E.Range, DamageType.Physical);
+            var minions = GameObjects.EnemyMinions.Where(m => m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral && m.IsValidTarget(Spells.W.Range)).ToList();
 
             if (Target != null && Target.IsValidTarget() && !Target.IsZombie)
             {
@@ -212,7 +213,7 @@ namespace PrideStalker_Rengar.Handlers
                     {
                         if (MenuConfig.IgnoreE)
                         {
-                            Spells.E.Cast(Target.Position);
+                            Spells.E.Cast();
                         }
                         else
                         {
@@ -337,7 +338,7 @@ namespace PrideStalker_Rengar.Handlers
                         }
                         Spells.W.Cast(m.ServerPosition);
                     }
-                   else if (Spells.E.IsReady() && !Spells.Q.IsReady() && !Spells.W.IsReady())
+                   else if (Spells.E.IsReady())
                     {
                         Spells.E.Cast(m.ServerPosition);
                     }
