@@ -197,7 +197,6 @@ namespace PrideStalker_Rengar.Handlers
                     {
                         ITEM.CastYomu();
                     }
-
                     if (Spells.Q.IsReady() && Target.Distance(Player) <= Spells.E.Range)
                     {
                         Spells.Q.Cast();   
@@ -220,7 +219,7 @@ namespace PrideStalker_Rengar.Handlers
                             Spells.E.Cast(Target);
                         }
                     }
-                    if (Spells.Q.IsReady() && Target.Distance(Player) <= Spells.E.Range)
+                    if (Spells.Q.IsReady() && Target.Distance(Player) <= Spells.W.Range)
                     {
                         Spells.Q.Cast();
                     }
