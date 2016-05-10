@@ -18,10 +18,6 @@ namespace PrideStalker_Rengar
         {
             Events.OnLoad += Load;
         }
-        private static Orbwalker Orbwalker
-        {
-            get { return Variables.Orbwalker; }
-        }
         private static void Load(object sender, EventArgs e)
         {
             if (GameObjects.Player.ChampionName != "Rengar")

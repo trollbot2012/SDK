@@ -9,11 +9,18 @@ using System.Threading.Tasks;
 
 namespace PrideStalker_Rengar.Handlers
 {
-    class ITEM
+    class ITEM : Core
     {
         public static readonly int[] BlueSmite = { 3706, 1400, 1401, 1402, 1403 };
         public static readonly int[] RedSmite = { 3715, 1415, 1414, 1413, 1412 };
-
+        public static void CastProtobelt()
+        {
+            var Target = Variables.TargetSelector.GetSelectedTarget();
+            if (Items.CanUseItem(3152) && Target.IsValidTarget())
+            {
+                Items.UseItem(3152, Target.ServerPosition);
+            }
+        }
         public static void CastHydra()
         {
             if(Items.CanUseItem(3074))

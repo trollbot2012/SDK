@@ -29,6 +29,8 @@ namespace PrideStalker_Rengar.Main
             // Draw
             Draw = MainMenu.Add(new Menu("Draw", "Draw"));
             DrawCombo = Draw.Add(new MenuBool("DrawCombo", "Draw ComboMode", true));
+            DrawAnim = Draw.Add(new MenuBool("DrawAnim", "Draw Animation", true));
+            DrawHelp = Draw.Add(new MenuBool("DrawHelp", "Draw Tips", true));
             dind = Draw.Add(new MenuBool("dind", "Damage Indicator", true));
             EngageDraw = Draw.Add(new MenuBool("EngageDraw", "Draw Engage", true));
 
@@ -57,6 +59,8 @@ namespace PrideStalker_Rengar.Main
         public static MenuBool KillStealSummoner;
         public static MenuBool UseItem;
         public static MenuBool DrawCombo;
+        public static MenuBool DrawAnim;
+        public static MenuBool DrawHelp;
         public static MenuBool dind;
         public static MenuBool EngageDraw;
     }

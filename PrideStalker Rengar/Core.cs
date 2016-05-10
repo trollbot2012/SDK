@@ -12,7 +12,10 @@ namespace PrideStalker_Rengar
     class Core
     {
        public static Obj_AI_Hero Player => ObjectManager.Player;
-
+        public static Orbwalker Orbwalker
+        {
+            get { return Variables.Orbwalker; }
+        }
         public class Spells
         {
             public static SpellSlot Ignite;

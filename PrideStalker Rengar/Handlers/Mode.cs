@@ -16,7 +16,7 @@ namespace PrideStalker_Rengar.Handlers
         #region Combo
         public static void Combo()
         {   
-            var Target = Variables.TargetSelector.GetTarget(Spells.E.Range, DamageType.Physical);
+            var Target = Variables.TargetSelector.GetTarget(1000, DamageType.Physical);
             
 
             if (Target != null && Target.IsValidTarget() && !Target.IsZombie)
@@ -96,6 +96,10 @@ namespace PrideStalker_Rengar.Handlers
                     {
                         ITEM.CastYomu();
                     }
+                     if(MenuConfig.UseItem && !hasPassive)
+                    {
+                        ITEM.CastProtobelt();
+                    }
                     if(Target.Distance(Player) <= Spells.W.Range)
                     {
                         if (MenuConfig.UseItem && Spells.W.IsReady())
@@ -104,6 +108,7 @@ namespace PrideStalker_Rengar.Handlers
                         }
                         if (Spells.W.IsReady())
                         {
+                            Spells.W.Cast(Target);
                             Spells.W.Cast(Target);
                         }
                         else if (Spells.Q.IsReady())
@@ -114,7 +119,7 @@ namespace PrideStalker_Rengar.Handlers
                         {
                             if (MenuConfig.IgnoreE)
                             {
-                                Spells.E.Cast(Target.Position);
+                                Spells.E.Cast();
                             }
                             else
                             {
@@ -165,7 +170,7 @@ namespace PrideStalker_Rengar.Handlers
                     {
                         if (MenuConfig.IgnoreE)
                         {
-                            Spells.E.Cast(Target.Position);
+                            Spells.E.Cast(Target.ServerPosition);
                         }
                         else
                         {
@@ -338,7 +343,7 @@ namespace PrideStalker_Rengar.Handlers
                         }
                         Spells.W.Cast(m.ServerPosition);
                     }
-                   else if (Spells.E.IsReady())
+                   if (Spells.E.IsReady())
                     {
                         Spells.E.Cast(m.ServerPosition);
                     }
