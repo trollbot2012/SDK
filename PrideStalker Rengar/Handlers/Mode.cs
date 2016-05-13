@@ -12,6 +12,7 @@ namespace PrideStalker_Rengar.Handlers
 {
     class Mode : Core
     {
+
         public static bool hasPassive => Player.Buffs.Any(x => x.Name.ToLower().Contains("rengarpassivebuff"));
         #region Combo
         public static void Combo()
@@ -117,9 +118,9 @@ namespace PrideStalker_Rengar.Handlers
                         }
                         else if (Spells.E.IsReady())
                         {
-                            if (MenuConfig.IgnoreE)
+                            if (MenuConfig.IgnoreE && hasPassive)
                             {
-                                Spells.E.Cast();
+                                Spells.E.Cast(Game.CursorPos);
                             }
                             else
                             {
@@ -168,9 +169,9 @@ namespace PrideStalker_Rengar.Handlers
                     }
                     if (Spells.E.IsReady() && !Spells.Q.IsReady() && !hasPassive)
                     {
-                        if (MenuConfig.IgnoreE)
+                        if (MenuConfig.IgnoreE && hasPassive)
                         {
-                            Spells.E.Cast(Target.ServerPosition);
+                            Spells.E.Cast(Game.CursorPos);
                         }
                         else
                         {
@@ -216,9 +217,9 @@ namespace PrideStalker_Rengar.Handlers
                     }
                     if (Spells.E.IsReady() && !hasPassive && Player.Distance(Target) <= Spells.E.Range)
                     {
-                        if (MenuConfig.IgnoreE)
+                        if (MenuConfig.IgnoreE && hasPassive)
                         {
-                            Spells.E.Cast();
+                            Spells.E.Cast(Game.CursorPos);
                         }
                         else
                         {

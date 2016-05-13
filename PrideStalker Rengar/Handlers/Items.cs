@@ -11,14 +11,14 @@ namespace PrideStalker_Rengar.Handlers
 {
     class ITEM : Core
     {
-        public static readonly int[] BlueSmite = { 3706, 1400, 1401, 1402, 1403 };
-        public static readonly int[] RedSmite = { 3715, 1415, 1414, 1413, 1412 };
+      //  public static readonly int[] BlueSmite = { 3706, 1400, 1401, 1402, 1403 };
+      //  public static readonly int[] RedSmite = { 3715, 1415, 1414, 1413, 1412 };
         public static void CastProtobelt()
         {
-            var Target = Variables.TargetSelector.GetSelectedTarget();
+            var Target = Variables.TargetSelector.GetTarget(1000, DamageType.Physical);
             if (Items.CanUseItem(3152) && Target.IsValidTarget())
             {
-                Items.UseItem(3152, Target.ServerPosition);
+                Items.UseItem(3152, Player.ServerPosition.Extend(Target.ServerPosition, Player.AttackRange));
             }
         }
         public static void CastHydra()
