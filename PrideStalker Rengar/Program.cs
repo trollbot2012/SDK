@@ -16,6 +16,7 @@ namespace PrideStalker_Rengar
     {
         static void Main(string[] args)
         {
+            Bootstrap.Init(args);
             Events.OnLoad += Load;
         }
         private static void Load(object sender, EventArgs e)
