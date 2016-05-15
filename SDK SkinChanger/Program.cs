@@ -13,6 +13,7 @@ namespace SDK_SkinChanger
         public static Obj_AI_Hero Player => ObjectManager.Player;
         static void Main(string[] args)
         {
+            Bootstrap.Init(args);
             Events.OnLoad += Load;
         }
         private static void Load(object sender, EventArgs e)
