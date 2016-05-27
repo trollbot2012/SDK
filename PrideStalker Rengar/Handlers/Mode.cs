@@ -116,7 +116,7 @@ namespace PrideStalker_Rengar.Handlers
                         {
                             Spells.Q.Cast(Target);
                         }
-                        else if (Spells.E.IsReady())
+                        else if (Spells.E.IsReady() && Target.Distance(Player) <= Spells.W.Range)
                         {
                             if (MenuConfig.IgnoreE && hasPassive)
                             {
@@ -167,7 +167,7 @@ namespace PrideStalker_Rengar.Handlers
                             Spells.Q.Cast();
                         }
                     }
-                    if (Spells.E.IsReady() && !Spells.Q.IsReady())
+                    if (Spells.E.IsReady() && !Spells.Q.IsReady() && Target.Distance(Player) <= Spells.W.Range)
                     {
                         if (MenuConfig.IgnoreE && hasPassive)
                         {
@@ -215,7 +215,7 @@ namespace PrideStalker_Rengar.Handlers
                     {
                         ITEM.CastYomu();
                     }
-                    if (Spells.E.IsReady())
+                    if (Spells.E.IsReady() && Target.Distance(Player) <= Spells.W.Range)
                     {
                         if (MenuConfig.IgnoreE && hasPassive)
                         {
