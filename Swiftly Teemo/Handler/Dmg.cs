@@ -1,16 +1,14 @@
-﻿using LeagueSharp;
+﻿#region
+
+using LeagueSharp;
 using LeagueSharp.SDK;
-using LeagueSharp.SDK.Enumerations;
-using LeagueSharp.SDK.UI;
-using LeagueSharp.SDK.Utils;
-using SharpDX;
-using System;
-using System.Linq;
 using Swiftly_Teemo.Main;
+
+#endregion
 
 namespace Swiftly_Teemo.Handler
 {
-    class Dmg : Core
+    internal class Dmg : Core
     {
         public static int IgniteDmg = 50 + 20 * GameObjects.Player.Level;
         public static float ComboDmg(Obj_AI_Base enemy)

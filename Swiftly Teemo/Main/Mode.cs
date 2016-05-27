@@ -1,19 +1,15 @@
-﻿using LeagueSharp;
-using LeagueSharp.SDK;
-using LeagueSharp.SDK.Enumerations;
-using LeagueSharp.SDK.UI;
-using LeagueSharp.SDK.Utils;
-using SharpDX;
-using System;
+﻿#region
+
 using System.Linq;
-using Swiftly_Teemo.Handler;
+using LeagueSharp;
+using LeagueSharp.SDK;
+
+#endregion
 
 namespace Swiftly_Teemo.Main
 {
-    class Mode : Core
-    {
-        
-        
+    internal class Mode : Core
+    {   
         public static void Combo()
         {
             if(Target.IsValidTarget() && Target != null && !Target.IsZombie)
@@ -26,12 +22,13 @@ namespace Swiftly_Teemo.Main
                 {
                     Spells.R.Cast(Target.Position);
                 }
-                if (Spells.W.IsReady() && Player.ManaPercent > 20)
+                if (Spells.W.IsReady() && Player.ManaPercent > 22.5)
                 {
                     Spells.W.Cast();
                 }
             }
         }
+       
         public static void Lane()
         {
             var minions = GameObjects.EnemyMinions.Where(m => m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral && m.IsValidTarget(Player.AttackRange)).ToList();
@@ -91,7 +88,10 @@ namespace Swiftly_Teemo.Main
                 }
                 if(Target.Distance(Player) <= Spells.R.Range && Target.IsValidTarget() && Target != null)
                 {
-                    Spells.R.Cast(Target.Position);
+                if(Spells.R.IsReady())
+                  {
+                    Spells.R.Cast(Player.Position);
+                  }
                 }
             }
         

@@ -1,15 +1,14 @@
-﻿using LeagueSharp;
-using LeagueSharp.SDK;
-using System;
-using System.Collections.Generic;
+﻿#region
+
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LeagueSharp.SDK;
 using Swiftly_Teemo.Main;
+
+#endregion
 
 namespace Swiftly_Teemo.Handler
 {
-    class Killsteal : Core
+    internal class Killsteal : Core
     {
         public static void KillSteal()
         {

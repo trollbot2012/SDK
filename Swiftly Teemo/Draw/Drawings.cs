@@ -1,15 +1,14 @@
-﻿using LeagueSharp;
+﻿#region
+
+using System;
 using LeagueSharp.SDK.Utils;
 using Swiftly_Teemo.Main;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace Swiftly_Teemo.Draw
 {
-    class Drawings : Core
+    internal class Drawings : Core
     {
         public static HpBarDraw DrawHpBar = new HpBarDraw();
         public static void OnDraw(EventArgs args)

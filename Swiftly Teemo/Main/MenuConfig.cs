@@ -1,9 +1,13 @@
-﻿using LeagueSharp.SDK.Enumerations;
+﻿#region
+
+using LeagueSharp.SDK.Enumerations;
 using LeagueSharp.SDK.UI;
+
+#endregion
 
 namespace Swiftly_Teemo.Main
 {
-    class MenuConfig
+    internal class MenuConfig
     {
         public Menu TargetSelectorMenu;
         private const string MenuName = "Swiftly Teemo";

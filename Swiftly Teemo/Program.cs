@@ -1,21 +1,24 @@
-﻿using LeagueSharp;
-using LeagueSharp.SDK;
-using LeagueSharp.SDK.Enumerations;
-using LeagueSharp.SDK.UI;
-using LeagueSharp.SDK.Utils;
-using SharpDX;
+﻿#region
+
 using System;
 using System.Linq;
+using LeagueSharp;
+using LeagueSharp.SDK;
+using LeagueSharp.SDK.Enumerations;
+using SharpDX;
+using Swiftly_Teemo.Draw;
 using Swiftly_Teemo.Handler;
 using Swiftly_Teemo.Main;
-using Swiftly_Teemo.Draw;
+
+#endregion
 
 namespace Swiftly_Teemo
 {
-    class Program : Core
+    internal class Program : Core
     {
         static void Main(string[] args)
         {
+            Bootstrap.Init(args);
             Events.OnLoad += Load;
         }
         private static void Load(object sender, EventArgs e)

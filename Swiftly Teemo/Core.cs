@@ -1,15 +1,14 @@
-﻿using LeagueSharp;
+﻿#region
+
+using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
-using LeagueSharp.SDK.UI;
-using LeagueSharp.SDK.Utils;
-using SharpDX;
-using System;
-using System.Linq;
+
+#endregion
 
 namespace Swiftly_Teemo
 {
-    class Core
+    internal class Core
     {
         public static Orbwalker Orbwalker {get { return Variables.Orbwalker; }}
         public static Obj_AI_Hero Target => Variables.TargetSelector.GetTarget(Spells.Q.Range, DamageType.Physical);
