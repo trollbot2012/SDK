@@ -18,6 +18,7 @@ namespace Spirit_Karma.Load
 
             Game.OnUpdate += SkinChanger.OnUpdate;
             Game.OnUpdate += Mode.OnUpdate;
+            Game.OnUpdate += Trinkets.OnUpdate;
 
             Spells.Load();
             Menus.MenuConfig.Load();

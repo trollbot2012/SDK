@@ -18,7 +18,10 @@ namespace Spirit_Karma
 
         private static void Load(object sender, EventArgs e)
         {
-            if (GameObjects.Player.ChampionName != "Karma") return;
+            if (GameObjects.Player.ChampionName != "Karma")
+            {
+                Console.WriteLine("Could not load Karma!"); return;
+            }
             Spirit_Karma.Load.Load.LoadAssembly();
         }
     }
