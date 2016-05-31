@@ -19,10 +19,28 @@ namespace Spirit_Karma.Draw
             if(Player.IsDead || !MenuConfig.MantraDraw || !MenuConfig.UseDrawings) return;
             var heropos = Drawing.WorldToScreen(ObjectManager.Player.Position);
 
-            if (MenuConfig.QRange)
+            if (MenuConfig.QRange && MenuConfig.MantraMode.Index == 0)
             {
                 Render.Circle.DrawCircle(Player.Position, Spells.Q.Range,
-                   Spells.Q.IsReady() ? System.Drawing.Color.FromArgb(120, 0, 170, 255) : System.Drawing.Color.IndianRed);
+                   Spells.R.IsReady() ? System.Drawing.Color.FromArgb(120, 0, 170, 255) : System.Drawing.Color.IndianRed);
+            }
+
+            if (MenuConfig.QRange && MenuConfig.MantraMode.Index == 1)
+            {
+                Render.Circle.DrawCircle(Player.Position, Spells.W.Range,
+                   Spells.R.IsReady() ? System.Drawing.Color.FromArgb(120, 0, 170, 255) : System.Drawing.Color.IndianRed);
+            }
+
+            if (MenuConfig.QRange && MenuConfig.MantraMode.Index == 2)
+            {
+                Render.Circle.DrawCircle(Player.Position, Spells.E.Range,
+                   Spells.R.IsReady() ? System.Drawing.Color.FromArgb(120, 0, 170, 255) : System.Drawing.Color.IndianRed);
+            }
+
+            if (MenuConfig.QRange && MenuConfig.MantraMode.Index == 3)
+            {
+                Render.Circle.DrawCircle(Player.Position, Spells.Q.Range,
+                   Spells.R.IsReady() ? System.Drawing.Color.FromArgb(120, 0, 170, 255) : System.Drawing.Color.IndianRed);
             }
 
             if (MenuConfig.MantraMode.SelectedValue == "Q")

@@ -29,16 +29,16 @@ namespace Spirit_Karma.Event
                 switch (MenuConfig.MantraMode.SelectedValue)
                 {
                     case "Q":
-                        DelayAction.Add(250, () => MenuConfig.MantraMode.SelectedValue = "W");
+                        DelayAction.Add(200, () => MenuConfig.MantraMode.SelectedValue = "W");
                         break;
                     case "W":
-                        DelayAction.Add(250, () => MenuConfig.MantraMode.SelectedValue = "E");
+                        DelayAction.Add(200, () => MenuConfig.MantraMode.SelectedValue = "E");
                         break;
                     case "E":
-                        DelayAction.Add(250, () => MenuConfig.MantraMode.SelectedValue = "Auto");
+                        DelayAction.Add(200, () => MenuConfig.MantraMode.SelectedValue = "Auto");
                         break;
                     case "Auto":
-                        DelayAction.Add(250, () => MenuConfig.MantraMode.SelectedValue = "Q");
+                        DelayAction.Add(200, () => MenuConfig.MantraMode.SelectedValue = "Q");
                         break;
                 }
             }
@@ -71,92 +71,88 @@ namespace Spirit_Karma.Event
         }
         private static void Combo()
         {
-                foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().OrderBy(hp => hp.Health))
-                {
-                   if(!enemy.IsValidTarget(Spells.Q.Range) || enemy.IsDead || enemy.IsZombie) return;
+            foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().OrderBy(hp => hp.Health))
+            {
+                if (!enemy.IsValidTarget(Spells.Q.Range) || enemy.IsDead || enemy.IsZombie) return;
 
-                    Usables.Locket();
+                Usables.Locket();
                 //    Usables.Seraph();
-
                 switch (MenuConfig.MantraMode.Index)
-                    {
-                        // Q
-                        case 0:
-                            if (Spells.R.IsReady() && Spells.Q.IsReady())
-                            {
-                                Spells.R.Cast();
-                                Spells.Q.Cast(enemy);
-                            }
-                            if (Spells.Q.IsReady())
-                            {
-                                Usables.FrostQueen();
-                                Usables.ProtoBelt();
-                                Spells.Q.Cast(enemy);
-                            }
-                            if (Spells.W.IsReady())
-                            {
-                                Spells.W.Cast(enemy);
-                            }
-                            if (Spells.E.IsReady())
-                            {
-                                Spells.E.Cast(Player);
-                            }
-                            break;
-                        // W
-                        case 1:
-                            if (Spells.R.IsReady() &&  Spells.W.IsReady())
-                            {
-                                Spells.R.Cast();
-                            }
-                            if (Spells.W.IsReady())
-                            {
-                                Spells.W.Cast(enemy);
-                            }
-                            if (Spells.E.IsReady())
-                            {
-                                Spells.E.Cast(Player);
-                            }
-                            if (Spells.Q.IsReady())
-                            {
+                {
+                    case 0:
+                        if (Spells.R.IsReady() && Spells.Q.IsReady())
+                        {
+                            Spells.R.Cast();
+                            Spells.Q.Cast(enemy);
+                        }
+                        else if (Spells.Q.IsReady())
+                        {
                             Usables.FrostQueen();
                             Usables.ProtoBelt();
                             Spells.Q.Cast(enemy);
-                            }
-                            break;
-                        // E
-                        case 2:
-                            if (Spells.R.IsReady() && Spells.E.IsReady())
-                            {
-                                Spells.R.Cast();
-                               
-                            }
-                            if (Spells.E.IsReady())
-                            {
-                                Spells.E.Cast(Player);
-                            }
-                            if (Spells.W.IsReady())
-                            {
-                                Spells.W.Cast(enemy);
-                            }
-                            if (Spells.Q.IsReady())
-                            {
+                        }
+                        else if (Spells.W.IsReady())
+                        {
+                            Spells.W.Cast(enemy);
+                        }
+                        else if (Spells.E.IsReady())
+                        {
+                            Spells.E.Cast(Player);
+                        }
+                        break;
+                    case 1:
+                        if (Spells.R.IsReady() && Spells.W.IsReady())
+                        {
+                            Spells.R.Cast();
+                        }
+                        else if (Spells.W.IsReady())
+                        {
+                            Spells.W.Cast(enemy);
+                        }
+                        else if (Spells.E.IsReady())
+                        {
+                            Spells.E.Cast(Player);
+                        }
+                        else if (Spells.Q.IsReady())
+                        {
                             Usables.FrostQueen();
                             Usables.ProtoBelt();
                             Spells.Q.Cast(enemy);
-                            }
-                            break;
-                        // Auto
-                        case 3:
-                            if (Player.HealthPercent <= 30 && enemy.HealthPercent >= 50)
-                            {
-                                goto case 2;
-                            }
-                            if (!enemy.IsFacing(Player))
-                            {
-                                goto case 1;
-                            }
-                            goto case 0;
-                    }
+                        }
+                        break;
+                    case 2:
+                        if (Spells.R.IsReady() && Spells.E.IsReady())
+                        {
+                            Spells.R.Cast();
+
+                        }
+                        else if (Spells.E.IsReady())
+                        {
+                            Spells.E.Cast(Player);
+                        }
+                        else if (Spells.W.IsReady())
+                        {
+                            Spells.W.Cast(enemy);
+                        }
+                        else if (Spells.Q.IsReady())
+                        {
+                            Usables.FrostQueen();
+                            Usables.ProtoBelt();
+                            Spells.Q.Cast(enemy);
+                        }
+                        break;
+                    // Auto
+                    case 3:
+                        if (Player.HealthPercent <= 30 && enemy.HealthPercent >= 50)
+                        {
+                            goto case 2;
+                        }
+                        if (!enemy.IsFacing(Player))
+                        {
+                            goto case 1;
+                        }
+                        goto case 0;
+                }
             }
         }
 
@@ -229,10 +225,14 @@ namespace Spirit_Karma.Event
             {
                 if (Spells.R.IsReady())
                 {
-                    if (Spells.Q.IsReady() || Spells.E.IsReady())
+                    if (Spells.Q.IsReady())
                     {
                         Spells.R.Cast();
                         Spells.Q.Cast(m.ServerPosition);
+                    }
+                    else if (Spells.E.IsReady() && Player.HealthPercent <= 80)
+                    {
+                        Spells.R.Cast();
                         Spells.E.Cast(Player);
                     }
                 }

@@ -13,7 +13,7 @@ namespace Spirit_Karma.Event
     {
         public static void OnUpdate(EventArgs args)
         {
-            if(!MenuConfig.Trinket || Player.Level < 9 || !Player.InShop() || Items.HasItem(3364) || Items.HasItem(3364)) return;
+            if(!MenuConfig.Trinket || Player.Level < 9 || !Player.InShop() || Items.HasItem(3363) || Items.HasItem(3364)) return;
 
             switch (MenuConfig.TrinketList.Index)
             {
