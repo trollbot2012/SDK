@@ -13,9 +13,9 @@ namespace Spirit_Karma.Core
                 
                 if (Player.CanAttack) damage = damage + (float)Player.GetAutoAttackDamage(enemy);
 
-                if (Spells.E.IsReady()) damage = damage + Spells.E.GetDamage(enemy);
+                if (Spells.W.IsReady()) damage = damage + Spells.W.GetDamage(enemy);
 
-                if (Spells.R.IsReady()) damage = damage + Spells.R.GetDamage(enemy);
+                if (Spells.R.IsReady()) damage = damage + Spells.Q.GetDamage(enemy);
 
                 if (Spells.Q.IsReady()) damage = damage + Spells.Q.GetDamage(enemy);
 

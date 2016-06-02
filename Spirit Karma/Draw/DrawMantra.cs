@@ -1,20 +1,19 @@
-﻿using System;
-using System.Linq;
+﻿#region
+
+using System;
 using LeagueSharp;
-using LeagueSharp.SDK;
 using LeagueSharp.SDK.Utils;
 using Spirit_Karma.Core;
 using Spirit_Karma.Menus;
 
+#endregion
+
 namespace Spirit_Karma.Draw 
 {
-    class DrawMantra : Core.Core
+    internal class DrawMantra : Core.Core
     {
-        public static void OnDraw(EventArgs args)
-        {
-            SelectedMantra();
-        }
-        public static void SelectedMantra()
+
+        public static void SelectedMantra(EventArgs args)
         {
             if(Player.IsDead || !MenuConfig.MantraDraw || !MenuConfig.UseDrawings) return;
             var heropos = Drawing.WorldToScreen(ObjectManager.Player.Position);

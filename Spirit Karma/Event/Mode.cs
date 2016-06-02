@@ -73,7 +73,7 @@ namespace Spirit_Karma.Event
         {
             foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().OrderBy(hp => hp.Health))
             {
-                if (!enemy.IsValidTarget(Spells.Q.Range) || enemy.IsDead || enemy.IsZombie) return;
+                if (!enemy.IsValidTarget(Spells.Q.Range) || enemy.IsDead) return;
 
                 Usables.Locket();
                 //    Usables.Seraph();

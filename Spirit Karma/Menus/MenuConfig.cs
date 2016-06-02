@@ -10,7 +10,6 @@ namespace Spirit_Karma.Menus
 {
     internal class MenuConfig
     {
-
         public Menu TargetSelectorMenu;
         private const string MenuName = "Spirit Karma";
         public static Menu MainMenu { get; set; } = new Menu(MenuName, MenuName, true);
@@ -35,37 +34,27 @@ namespace Spirit_Karma.Menus
             // Items
             ItemsMenu = MainMenu.Add(new Menu("ItemsMenu", "Items"));
             UseItems = ItemsMenu.Add(new MenuBool("UseItems", "Use Items"));
-                ItemLocket = ItemsMenu.Add(new MenuBool("ItemLocket", "Locket of the Iron Solari"));
-                ItemProtoBelt = ItemsMenu.Add(new MenuBool("ItemProtoBelt", "ProtoBelt"));
-          //      ItemSeraph = ItemsMenu.Add(new MenuBool("ItemSeraph", "Seraph's Embrace"));
-                ItemFrostQueen = ItemsMenu.Add(new MenuBool("ItemFrostQueen", "Frost Queen's Claim"));
+            ItemLocket = ItemsMenu.Add(new MenuBool("ItemLocket", "Locket of the Iron Solari"));
+            ItemProtoBelt = ItemsMenu.Add(new MenuBool("ItemProtoBelt", "ProtoBelt"));
+         // ItemSeraph = ItemsMenu.Add(new MenuBool("ItemSeraph", "Seraph's Embrace"));
+            ItemFrostQueen = ItemsMenu.Add(new MenuBool("ItemFrostQueen", "Frost Queen's Claim"));
             
-
-            // Interrupt
-            InterruptMenu = MainMenu.Add(new Menu("InterruptMenu", "Interrupt"));
-            UseInterrupt = InterruptMenu.Add(new MenuBool("UseInterrupt", "Use Interrupter", true));
-            foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>())
-            {
-                if (!enemy.IsEnemy) continue;
-                UseInterruptTarget = InterruptMenu.Add(new MenuBool("UseInterruptTarget", "Use Interrupt On " + enemy.ChampionName));
-            }
-
             // Draw
             DrawMenu = MainMenu.Add(new Menu("DrawMenu", "Draw"));
             UseDrawings = DrawMenu.Add(new MenuBool("UseDrawings", "Enable Drawings", true));
-              Dind = DrawMenu.Add(new MenuBool("Dind", "Damage Indicator (Fps Heavy)"));
-              QRange = DrawMenu.Add(new MenuBool("QRange", "Engage Range (Q)", true));
-              MantraDraw = DrawMenu.Add(new MenuBool("MantraDraw", "Draw Selected Prio", true));
+            Dind = DrawMenu.Add(new MenuBool("Dind", "Damage Indicator (Fps Heavy)"));
+            QRange = DrawMenu.Add(new MenuBool("QRange", "Engage Range (Q)", true));
+            MantraDraw = DrawMenu.Add(new MenuBool("MantraDraw", "Draw Selected Prio", true));
             
             // Skins
             SkinMenu = MainMenu.Add(new Menu("SkinChanger", "SkinChanger"));
             UseSkin = SkinMenu.Add(new MenuBool("UseSkin", "Use SkinChanger"));
-             SkinChanger = SkinMenu.Add(new MenuList<string>("Skins", "Skins", new[] { "Default", "Sun Godess Karma", "Sakura Karma", "Traditional Karma", "Order Of Lotus Karma", "Warden Karma" }));
+            SkinChanger = SkinMenu.Add(new MenuList<string>("Skins", "Skins", new[] { "Default", "Sun Godess Karma", "Sakura Karma", "Traditional Karma", "Order Of Lotus Karma", "Warden Karma" }));
             
 
             TrinketMenu = MainMenu.Add(new Menu("TrinketMenu", "Trinket"));
             Trinket = TrinketMenu.Add(new MenuBool("Trinket", "Auto Buy Advanced Trinket"));
-              TrinketList = TrinketMenu.Add(new MenuList<string>("TrinketList", "Choose Trinket", new[] { "Oracle Alternation", "Farsight Alternation" }));
+            TrinketList = TrinketMenu.Add(new MenuList<string>("TrinketList", "Choose Trinket", new[] { "Oracle Alternation", "Farsight Alternation" }));
 
             FleeKey = MainMenu.Add(new MenuKeyBind("FleeKey", "Flee", System.Windows.Forms.Keys.A, KeyBindType.Press));
 

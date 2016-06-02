@@ -11,7 +11,7 @@ namespace Spirit_Karma.Event
 {
     internal class Trinkets : Core.Core
     {
-        public static void OnUpdate(EventArgs args)
+        public static void Update(EventArgs args)
         {
             if(!MenuConfig.Trinket || Player.Level < 9 || !Player.InShop() || Items.HasItem(3363) || Items.HasItem(3364)) return;
 
