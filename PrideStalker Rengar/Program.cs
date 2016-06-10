@@ -26,8 +26,8 @@ namespace PrideStalker_Rengar
                 return;
             }
 
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Nechrito Rengar</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Update 9 or smthn</font></b>");
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> ProtoBelt Added</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Nechrito Rengar</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Update 10</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Q AA Reset</font></b>");
 
             Spells.Load();
             MenuConfig.Load();
@@ -35,13 +35,20 @@ namespace PrideStalker_Rengar
             Orbwalker.OnAction += AfterAA.OnAction;
             Orbwalker.OnAction += BeforeAA.OnAction;
 
-           
+            Spellbook.OnCastSpell += OnSpell;
 
             Drawing.OnDraw += DRAW.OnDraw;
             Drawing.OnEndScene += Drawing_OnEndScene;
             Game.OnUpdate += OnUpdate;
         }
 
+        private static void OnSpell(Spellbook sender, SpellbookCastSpellEventArgs args)
+        {
+            if (args.Slot == SpellSlot.Q)
+            {
+                Orbwalker.ResetSwingTimer();
+            }
+        }
         private static void OnUpdate(EventArgs args)
         {
             if(Player.IsDead || Player.IsRecalling())
