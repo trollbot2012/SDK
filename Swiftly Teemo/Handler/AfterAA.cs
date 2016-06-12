@@ -8,15 +8,17 @@ using LeagueSharp.SDK.Enumerations;
 
 namespace Swiftly_Teemo.Handler
 {
-    internal class AfterAA : Core
+    internal class AfterAa : Core
     {
         public static void OnAction(object sender, OrbwalkingActionArgs e)
         {
+          
             if (Variables.Orbwalker.ActiveMode == OrbwalkingMode.Combo || Variables.Orbwalker.ActiveMode == OrbwalkingMode.Hybrid)
             {
+                if (Target == null || Target.IsDead || Target.IsInvulnerable || !Target.IsValidTarget(Spells.Q.Range)) return;
                 if (e.Type == OrbwalkingType.AfterAttack)
                 {
-                    if (Spells.Q.IsReady() && Target.IsValidTarget(Spells.Q.Range))
+                    if (Spells.Q.IsReady())
                     {
                         Spells.Q.Cast(Target);
                     }
@@ -26,7 +28,7 @@ namespace Swiftly_Teemo.Handler
             if (Variables.Orbwalker.ActiveMode != OrbwalkingMode.LaneClear) return;
             if (e.Type != OrbwalkingType.AfterAttack) return;
 
-            var mob = GameObjects.Jungle.Where(m => m.IsValidTarget(Spells.Q.Range) && !GameObjects.JungleSmall.Contains(m)).ToList();
+            var mob = GameObjects.Jungle.Where(m => m != null && m.IsValidTarget(Player.AttackRange) && !GameObjects.JungleSmall.Contains(m));
 
             foreach (var m in mob)
             {

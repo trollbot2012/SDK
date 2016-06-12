@@ -16,7 +16,7 @@ namespace Swiftly_Teemo
 {
     internal class Program : Core
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Bootstrap.Init(args);
             Events.OnLoad += Load;
@@ -25,20 +25,21 @@ namespace Swiftly_Teemo
         {
             if (GameObjects.Player.ChampionName != "Teemo")
             {
+                Game.PrintChat("Failed to load Swiftly Teemo!");
                 return;
             }
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Swiftly Teemo</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Version: 2</font></b>");
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> No Q Small Jungle</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Swiftly Teemo</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Version: 3</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> AA Q Fix</font></b>");
 
              Spells.Load();
              MenuConfig.Load();
 
-            Spellbook.OnCastSpell += Mode.OnSpell;
-
             Drawing.OnDraw += Drawings.OnDraw;
             Drawing.OnEndScene += Drawing_OnEndScene;
 
-            Orbwalker.OnAction += AfterAA.OnAction;
+            Spellbook.OnCastSpell += Mode.OnCastSpell;
+
+            Orbwalker.OnAction += AfterAa.OnAction;
 
             Game.OnUpdate += OnUpdate;
         }
@@ -73,14 +74,14 @@ namespace Swiftly_Teemo
 
         private static void Drawing_OnEndScene(EventArgs args)
         {
-            foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().Where(ene => ene.IsValidTarget() && !ene.IsZombie))
+            foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().Where(ene => ene.IsValidTarget() && ene.IsValidTarget(750) && !ene.IsZombie))
             {
-                if (MenuConfig.dind)
-                {
-                    var EasyKill = Spells.Q.IsReady() && Dmg.IsLethal(enemy) ? new ColorBGRA(0, 255, 0, 120) : new ColorBGRA(255, 255, 0, 120);
-                    Drawings.DrawHpBar.unit = enemy;
-                    Drawings.DrawHpBar.drawDmg(Dmg.ComboDmg(enemy), EasyKill);
-                }
+                if (!MenuConfig.Dind) continue;
+
+                var easyKill = Spells.Q.IsReady() && Dmg.IsLethal(enemy) ? new ColorBGRA(0, 255, 0, 120) : new ColorBGRA(255, 255, 0, 120);
+
+                Drawings.DrawHpBar.unit = enemy;
+                Drawings.DrawHpBar.drawDmg(Dmg.ComboDmg(enemy), easyKill);
             }
         }
     }

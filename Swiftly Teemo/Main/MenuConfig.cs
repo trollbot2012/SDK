@@ -22,7 +22,7 @@ namespace Swiftly_Teemo.Main
             LaneQ = LaneMenu.Add(new MenuBool("LaneQ", "Last Hit Q AA", true));
 
             DrawMenu = MainMenu.Add(new Menu("Draw", "Draw"));
-            dind = DrawMenu.Add(new MenuBool("dind", "Damage Indicator", true));
+            Dind = DrawMenu.Add(new MenuBool("dind", "Damage Indicator", true));
             EngageDraw = DrawMenu.Add(new MenuBool("EngageDraw", "Draw Engage", true));
 
             SkinMenu = MainMenu.Add(new Menu("SkinChanger", "SkinChanger"));
@@ -43,7 +43,7 @@ namespace Swiftly_Teemo.Main
         public static MenuBool RCombo;
         public static MenuBool LaneQ;
         public static MenuBool EngageDraw;
-        public static MenuBool dind;
+        public static MenuBool Dind;
         public static MenuBool UseSkin;
         public static MenuBool KillStealSummoner;
     }
