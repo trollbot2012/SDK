@@ -3,6 +3,7 @@
 using System.Linq;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
+using Swiftly_Teemo.Main;
 
 #endregion
 
@@ -14,10 +15,11 @@ namespace Swiftly_Teemo.Handler
         {
           
             if (Variables.Orbwalker.ActiveMode == OrbwalkingMode.Combo || Variables.Orbwalker.ActiveMode == OrbwalkingMode.Hybrid)
-            {
+            {  
                 if (Target == null || Target.IsDead || Target.IsInvulnerable || !Target.IsValidTarget(Spells.Q.Range)) return;
                 if (e.Type == OrbwalkingType.AfterAttack)
                 {
+                    if (MenuConfig.TowerCheck && Target.IsUnderEnemyTurret()) return;
                     if (Spells.Q.IsReady())
                     {
                         Spells.Q.Cast(Target);

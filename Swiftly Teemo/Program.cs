@@ -28,8 +28,8 @@ namespace Swiftly_Teemo
                 Game.PrintChat("Failed to load Swiftly Teemo!");
                 return;
             }
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Swiftly Teemo</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Version: 3</font></b>");
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> AA Q Fix</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Swiftly Teemo</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Version: 4</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> TowerCheck & R Draw</font></b>");
 
              Spells.Load();
              MenuConfig.Load();
@@ -46,7 +46,7 @@ namespace Swiftly_Teemo
         private static void OnUpdate(EventArgs args)
         {
             if (Player.IsDead || Player.IsRecalling()) return;
-             
+
             Killsteal.KillSteal();
             Mode.Skin();
             Mode.Flee();
@@ -74,7 +74,7 @@ namespace Swiftly_Teemo
 
         private static void Drawing_OnEndScene(EventArgs args)
         {
-            foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().Where(ene => ene.IsValidTarget() && ene.IsValidTarget(750) && !ene.IsZombie))
+            foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().Where(ene => ene.IsValidTarget() && ene.IsValidTarget(1000) && !ene.IsZombie))
             {
                 if (!MenuConfig.Dind) continue;
 

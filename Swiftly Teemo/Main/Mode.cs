@@ -4,7 +4,6 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Utils;
-using SharpDX;
 
 #endregion
 
@@ -15,35 +14,24 @@ namespace Swiftly_Teemo.Main
         public static void Combo()
         {
             if (Target == null || Target.IsZombie || Target.IsInvulnerable) return;
+            if (MenuConfig.TowerCheck && Target.IsUnderEnemyTurret()) return;
 
-            var rPrediction = Spells.R.GetPrediction(Target).CastPosition;
             var ammo = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.R).Ammo;
+            var rPrediction = Spells.R.GetPrediction(Target).CastPosition;
+            var newPos = Player.ServerPosition.Extend(rPrediction, Spells.R.Range);
 
-            if (Spells.R.IsReady())
+            if (Spells.R.IsReady() && Target.IsValidTarget(Spells.R.Range))
             {
-                if (!Target.HasBuffOfType(BuffType.Poison) && !Target.HasBuffOfType(BuffType.Slow) && !Target.HasBuffOfType(BuffType.NearSight))
+                if (ammo == 3)
                 {
-                    if (!MenuConfig.RCombo)
+                    if (Target.Distance(Player) <= Spells.R.Range)
                     {
-                        if (Target.IsValidTarget(Spells.R.Range))
-                        {
-                            if (Target.Distance(Player) <= Spells.R.Range)
-                            {
-                                Spells.R.Cast(rPrediction);
-                            }
-                        }
-
+                        Spells.R.Cast(rPrediction);
                     }
-                    if (MenuConfig.RCombo)
-                    {
-                        if (Target.IsValidTarget(Spells.R.Range * 2))
-                        {
-                            if (Target.Distance(Player) <= Spells.R.Range * 2)
-                            {
-                                Spells.R.Cast(rPrediction);
-                            }
-                        }
-                    }
+                }
+                else
+                {
+                    Spells.R.Cast(newPos);
                 }
             }
 
@@ -54,18 +42,15 @@ namespace Swiftly_Teemo.Main
         }
         public static void OnCastSpell(Spellbook sender, SpellbookCastSpellEventArgs args)
         {
-            if (args.Slot == SpellSlot.Q)
-            {
-                if (sender.Owner == Player)
-                {
-                    Orbwalker.SetAttackState(false);
-                    DelayAction.Add(200, () => Orbwalker.SetAttackState(true));
-                }
-            }
+            if (args.Slot != SpellSlot.Q) return;
+            if (sender.Owner != Player) return;
+
+            Orbwalker.SetAttackState(false);
+            DelayAction.Add(350, () => Orbwalker.SetAttackState(true));
         }
         public static void Lane()
         {
-            var minions = GameObjects.EnemyMinions.Where(m => m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral && m.IsValidTarget(Spells.Q.Range)).ToList();
+            var minions = GameObjects.EnemyMinions.Where(m => m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral && m.IsValidTarget(800)).ToList();
             var ammo = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.R).Ammo;
             var rPred = Spells.R.GetCircularFarmLocation(minions);
 

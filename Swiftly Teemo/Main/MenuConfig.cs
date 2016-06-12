@@ -16,7 +16,7 @@ namespace Swiftly_Teemo.Main
         {
             ComboMenu = MainMenu.Add(new Menu("ComboMenu", "Combo"));
             KillStealSummoner = ComboMenu.Add(new MenuBool("KillStealSummoner", "KillSecure Ignite", true));
-            RCombo = ComboMenu.Add(new MenuBool("RCombo", "Shroom On Shroom Combo", true));
+            TowerCheck = ComboMenu.Add(new MenuBool("TowerCheck", "Don't Combo Under Turret", true));
 
             LaneMenu = MainMenu.Add(new Menu("LaneMenu", "Lane"));
             LaneQ = LaneMenu.Add(new MenuBool("LaneQ", "Last Hit Q AA", true));
@@ -24,6 +24,7 @@ namespace Swiftly_Teemo.Main
             DrawMenu = MainMenu.Add(new Menu("Draw", "Draw"));
             Dind = DrawMenu.Add(new MenuBool("dind", "Damage Indicator", true));
             EngageDraw = DrawMenu.Add(new MenuBool("EngageDraw", "Draw Engage", true));
+            DrawR = DrawMenu.Add(new MenuBool("DrawR", "Draw R Prediction"));
 
             SkinMenu = MainMenu.Add(new Menu("SkinChanger", "SkinChanger"));
             UseSkin = SkinMenu.Add(new MenuBool("UseSkin", "Use SkinChanger"));
@@ -40,7 +41,8 @@ namespace Swiftly_Teemo.Main
 
         public static MenuList<string> SkinChanger;
 
-        public static MenuBool RCombo;
+        public static MenuBool TowerCheck;
+        public static MenuBool DrawR;
         public static MenuBool LaneQ;
         public static MenuBool EngageDraw;
         public static MenuBool Dind;

@@ -1,8 +1,10 @@
 ﻿#region
 
+using System.Linq;
 using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
+using LeagueSharp.SDK.Utils;
 
 #endregion
 
@@ -11,8 +13,10 @@ namespace Swiftly_Teemo
     internal class Core
     {
         public static Orbwalker Orbwalker => Variables.Orbwalker;
-        public static Obj_AI_Hero Target => Variables.TargetSelector.GetTarget(Spells.R.Range*2, DamageType.Magical);
+        public static Obj_AI_Hero Target => Variables.TargetSelector.GetTarget(Player.GetRealAutoAttackRange(), DamageType.Physical);
         public static Obj_AI_Hero Player => ObjectManager.Player;
+       // public static bool NoxiousTrap => Target.Buffs.Any(x => x.Name.ToLower().Contains("Noxious Trap"));
+
         public class Spells
         {
             public static SpellSlot Ignite;
@@ -20,6 +24,7 @@ namespace Swiftly_Teemo
             public static Spell W { get; set; }
             public static Spell E { get; set; }
             public static Spell R { get; set; }
+
             public static void Load()
             {
                 Q = new Spell(SpellSlot.Q, 680);
