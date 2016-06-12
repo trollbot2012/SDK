@@ -1,15 +1,14 @@
-﻿using LeagueSharp;
+﻿#region
+
+using System.Linq;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
-using LeagueSharp.SDK.UI;
-using LeagueSharp.SDK.Utils;
-using SharpDX;
-using System;
-using System.Linq;
+
+#endregion
 
 namespace Swiftly_Teemo.Handler
 {
-    class AfterAA : Core
+    internal class AfterAA : Core
     {
         public static void OnAction(object sender, OrbwalkingActionArgs e)
         {
@@ -17,7 +16,7 @@ namespace Swiftly_Teemo.Handler
             {
                 if (e.Type == OrbwalkingType.AfterAttack)
                 {
-                    if (Spells.Q.IsReady())
+                    if (Spells.Q.IsReady() && Target.IsValidTarget(Spells.Q.Range))
                     {
                         Spells.Q.Cast(Target);
                     }

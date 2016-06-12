@@ -27,25 +27,29 @@ namespace Swiftly_Teemo
             {
                 return;
             }
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Swiftly Teemo</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Version: 1</font></b>");
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Release</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Swiftly Teemo</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Version: 2</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> No Q Small Jungle</font></b>");
 
              Spells.Load();
              MenuConfig.Load();
 
+            Spellbook.OnCastSpell += Mode.OnSpell;
+
             Drawing.OnDraw += Drawings.OnDraw;
             Drawing.OnEndScene += Drawing_OnEndScene;
+
             Orbwalker.OnAction += AfterAA.OnAction;
+
             Game.OnUpdate += OnUpdate;
         }
         private static void OnUpdate(EventArgs args)
         {
-            if (Player.IsDead || Player.IsRecalling())
-            {
-                return;
-            }
+            if (Player.IsDead || Player.IsRecalling()) return;
+             
             Killsteal.KillSteal();
-            Mode.SKIN();
+            Mode.Skin();
+            Mode.Flee();
+          
             switch (Orbwalker.GetActiveMode())
             {
                 case OrbwalkingMode.LaneClear:
@@ -64,7 +68,7 @@ namespace Swiftly_Teemo
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            Mode.Flee();
+            
         }
 
         private static void Drawing_OnEndScene(EventArgs args)

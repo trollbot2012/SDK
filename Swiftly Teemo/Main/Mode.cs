@@ -3,6 +3,7 @@
 using System.Linq;
 using LeagueSharp;
 using LeagueSharp.SDK;
+using SharpDX;
 
 #endregion
 
@@ -12,20 +13,38 @@ namespace Swiftly_Teemo.Main
     {   
         public static void Combo()
         {
-            if(Target.IsValidTarget() && Target != null && !Target.IsZombie)
+            
+            if (!Target.IsValidTarget() || Target == null || Target.IsZombie || Target.IsInvulnerable) return;
+
+            var rPrediction = Spells.R.GetPrediction(Target).CastPosition;
+            var ammo = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.R).Ammo;
+
+            if (Spells.R.IsReady())
             {
-                if (Spells.R.IsReady() && Target.Distance(Player) <= Spells.R.Range - 50)
+                if (ammo <= 3 && !MenuConfig.RCombo)
                 {
-                    Spells.R.Cast(Target);
+                    if (!Target.HasBuffOfType(BuffType.Poison) && !Target.HasBuffOfType(BuffType.Slow))
+                    {
+                        if (Target.Distance(Player) <= Spells.R.Range)
+                        {
+                            Spells.R.Cast(rPrediction);
+                        }
+                    }
                 }
-                if (Target.IsInvulnerable && Target != null)
+                else if (MenuConfig.RCombo)
                 {
-                    Spells.R.Cast(Target.Position);
+                    if (ammo <= 3)
+                    {
+                        if (Target.Distance(Player) <= Spells.R.Range*2)
+                        {
+                            Spells.R.Cast(rPrediction);
+                        }
+                    }
                 }
-                if (Spells.W.IsReady() && Player.ManaPercent > 22.5)
-                {
-                    Spells.W.Cast();
-                }
+            }
+            if (Spells.W.IsReady() && Player.ManaPercent > 22.5)
+            {
+                Spells.W.Cast();
             }
         }
        
@@ -33,10 +52,7 @@ namespace Swiftly_Teemo.Main
         {
             var minions = GameObjects.EnemyMinions.Where(m => m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral && m.IsValidTarget(Player.AttackRange)).ToList();
             var ammo = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.R).Ammo;
-            if (minions == null)
-            {
-                return;
-            }
+
             foreach (var m in minions)
             {
                 if (m.Health < Spells.Q.GetDamage(m) && Player.ManaPercent > 35 && MenuConfig.LaneQ)
@@ -51,7 +67,7 @@ namespace Swiftly_Teemo.Main
         }
         public static void Jungle()
         {
-            var mob = ObjectManager.Get<Obj_AI_Minion>().Where(m => !m.IsDead && !m.IsZombie && m.Team == GameObjectTeam.Neutral && m.IsValidTarget(Spells.Q.Range)).ToList();
+            var mob = GameObjects.Jungle.Where(m => m.IsValidTarget(Spells.Q.Range) && !GameObjects.JungleSmall.Contains(m)).ToList();
             var ammo = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.R).Ammo;
 
             foreach (var m in mob)
@@ -69,67 +85,44 @@ namespace Swiftly_Teemo.Main
                 }
             }
         }
+
         public static void Flee()
         {
-            if(!MenuConfig.Flee.Active)
+            if (!MenuConfig.Flee.Active)
             {
                 return;
             }
 
-                ObjectManager.Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
+            ObjectManager.Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
 
-                if(Spells.W.IsReady())
-                {
-                    Spells.W.Cast();
-                }
-                if(Target.Distance(Player) <= Spells.R.Range && Target.IsValidTarget() && Target != null)
-                {
-                if(Spells.R.IsReady())
-                  {
-                    Spells.R.Cast(Player.Position);
-                  }
-                }
-            }
-        
-        public static void SKIN()
-        {
-            if(MenuConfig.UseSkin)
+            if (Spells.W.IsReady())
             {
-                switch(MenuConfig.SkinChanger.Index)
+                Spells.W.Cast();
+            }
+
+            if (Target.Distance(Player) <= Spells.R.Range && Target.IsValidTarget() && Target != null)
+            {
+                if (Spells.R.IsReady())
                 {
-                    case 0:
-                        Player.SetSkin(Player.CharData.BaseSkinName, 0);
-                        break;
-                    case 1:
-                        Player.SetSkin(Player.CharData.BaseSkinName, 1);
-                        break;
-                    case 2:
-                        Player.SetSkin(Player.CharData.BaseSkinName, 2);
-                        break;
-                    case 3:
-                        Player.SetSkin(Player.CharData.BaseSkinName, 3);
-                        break;
-                    case 4:
-                        Player.SetSkin(Player.CharData.BaseSkinName, 4);
-                        break;
-                    case 5:
-                        Player.SetSkin(Player.CharData.BaseSkinName, 5);
-                        break;
-                    case 6:
-                        Player.SetSkin(Player.CharData.BaseSkinName, 6);
-                        break;
-                    case 7:
-                        Player.SetSkin(Player.CharData.BaseSkinName, 7);
-                        break;
-                    case 8:
-                        Player.SetSkin(Player.CharData.BaseSkinName, 8);
-                        break;
+                    Spells.R.Cast(Player.Position);
                 }
             }
-            else
+        }
+        public static void OnSpell(Spellbook sender, SpellbookCastSpellEventArgs args)
+        {
+            if (args.Slot == SpellSlot.Q)
+            {
+                Orbwalker.ShouldWait();
+            }
+        }
+        public static void Skin()
+        {
+            if (!MenuConfig.UseSkin)
             {
                 Player.SetSkin(Player.CharData.BaseSkinName, Player.BaseSkinId);
+                return;
             }
+            Player.SetSkin(Player.CharData.BaseSkinName, MenuConfig.SkinChanger.Index);
         }
     }
 }
