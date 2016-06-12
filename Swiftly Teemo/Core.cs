@@ -10,7 +10,7 @@ namespace Swiftly_Teemo
 {
     internal class Core
     {
-        public static Orbwalker Orbwalker {get { return Variables.Orbwalker; }}
+        public static Orbwalker Orbwalker => Variables.Orbwalker;
         public static Obj_AI_Hero Target => Variables.TargetSelector.GetTarget(Spells.Q.Range, DamageType.Physical);
         public static Obj_AI_Hero Player => ObjectManager.Player;
         public class Spells

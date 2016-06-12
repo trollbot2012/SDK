@@ -55,18 +55,25 @@ namespace Swiftly_Teemo
                 case OrbwalkingMode.Combo:
                     Mode.Combo();
                     break;
+                case OrbwalkingMode.None:
+                    break;
+                case OrbwalkingMode.Hybrid:
+                    break;
+                case OrbwalkingMode.LastHit:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
             Mode.Flee();
         }
+
         private static void Drawing_OnEndScene(EventArgs args)
         {
             foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().Where(ene => ene.IsValidTarget() && !ene.IsZombie))
             {
                 if (MenuConfig.dind)
                 {
-                    var EasyKill = Spells.Q.IsReady() && Dmg.IsLethal(enemy)
-                       ? new ColorBGRA(0, 255, 0, 120)
-                       : new ColorBGRA(255, 255, 0, 120);
+                    var EasyKill = Spells.Q.IsReady() && Dmg.IsLethal(enemy) ? new ColorBGRA(0, 255, 0, 120) : new ColorBGRA(255, 255, 0, 120);
                     Drawings.DrawHpBar.unit = enemy;
                     Drawings.DrawHpBar.drawDmg(Dmg.ComboDmg(enemy), EasyKill);
                 }

@@ -40,7 +40,7 @@
       <HintPath>C:\Software\LeagueSharp\System\LeagueSharp.Data.dll</HintPath>
     </Reference>
     <Reference Include="LeagueSharp.SDKEx">
-      <HintPath>..\..\..\..\..\..\..\Software\LeagueSharp\System\LeagueSharp.SDKEx.dll</HintPath>
+      <HintPath>C:\Software\LeagueSharp\System\LeagueSharp.SDKEx.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX">
       <HintPath>C:\Software\LeagueSharp\System\SharpDX.dll</HintPath>

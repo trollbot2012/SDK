@@ -23,18 +23,17 @@ namespace Swiftly_Teemo.Handler
                     }
                 }
             }
-            if(Variables.Orbwalker.ActiveMode == OrbwalkingMode.LaneClear)
+
+            if (Variables.Orbwalker.ActiveMode != OrbwalkingMode.LaneClear) return;
+            if (e.Type != OrbwalkingType.AfterAttack) return;
+
+            var mob = GameObjects.Jungle.Where(m => m.IsValidTarget(Spells.Q.Range) && !GameObjects.JungleSmall.Contains(m)).ToList();
+
+            foreach (var m in mob)
             {
-                if(e.Type == OrbwalkingType.AfterAttack)
+                if (Spells.Q.IsReady())
                 {
-                    var mob = ObjectManager.Get<Obj_AI_Minion>().Where(m => !m.IsDead && !m.IsZombie && m.Team == GameObjectTeam.Neutral && m.IsValidTarget(Spells.Q.Range)).ToList();
-                    foreach (var m in mob)
-                    {
-                        if (Spells.Q.IsReady())
-                        {
-                            Spells.Q.Cast(m);
-                        }
-                    }
+                    Spells.Q.Cast(m);
                 }
             }
         }

@@ -54,10 +54,6 @@ namespace Swiftly_Teemo.Main
             var mob = ObjectManager.Get<Obj_AI_Minion>().Where(m => !m.IsDead && !m.IsZombie && m.Team == GameObjectTeam.Neutral && m.IsValidTarget(Spells.Q.Range)).ToList();
             var ammo = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.R).Ammo;
 
-            if (mob == null)
-            {
-                return;
-            }
             foreach (var m in mob)
             {
                 if(Spells.R.IsReady() && m.Distance(Player) <= Spells.R.Range && m.Health > Spells.R.GetDamage(m))
