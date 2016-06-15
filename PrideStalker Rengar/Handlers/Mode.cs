@@ -323,7 +323,7 @@ namespace PrideStalker_Rengar.Handlers
                     }
                     else
                     {
-                        if (Spells.W.IsReady() && m.Distance(Player) <= Spells.W.Range && Player.HealthPercent < 80)
+                        if (Spells.W.IsReady() && m.Distance(Player) <= Spells.W.Range && Player.HealthPercent < 20
                         {
                             if (MenuConfig.UseItem)
                             {
