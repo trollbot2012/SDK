@@ -26,8 +26,8 @@ namespace PrideStalker_Rengar
                 return;
             }
 
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Nechrito Rengar</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Update 10</font></b>");
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Q AA Reset</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Nechrito Rengar</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Update 11</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Range E</font></b>");
 
             Spells.Load();
             MenuConfig.Load();
@@ -57,7 +57,7 @@ namespace PrideStalker_Rengar
             }
             DelayAction.Add(600, Mode.ChangeComboMode);
             KillSteal.Killsteal();
-            Mode.SKIN();
+            Mode.Skin();
             if (Variables.Orbwalker.ActiveMode == OrbwalkingMode.Combo)
             {
                 switch(MenuConfig.ComboMode.SelectedValue)
@@ -93,9 +93,10 @@ namespace PrideStalker_Rengar
             {
                 if (MenuConfig.dind)
                 {
-                    var EasyKill = Spells.Q.IsReady() && Dmg.IsLethal(enemy)
+                    var EasyKill = Spells.Q.IsReady() && enemy.IsValidTarget(Player.AttackRange + 75) && Dmg.IsLethal(enemy)
                        ? new ColorBGRA(0, 255, 0, 120)
                        : new ColorBGRA(255, 255, 0, 120);
+
                     DRAW.DrawHpBar.unit = enemy;
                     DRAW.DrawHpBar.drawDmg(Dmg.ComboDmg(enemy), EasyKill);
                 }
