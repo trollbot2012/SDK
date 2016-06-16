@@ -1,0 +1,19 @@
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\Infected Twitch.exe.config
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\Infected Twitch.exe
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\Infected Twitch.pdb
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\LeagueSharp.Data.dll
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\LeagueSharp.dll
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\LeagueSharp.SDKEx.dll
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\SharpDX.dll
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\LeagueSharp.Sandbox.dll
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\LeagueSharp.Data.pdb
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\LeagueSharp.SDKEx.pdb
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\obj\x86\Debug\Infected Twitch.csprojResolveAssemblyReference.cache
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\obj\x86\Debug\Infected Twitch.exe
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\obj\x86\Debug\Infected Twitch.pdb
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\Infected Twitch.exe.manifest
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\Infected Twitch.application
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\obj\x86\Debug\Infected Twitch.exe.manifest
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\obj\x86\Debug\Infected Twitch.application

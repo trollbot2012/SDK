@@ -1,0 +1,2 @@
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\obj\x86\Release\Infected Twitch.csprojResolveAssemblyReference.cache
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\obj\x86\Release\Infected Twitch.exe
