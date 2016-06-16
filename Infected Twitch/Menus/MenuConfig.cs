@@ -62,6 +62,7 @@ namespace Infected_Twitch.Menus
             UseExploit = ExploitMenu.Add(new MenuBool("UseExploit", "Exploit"));
             ExploitMenu.Add(new Menu("x2", "Will try E AA Q / E AA AA Q"));
             Eaaq = ExploitMenu.Add(new MenuBool("EAAQ", "E AA Q"));
+        //    DisableAA = ExploitMenu.Add(new MenuBool("DisableAA", "Disable AA After Q (Good for Repositioning)"));
 
             MainMenu.Attach();
         }
@@ -104,5 +105,6 @@ namespace Infected_Twitch.Menus
         public static MenuBool StealEpic;
         public static MenuBool StealRed;
         public static MenuBool DrawDmg;
+        public static MenuBool DisableAA;
     }
 }

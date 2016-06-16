@@ -26,7 +26,7 @@ namespace Infected_Twitch.Event
                       : new ColorBGRA(255, 255, 0, 120);
 
                 DrawHpBar.unit = enemy;
-                DrawHpBar.drawDmg(Dmg.Damage(enemy), easyKill);
+                DrawHpBar.drawDmg(Dmg.EDamage(enemy), easyKill);
             }
         }
     }

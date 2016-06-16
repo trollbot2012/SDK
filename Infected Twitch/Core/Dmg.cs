@@ -29,13 +29,13 @@ namespace Infected_Twitch.Core
             return dmg;
         }
 
-        public static double EDamage(Obj_AI_Base target)
+        public static float EDamage(Obj_AI_Base target)
         {
             if (target == null || !target.IsValidTarget(1200) || !target.HasBuff("TwitchDeadlyVenom")) return 0;
             if (target.IsInvulnerable || target.HasBuff("KindredRNoDeathBuff") || target.HasBuffOfType(BuffType.SpellShield)) return 0;
 
             float eDmg = 0;
-            if (Spells.E.IsReady()) eDmg = eDmg + Spells.E.GetDamage(target);
+            if (Spells.E.IsReady()) eDmg = eDmg + Spells.E.GetDamage(target) * Stacks(target);
 
             if (GameObjects.Player.HasBuff("SummonerExhaust")) eDmg = eDmg *= (float) 0.6;
 

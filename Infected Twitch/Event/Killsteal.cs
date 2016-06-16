@@ -19,15 +19,13 @@ namespace Infected_Twitch.Event
             {
                 if (!Spells.Ignite.IsReady()) return;
 
-                
-
                 if (target.IsValidTarget(600f) && Dmg.IgniteDmg >= target.Health)
                 {
                     GameObjects.Player.Spellbook.CastSpell(Spells.Ignite, target);
                 }
             }
 
-            if (target.HealthPercent <= 10 && !Spells.Q.IsReady() && !MenuConfig.Eaaq)
+            if (target.HealthPercent <= 10 && !Spells.Q.IsReady())
             {
                 Usables.Botrk();
             }

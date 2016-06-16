@@ -16,10 +16,10 @@ namespace Infected_Twitch.Event
     {
         public static void Update(EventArgs args)
         {
+            AutoE();
             switch (Orbwalker.ActiveMode)
             {
                 case OrbwalkingMode.None:
-                    AutoE();
                     break;
                 case OrbwalkingMode.Combo:
                     Combo();
@@ -40,7 +40,7 @@ namespace Infected_Twitch.Event
 
             if (MenuConfig.KillstealE)
             {
-                if(Target == null || Target.IsDead || Target.IsInvulnerable || !Target.IsValidTarget()) return;
+                if(Target == null || Target.IsDead || Target.IsInvulnerable || !Target.IsValidTarget(Spells.E.Range)) return;
                 if (Target.Health < Dmg.EDamage(Target))
                 {
                     Spells.E.Cast();
@@ -78,12 +78,13 @@ namespace Infected_Twitch.Event
         {
            if(!MenuConfig.ComboW) return;
 
-            if(Target == null || Target.IsInvulnerable || !Target.IsValidTarget()) return;
+            if(Target == null || Target.IsInvulnerable || !Target.IsValidTarget(Spells.W.Range)) return;
 
-            if (MenuConfig.UseYoumuu && Target.IsValidTarget(Player.AttackRange))
+            if (MenuConfig.UseYoumuu && Target.IsValidTarget(Spells.W.Range))
             {
                 Usables.CastYomu();
             }
+
             if (Target.HealthPercent <= 70)
             {
                 Usables.Botrk();

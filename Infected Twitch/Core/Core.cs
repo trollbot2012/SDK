@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Linq;
 using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
@@ -10,6 +11,7 @@ namespace Infected_Twitch.Core
 {
     internal class Core
     {
+        public static bool HasPassive => Player.Buffs.Any(x => x.Name.ToLower().Contains("TwitchHideInShadows"));
         public static Orbwalker Orbwalker => Variables.Orbwalker;
         public static Obj_AI_Hero Player => ObjectManager.Player;
         public static Obj_AI_Hero Target => Variables.TargetSelector.GetTarget(1200, DamageType.Physical);

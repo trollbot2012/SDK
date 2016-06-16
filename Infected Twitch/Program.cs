@@ -17,7 +17,7 @@ namespace Infected_Twitch
 
         private static void Load(object sender, EventArgs e)
         {
-          //  if (GameObjects.Player.Name != "twitch") return;
+            if (GameObjects.Player.ChampionName != "Twitch") return;
 
             LoadAssembly.Load();
         }
