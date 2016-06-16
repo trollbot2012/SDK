@@ -15,7 +15,7 @@ namespace Infected_Twitch
         {
             get
             {
-                using (var wC = new WebClient()) return wC.DownloadString("https://raw.githubusercontent.com/Nechrito/SDK/master/Spirit%20Karma/Properties/AssemblyInfo.cs");
+                using (var wC = new WebClient()) return wC.DownloadString("https://raw.githubusercontent.com/Nechrito/SDK/master/Infected%20Twitch/AssemblyVersion.cs");
             }
         }
 
