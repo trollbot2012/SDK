@@ -20,11 +20,11 @@ namespace Infected_Twitch.Core
 
             float eDmg = 0;
 
-            if (Spells.E.IsReady()) eDmg = eDmg + Spells.E.GetDamage(target) + (float)GameObjects.Player.CalculateDamage(target, DamageType.True, Passive(target) * Stacks(target) * GameObjects.Player.FlatMagicDamageMod + GameObjects.Player.FlatPhysicalDamageMod);
+            if (Spells.E.IsReady()) eDmg = eDmg + Spells.E.GetDamage(target) + (float)GameObjects.Player.CalculateDamage(target, DamageType.True, Passive(target) * GameObjects.Player.FlatMagicDamageMod + GameObjects.Player.FlatPhysicalDamageMod);
 
             if (GameObjects.Player.HasBuff("SummonerExhaust")) eDmg = eDmg *= (float)0.6;
 
-            return eDmg;
+            return eDmg * Stacks(target);
         }
 
         public static double Passive(Obj_AI_Base target)
