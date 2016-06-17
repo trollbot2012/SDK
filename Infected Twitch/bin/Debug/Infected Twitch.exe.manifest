@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Infected Twitch.exe" size="26112">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Infected Twitch.exe" size="25600">
       <assemblyIdentity name="Infected Twitch" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>LMeX2W+UelOTjI+bS66iUrCGZGyzLM/ilZm3axp1CM8=</dsig:DigestValue>
+        <dsig:DigestValue>bSlLurU9X13C7UPvKo1W9kAIhEZoAGJGiDKtt4/jdIg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
