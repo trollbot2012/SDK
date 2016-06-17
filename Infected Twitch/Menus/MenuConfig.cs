@@ -1,7 +1,9 @@
 ﻿#region
 
+using System.Windows.Forms;
 using LeagueSharp.SDK.Enumerations;
 using LeagueSharp.SDK.UI;
+using Menu = LeagueSharp.SDK.UI.Menu;
 
 #endregion
 
@@ -40,12 +42,13 @@ namespace Infected_Twitch.Menus
             EBeforeDeath = MiscMenu.Add(new MenuBool("EBeforeDeath", "Use E Before Death", true));
             StealEpic = MiscMenu.Add(new MenuBool("StealEpic", "Steal Herald, Baron & Dragons", true));
             StealRed = MiscMenu.Add(new MenuBool("StealRed", "Steal Redbuff", true));
-            QRecall = MiscMenu.Add(new MenuKeyBind("QRecall", "Q Recall", System.Windows.Forms.Keys.B, KeyBindType.Press));
+            QRecall = MiscMenu.Add(new MenuKeyBind("QRecall", "Q Recall", Keys.B, KeyBindType.Press));
 
             // Drawings
             DrawMenu = MainMenu.Add(new Menu("DrawMenu", "Drawings"));
             DrawDmg = DrawMenu.Add(new MenuBool("DrawDmg", "Damage Indicator", true));
             DrawTimer = DrawMenu.Add(new MenuBool("DrawTimer", "Q Timer", true));
+            DrawKillable = DrawMenu.Add(new MenuBool("DrawKillable", "Killable By Passive", true));
 
             // Killsteal
             KillstealMenu = MainMenu.Add(new Menu("KillstealMenu", "Killsteal"));
@@ -116,5 +119,6 @@ namespace Infected_Twitch.Menus
         public static MenuBool DisableAa;
         public static MenuBool EBeforeDeath;
         public static MenuBool DrawTimer;
+        public static MenuBool DrawKillable;
     }
 }

@@ -11,26 +11,8 @@ namespace Infected_Twitch.Core
     internal class Dmg
     {
         public static int IgniteDmg = 50 + 20 * GameObjects.Player.Level;
-        /*
-        public static float Damage(Obj_AI_Base target)
-        {
-            if (target == null) return 0;
-
-            float dmg = 0;
-            if (Spells.W.IsReady()) dmg = dmg + Spells.W.GetDamage(target);
-            if (Spells.E.IsReady()) dmg = dmg + EDamage(target);
-
-            if (Spells.Ignite != SpellSlot.Unknown && GameObjects.Player.Spellbook.CanUseSpell(Spells.Ignite) == SpellState.Ready)
-            {
-                dmg = dmg + IgniteDmg;
-            }
-
-
-            dmg = dmg + (float)GameObjects.Player.GetAutoAttackDamage(target);
-
-            return dmg;
-        }
-        */
+       
+        // Mostly supporting Exploit
         public static float EDamage(Obj_AI_Base target)
         {
             if (target == null || !target.IsValidTarget()) return 0;
@@ -38,14 +20,13 @@ namespace Infected_Twitch.Core
 
             float eDmg = 0;
 
-            
             if (Spells.E.IsReady()) eDmg = eDmg + Spells.E.GetDamage(target) + (float)GameObjects.Player.CalculateDamage(target, DamageType.True, Passive(target) * Stacks(target) * GameObjects.Player.FlatMagicDamageMod + GameObjects.Player.FlatPhysicalDamageMod);
 
-            if (GameObjects.Player.HasBuff("SummonerExhaust")) eDmg = eDmg *= (float) 0.6;
+            if (GameObjects.Player.HasBuff("SummonerExhaust")) eDmg = eDmg *= (float)0.6;
 
             return eDmg;
         }
-        
+
         public static double Passive(Obj_AI_Base target)
         {
             float dmg = 6;
@@ -56,10 +37,7 @@ namespace Infected_Twitch.Core
             if (GameObjects.Player.Level > 4) dmg = 3;
             if (GameObjects.Player.Level > 0) dmg = 2;
 
-
-            var passiveTime = Math.Max(0, target.GetBuff("TwitchDeadlyVenom").EndTime) - Game.Time;
-
-            return dmg * Stacks(target) * passiveTime - target.HPRegenRate * passiveTime;
+            return dmg * Stacks(target) * PassiveTime(target) - target.HPRegenRate * PassiveTime(target);
         }
 
         public static float Stacks(Obj_AI_Base target)
@@ -67,14 +45,16 @@ namespace Infected_Twitch.Core
             return target.GetBuffCount("TwitchDeadlyVenom");
         }
 
+        public static float PassiveTime(Obj_AI_Base target)
+        {
+            if (!target.HasBuff("twitchdeadlyvenom")) return 0;
+
+            return Math.Max(0, target.GetBuff("twitchdeadlyvenom").EndTime) - Game.Time;   
+        }
+
         public static bool Executable(Obj_AI_Hero target)
         {
             return !target.IsInvulnerable && target.Health < EDamage(target);
         }
-        /*
-        public static bool Lethal(Obj_AI_Base target)
-        {
-            return Damage(target) / 1.70 >= target.Health;
-        }*/
     }
 }

@@ -25,16 +25,17 @@ namespace Infected_Twitch.Event
                 }
             }
 
+            if (Target == null || Target.IsDead || !Target.IsValidTarget()) return;
+
             if (MenuConfig.KillstealE)
             {
-                if (Target == null || Target.IsDead || !Target.IsValidTarget(Spells.E.Range)) return;
-                if (Dmg.Executable(Target))
+                if (Dmg.EDamage(Target) >= Target.Health)
                 {
                     Spells.E.Cast();
                 }
             }
 
-            if (target.HealthPercent <= 10 && !Spells.Q.IsReady())
+            if (Target.HealthPercent <= 10 && !Spells.Q.IsReady())
             {
                 Usables.Botrk();
             }
