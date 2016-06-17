@@ -12,19 +12,29 @@ namespace Infected_Twitch.Core
     {
         public static int IgniteDmg = 50 + 20 * GameObjects.Player.Level;
        
-        // Mostly supporting Exploit
+
         public static float EDamage(Obj_AI_Base target)
         {
+            if (!Spells.E.IsReady()) return 0;
             if (target == null || !target.IsValidTarget()) return 0;
             if (target.IsInvulnerable || target.HasBuff("KindredRNoDeathBuff") || target.HasBuffOfType(BuffType.SpellShield)) return 0;
 
             float eDmg = 0;
 
-            if (Spells.E.IsReady()) eDmg = eDmg + Spells.E.GetDamage(target) + (float)GameObjects.Player.CalculateDamage(target, DamageType.True, Passive(target) * GameObjects.Player.FlatMagicDamageMod + GameObjects.Player.FlatPhysicalDamageMod);
+            eDmg = eDmg + ERaw(target) + (float)Passive(target);
 
-            if (GameObjects.Player.HasBuff("SummonerExhaust")) eDmg = eDmg *= (float)0.6;
+            if (GameObjects.Player.HasBuff("SummonerExhaust")) eDmg = eDmg * 0.6f;
 
-            return eDmg * Stacks(target);
+            return eDmg;
+        }
+       
+        public static float ERaw(Obj_AI_Base target)
+        {
+            return (float)GameObjects.Player.CalculateDamage(target, DamageType.True, (float)
+                (new[] { 15, 20, 25, 30, 35 }[Spells.E.Level - 1] * Stacks(target) +
+                0.2 * GameObjects.Player.FlatMagicDamageMod +
+                0.25 * GameObjects.Player.FlatPhysicalDamageMod +
+                new[] { 20, 35, 50, 65, 80 }[Spells.E.Level - 1]));
         }
 
         public static double Passive(Obj_AI_Base target)

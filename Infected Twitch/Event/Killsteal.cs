@@ -29,7 +29,7 @@ namespace Infected_Twitch.Event
 
             if (MenuConfig.KillstealE)
             {
-                if (Dmg.EDamage(Target) >= Target.Health)
+                if (Dmg.EDamage(Target) > Target.Health)
                 {
                     Spells.E.Cast();
                 }
