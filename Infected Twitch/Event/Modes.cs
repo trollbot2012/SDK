@@ -16,10 +16,11 @@ namespace Infected_Twitch.Event
     {
         public static void Update(EventArgs args)
         {
-            AutoE();
+           
             switch (Orbwalker.ActiveMode)
             {
                 case OrbwalkingMode.None:
+                    AutoE();
                     break;
                 case OrbwalkingMode.Combo:
                     Combo();
@@ -31,23 +32,17 @@ namespace Infected_Twitch.Event
                     Lane();
                     Jungle();
                     break;
+                case OrbwalkingMode.LastHit:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
         private static void AutoE()
         {
-           
             if (!Spells.E.IsReady()) return;
 
-            if (MenuConfig.KillstealE)
-            {
-                if(Target == null || Target.IsDead || Target.IsInvulnerable || !Target.IsValidTarget(Spells.E.Range)) return;
-                if (Dmg.Executable(Target))
-                {
-                    Spells.E.Cast();
-                }
-            }
-           
             if (MenuConfig.StealEpic)
             {
                 foreach (var m in ObjectManager.Get<Obj_AI_Base>().Where(x => Dragons.Contains(x.CharData.BaseSkinName) && !x.IsDead))
@@ -59,29 +54,28 @@ namespace Infected_Twitch.Event
                 }
             }
 
-            if(!MenuConfig.StealRed) return;
+            if (!MenuConfig.StealRed) return;
 
-            var mob = ObjectManager.Get<Obj_AI_Minion>().Where(m => !m.IsDead && !m.IsZombie && m.Team == GameObjectTeam.Neutral && !GameObjects.JungleSmall.Contains(m) && m.IsValidTarget(Spells.E.Range)).ToList();
+            var mob = ObjectManager.Get<Obj_AI_Minion>().Where(m => !m.IsDead && !m.IsZombie && m.Team == GameObjectTeam.Neutral && m.IsValidTarget(Spells.E.Range)).ToList();
 
             foreach (var m in mob)
             {
-                if (m.CharData.BaseSkinName.Contains("SRU_Red"))
+                if (!m.CharData.BaseSkinName.Contains("SRU_Red")) continue;
+
+                if (m.Health < Player.GetSpellDamage(m, SpellSlot.E))
                 {
-                    if (m.Health < Player.GetSpellDamage(m, SpellSlot.E))
-                    {
-                        Spells.E.Cast();
-                    }
+                    Spells.E.Cast();
                 }
             }
         }
 
         private static void Combo()
         {
-           if(!MenuConfig.ComboW) return;
+            if (!MenuConfig.ComboW) return;
 
-            if(Target == null || Target.IsInvulnerable || !Target.IsValidTarget(Spells.W.Range)) return;
+            if (Target == null || Target.IsInvulnerable || !Target.IsValidTarget(Spells.W.Range)) return;
 
-            if (MenuConfig.UseYoumuu && Target.IsValidTarget(Spells.W.Range))
+            if (MenuConfig.UseYoumuu && Target.IsValidTarget(Player.AttackRange))
             {
                 Usables.CastYomu();
             }
@@ -90,14 +84,12 @@ namespace Infected_Twitch.Event
             {
                 Usables.Botrk();
             }
-             
 
-             if(Target.Health < Player.GetAutoAttackDamage(Target) * 2 && Target.Distance(Player) < Player.AttackRange) return;
+            if (!Spells.W.IsReady()) return;
+            if (Target.Health < Player.GetAutoAttackDamage(Target)*2 && Target.Distance(Player) < Player.AttackRange) return;
 
-               if (!Spells.W.IsReady()) return;
 
-                if (!(Player.ManaPercent >= 7.5)) return;
-
+            if (!(Player.ManaPercent >= 7.5)) return;
 
             var wPred = Spells.W.GetPrediction(Target).CastPosition;
 
@@ -106,7 +98,7 @@ namespace Infected_Twitch.Event
 
         private static void Harass()
         {
-            if(Target == null || Target.IsInvulnerable || !Target.IsValidTarget()) return;
+            if (Target == null || Target.IsInvulnerable || !Target.IsValidTarget()) return;
 
             if (Dmg.Stacks(Target) >= MenuConfig.HarassE && Target.Distance(Player) >= Player.AttackRange + 50)
             {
@@ -123,8 +115,8 @@ namespace Infected_Twitch.Event
         private static void Lane()
         {
             var minions = GameObjects.EnemyMinions.Where(m => m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral && m.IsValidTarget(Player.AttackRange)).ToList();
-            if(!MenuConfig.LaneW) return;
-            if(!Spells.W.IsReady()) return;
+            if (!MenuConfig.LaneW) return;
+            if (!Spells.W.IsReady()) return;
 
             var wPred = Spells.W.GetCircularFarmLocation(minions);
 
@@ -132,12 +124,11 @@ namespace Infected_Twitch.Event
             {
                 Spells.W.Cast(wPred.Position);
             }
-                
         }
 
         private static void Jungle()
         {
-            if(Player.Level == 1) return;
+            if (Player.Level == 1) return;
             var mob = ObjectManager.Get<Obj_AI_Minion>().Where(m => !m.IsDead && !m.IsZombie && m.Team == GameObjectTeam.Neutral && !GameObjects.JungleSmall.Contains(m) && m.IsValidTarget(Spells.E.Range)).ToList();
 
             if (MenuConfig.JungleW && Player.ManaPercent >= 20)
@@ -145,13 +136,13 @@ namespace Infected_Twitch.Event
                 if (mob.Count == 0) return;
 
                 var wPrediction = Spells.W.GetCircularFarmLocation(mob);
-                if(wPrediction.MinionsHit >= 2)
+                if (wPrediction.MinionsHit >= 2)
                 {
                     Spells.W.Cast(wPrediction.Position);
                 }
             }
-           
-            if(!MenuConfig.JungleE) return;
+
+            if (!MenuConfig.JungleE) return;
 
             foreach (var m in mob)
             {

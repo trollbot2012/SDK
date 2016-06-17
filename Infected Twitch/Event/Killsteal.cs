@@ -9,7 +9,7 @@ using LeagueSharp.SDK;
 
 namespace Infected_Twitch.Event
 {
-    internal class Killsteal
+    internal class Killsteal : Core.Core
     {
         public static void Update(EventArgs args)
         {
@@ -22,6 +22,15 @@ namespace Infected_Twitch.Event
                 if (target.IsValidTarget(600f) && Dmg.IgniteDmg >= target.Health)
                 {
                     GameObjects.Player.Spellbook.CastSpell(Spells.Ignite, target);
+                }
+            }
+
+            if (MenuConfig.KillstealE)
+            {
+                if (Target == null || Target.IsDead || Target.IsInvulnerable || !Target.IsValidTarget(Spells.E.Range)) return;
+                if (Dmg.Executable(Target))
+                {
+                    Spells.E.Cast();
                 }
             }
 
