@@ -37,6 +37,7 @@ namespace Infected_Twitch.Menus
             // Misc
             MiscMenu = MainMenu.Add(new Menu("MiscMenu", "Misc"));
             DrawDmg = MiscMenu.Add(new MenuBool("DrawDmg", "Damage Indicator", true));
+            EBeforeDeath = MiscMenu.Add(new MenuBool("EBeforeDeath", "Use E Before Death", true));
             StealEpic = MiscMenu.Add(new MenuBool("StealEpic", "Steal Herald, Baron & Dragons", true));
             StealRed = MiscMenu.Add(new MenuBool("StealRed", "Steal Redbuff", true));
             QRecall = MiscMenu.Add(new MenuKeyBind("QRecall", "Q Recall", System.Windows.Forms.Keys.B, KeyBindType.Press));
@@ -105,6 +106,7 @@ namespace Infected_Twitch.Menus
         public static MenuBool StealEpic;
         public static MenuBool StealRed;
         public static MenuBool DrawDmg;
-        public static MenuBool DisableAA;
+        public static MenuBool DisableAa;
+        public static MenuBool EBeforeDeath;
     }
 }
