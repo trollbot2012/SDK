@@ -21,7 +21,7 @@ namespace Infected_Twitch.Core
 
             float eDmg = 0;
 
-            eDmg = eDmg + ERaw(target) + (float)Passive(target);
+            eDmg = eDmg + ERaw(target) + Passive(target);
 
             if (GameObjects.Player.HasBuff("SummonerExhaust")) eDmg = eDmg * 0.6f;
 
@@ -30,14 +30,18 @@ namespace Infected_Twitch.Core
        
         public static float ERaw(Obj_AI_Base target)
         {
-            return (float)GameObjects.Player.CalculateDamage(target, DamageType.True, (float)
-                (new[] { 15, 20, 25, 30, 35 }[Spells.E.Level - 1] * Stacks(target) +
+            return (float)GameObjects.Player.CalculateDamage(target, DamageType.True,
+                EStackDamage[Spells.E.Level - 1] * Stacks(target) +
                 0.2 * GameObjects.Player.FlatMagicDamageMod +
                 0.25 * GameObjects.Player.FlatPhysicalDamageMod +
-                new[] { 20, 35, 50, 65, 80 }[Spells.E.Level - 1]));
+                EBaseDamage[Spells.E.Level - 1]);
         }
 
-        public static double Passive(Obj_AI_Base target)
+        public static float[] EStackDamage = { 15f, 20f, 25f, 30f, 35f };
+
+        public static float[] EBaseDamage = { 20, 35, 50, 65, 80 };
+
+        public static float Passive(Obj_AI_Base target)
         {
             float dmg = 6;
 
