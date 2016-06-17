@@ -36,12 +36,13 @@ namespace Infected_Twitch.Event
 
         private static void AutoE()
         {
-            if(!Spells.E.IsReady()) return;
+           
+            if (!Spells.E.IsReady()) return;
 
             if (MenuConfig.KillstealE)
             {
                 if(Target == null || Target.IsDead || Target.IsInvulnerable || !Target.IsValidTarget(Spells.E.Range)) return;
-                if (Target.Health < Dmg.EDamage(Target))
+                if (Dmg.Executable(Target))
                 {
                     Spells.E.Cast();
                 }
@@ -148,14 +149,13 @@ namespace Infected_Twitch.Event
                 {
                     Spells.W.Cast(wPrediction.Position);
                 }
-               
             }
            
             if(!MenuConfig.JungleE) return;
 
             foreach (var m in mob)
             {
-                if (m.Health < Player.GetSpellDamage(m, SpellSlot.E))
+                if (Dmg.Executable(m))
                 {
                     Spells.E.Cast();
                 }

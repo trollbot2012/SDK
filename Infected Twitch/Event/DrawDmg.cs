@@ -21,7 +21,7 @@ namespace Infected_Twitch.Event
 
             foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().Where(x => x.IsValidTarget(1200) && !x.IsZombie))
             {
-                var easyKill = Spells.E.IsReady() && Dmg.Lethal(enemy)
+                var easyKill = Spells.E.IsReady() && Dmg.Executable(enemy)
                       ? new ColorBGRA(0, 255, 0, 120)
                       : new ColorBGRA(255, 255, 0, 120);
 

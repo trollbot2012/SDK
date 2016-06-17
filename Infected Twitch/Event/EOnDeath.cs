@@ -18,7 +18,7 @@ namespace Infected_Twitch.Event
 
             if (!Spells.E.IsReady()) return;
 
-            if (GameObjects.Player.HealthPercent <= 7.5)
+            if (GameObjects.Player.HealthPercent <= 5)
             {
                 Spells.E.Cast();
             }
