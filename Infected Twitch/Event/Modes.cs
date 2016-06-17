@@ -34,8 +34,6 @@ namespace Infected_Twitch.Event
                     break;
                 case OrbwalkingMode.LastHit:
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -47,7 +45,7 @@ namespace Infected_Twitch.Event
             {
                 foreach (var m in ObjectManager.Get<Obj_AI_Base>().Where(x => Dragons.Contains(x.CharData.BaseSkinName) && !x.IsDead))
                 {
-                    if (m.Health < Player.GetSpellDamage(m, SpellSlot.E))
+                    if (m.Health < Dmg.EDamage(m))
                     {
                         Spells.E.Cast();
                     }
@@ -60,19 +58,18 @@ namespace Infected_Twitch.Event
 
             foreach (var m in mob)
             {
-                if (!m.CharData.BaseSkinName.Contains("SRU_Red")) continue;
-
-                if (m.Health < Player.GetSpellDamage(m, SpellSlot.E))
+                if (m.CharData.BaseSkinName.Contains("SRU_Red"))
                 {
-                    Spells.E.Cast();
+                    if (m.Health < Dmg.EDamage(m))
+                    {
+                        Spells.E.Cast();
+                    }
                 }
             }
         }
 
         private static void Combo()
         {
-            if (!MenuConfig.ComboW) return;
-
             if (Target == null || Target.IsInvulnerable || !Target.IsValidTarget(Spells.W.Range)) return;
 
             if (MenuConfig.UseYoumuu && Target.IsValidTarget(Player.AttackRange))
@@ -80,19 +77,17 @@ namespace Infected_Twitch.Event
                 Usables.CastYomu();
             }
 
-            if (Target.HealthPercent <= 70)
+            if (Target.HealthPercent <= 70 && !MenuConfig.UseExploit)
             {
                 Usables.Botrk();
             }
 
+            if (!MenuConfig.ComboW) return;
             if (!Spells.W.IsReady()) return;
-            if (Target.Health < Player.GetAutoAttackDamage(Target)*2 && Target.Distance(Player) < Player.AttackRange) return;
-
+            if (Target.Health < Player.GetAutoAttackDamage(Target) * 2 && Target.Distance(Player) < Player.AttackRange) return;
 
             if (!(Player.ManaPercent >= 7.5)) return;
-
             var wPred = Spells.W.GetPrediction(Target).CastPosition;
-
             Spells.W.Cast(wPred);
         }
 
@@ -136,7 +131,7 @@ namespace Infected_Twitch.Event
                 if (mob.Count == 0) return;
 
                 var wPrediction = Spells.W.GetCircularFarmLocation(mob);
-                if (wPrediction.MinionsHit >= 2)
+                if (wPrediction.MinionsHit >= 3)
                 {
                     Spells.W.Cast(wPrediction.Position);
                 }
@@ -146,7 +141,7 @@ namespace Infected_Twitch.Event
 
             foreach (var m in mob)
             {
-                if (Dmg.Executable(m))
+                if (m.Health < Dmg.EDamage(m))
                 {
                     Spells.E.Cast();
                 }

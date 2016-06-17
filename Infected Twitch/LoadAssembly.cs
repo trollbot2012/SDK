@@ -18,11 +18,13 @@ namespace Infected_Twitch
             MenuConfig.Load();
 
             Recall.Load();
+            Game.OnUpdate += Killsteal.Update;
             Game.OnUpdate += Skinchanger.Update;
             Game.OnUpdate += Exploit.Update;
             Game.OnUpdate += Modes.Update;
             Game.OnUpdate += EOnDeath.Update;
             Game.OnUpdate += Trinkets.Update;
+            Drawing.OnDraw += DrawSpells.OnDraw;
 
             Drawing.OnEndScene += DrawDmg.Draw;
 

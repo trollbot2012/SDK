@@ -15,12 +15,12 @@ namespace Infected_Twitch.Event
         public static void Update(EventArgs args)
         {
             if(!MenuConfig.EBeforeDeath) return;
-            var target = GameObjects.EnemyHeroes.FirstOrDefault(x => x.IsValidTarget(1200) && Dmg.Stacks(x) > 0 && !x.IsDead && !x.IsZombie && !x.IsInvulnerable);
-            if(target == null) return;
-
             if (!Spells.E.IsReady()) return;
 
-            if (GameObjects.Player.HealthPercent <= 6.5)
+            var target = GameObjects.EnemyHeroes.FirstOrDefault(x => x.IsValidTarget(1200) && Dmg.Stacks(x) > 0 && !x.IsDead && !x.IsInvulnerable);
+            if(target == null) return;
+
+            if (GameObjects.Player.HealthPercent <= 7)
             {
                 Spells.E.Cast();
             }

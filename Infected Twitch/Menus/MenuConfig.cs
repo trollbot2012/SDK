@@ -36,11 +36,16 @@ namespace Infected_Twitch.Menus
 
             // Misc
             MiscMenu = MainMenu.Add(new Menu("MiscMenu", "Misc"));
-            DrawDmg = MiscMenu.Add(new MenuBool("DrawDmg", "Damage Indicator", true));
+            
             EBeforeDeath = MiscMenu.Add(new MenuBool("EBeforeDeath", "Use E Before Death", true));
             StealEpic = MiscMenu.Add(new MenuBool("StealEpic", "Steal Herald, Baron & Dragons", true));
             StealRed = MiscMenu.Add(new MenuBool("StealRed", "Steal Redbuff", true));
             QRecall = MiscMenu.Add(new MenuKeyBind("QRecall", "Q Recall", System.Windows.Forms.Keys.B, KeyBindType.Press));
+
+            // Drawings
+            DrawMenu = MainMenu.Add(new Menu("DrawMenu", "Drawings"));
+            DrawDmg = DrawMenu.Add(new MenuBool("DrawDmg", "Damage Indicator", true));
+            DrawTimer = DrawMenu.Add(new MenuBool("DrawTimer", "Q Timer", true));
 
             // Killsteal
             KillstealMenu = MainMenu.Add(new Menu("KillstealMenu", "Killsteal"));
@@ -73,6 +78,7 @@ namespace Infected_Twitch.Menus
         public static Menu LaneMenu;
         public static Menu JungleMenu;
         public static Menu MiscMenu;
+        public static Menu DrawMenu;
         public static Menu KillstealMenu;
         public static Menu TrinketMenu;
         public static Menu SkinMenu;
@@ -109,5 +115,6 @@ namespace Infected_Twitch.Menus
         public static MenuBool DrawDmg;
         public static MenuBool DisableAa;
         public static MenuBool EBeforeDeath;
+        public static MenuBool DrawTimer;
     }
 }

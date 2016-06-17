@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Infected Twitch.exe" size="25600">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Infected Twitch.exe" size="26112">
       <assemblyIdentity name="Infected Twitch" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>K+OuFWs8nRVClEyM2lUGSkSua283Cccqj223HVGfX5o=</dsig:DigestValue>
+        <dsig:DigestValue>yk+PO67qK/ktPfVBXjQlEnHSOG0jS5vSQ17riVb33oA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -73,7 +73,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>/dxazhs6h4+6ej9rbd4qwma8wYpeuQaMvpFtgHcq0gE=</dsig:DigestValue>
+        <dsig:DigestValue>C6iGGFiBsdoODybEG3M/P8fv3iobdtA9AjXKEo8PTJQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -97,7 +97,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>eaShnkMZzh6PySzg8xWEEnqINLByWba+4N1tgVkCKNA=</dsig:DigestValue>
+        <dsig:DigestValue>n3DzfkGJ0up7fOxVvWGsqfuQIoqZejLqRzhDfjTFliw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

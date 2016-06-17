@@ -27,7 +27,7 @@ namespace Infected_Twitch.Event
 
             if (MenuConfig.KillstealE)
             {
-                if (Target == null || Target.IsDead || Target.IsInvulnerable || !Target.IsValidTarget(Spells.E.Range)) return;
+                if (Target == null || Target.IsDead || !Target.IsValidTarget(Spells.E.Range)) return;
                 if (Dmg.Executable(Target))
                 {
                     Spells.E.Cast();
