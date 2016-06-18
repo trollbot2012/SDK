@@ -19,6 +19,7 @@ namespace Infected_Twitch.Menus
             // Combo
             ComboMenu = MainMenu.Add(new Menu("ComboMenu", "Combo"));
             ComboW = ComboMenu.Add(new MenuBool("ComboW", "Use W", true));
+            ComboE = ComboMenu.Add(new MenuBool("ComboE", "Use E", true));
             UseYoumuu = ComboMenu.Add(new MenuBool("UseYoumuu", "Use Youmuu", true));
             UseBotrk = ComboMenu.Add(new MenuBool("UseBotrk", "Use Blade Of The Ruined King", true));
 
@@ -73,6 +74,8 @@ namespace Infected_Twitch.Menus
             Eaaaaq = ExploitMenu.Add(new MenuBool("EAAAAQ", "E AA AA Q"));
             //  DisableAA = ExploitMenu.Add(new MenuBool("DisableAA", "Disable AA After Q (Good for Repositioning)"));
 
+            Debug = MainMenu.Add(new MenuBool("Debug", "Debug Mode (Prints chat)"));
+
             MainMenu.Attach();
         }
         // Menu
@@ -100,6 +103,7 @@ namespace Infected_Twitch.Menus
 
         // Bool
         public static MenuBool ComboW;
+        public static MenuBool ComboE;
         public static MenuBool HarassW;
         public static MenuBool LaneW;
         public static MenuBool JungleW;
@@ -120,5 +124,6 @@ namespace Infected_Twitch.Menus
         public static MenuBool EBeforeDeath;
         public static MenuBool DrawTimer;
         public static MenuBool DrawKillable;
+        public static MenuBool Debug;
     }
 }

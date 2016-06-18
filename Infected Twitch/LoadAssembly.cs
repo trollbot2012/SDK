@@ -11,13 +11,12 @@ namespace Infected_Twitch
 {
     internal class LoadAssembly
     {
-        public static void Load()
+        public static void OnGameLoad()
         {
-
             Spells.Load();
             MenuConfig.Load();
-
             Recall.Load();
+
             Game.OnUpdate += Killsteal.Update;
             Game.OnUpdate += Skinchanger.Update;
             Game.OnUpdate += Exploit.Update;
@@ -30,8 +29,8 @@ namespace Infected_Twitch
 
             AssemblyVersion.CheckVersion();
 
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Infected Twitch</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Version: 6</font></b>");
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> E Almost Perfect</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Infected Twitch</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Version: 8</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Lag, E</font></b>");
         }
     }
 }
