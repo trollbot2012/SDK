@@ -23,7 +23,7 @@ namespace Infected_Twitch.Core
 
             if (MenuConfig.Eaaq)
             {
-                eDmg = eDmg + ERaw(target);
+                eDmg = eDmg + ERaw(target) * Stacks(target);
             }
             else
             {
