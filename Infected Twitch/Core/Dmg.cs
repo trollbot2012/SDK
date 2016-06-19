@@ -20,17 +20,24 @@ namespace Infected_Twitch.Core
             if (!SafeTarget(target)) return 0;
 
             float eDmg = 0;
-
-            if (MenuConfig.Eaaq)
-            {
-                eDmg = eDmg + ERaw(target) * Stacks(target);
-            }
-            else
-            {
-                eDmg = eDmg + ERaw(target) + Passive(target);
-            }
+ 
+            eDmg = eDmg + ERaw(target) + Passive(target);            
 
             if (GameObjects.Player.HasBuff("SummonerExhaust")) eDmg = eDmg * 0.6f;
+
+            return eDmg;
+        }
+
+        public static float ExploitDamage(Obj_AI_Base target)
+        {
+            if (!Spells.E.IsReady()) return 0;
+            if (!SafeTarget(target)) return 0;
+
+            float eDmg = 0;
+
+            eDmg = eDmg + ERaw(target);
+
+            if (Player.HasBuff("SummonerExhaust")) eDmg = eDmg * 0.6f;
 
             return eDmg;
         }

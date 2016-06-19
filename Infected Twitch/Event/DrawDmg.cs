@@ -22,7 +22,7 @@ namespace Infected_Twitch.Event
                 if (!MenuConfig.DrawDmg) continue; 
 
                 Indicator.unit = enemy;
-                Indicator.drawDmg(Dmg.EDamage(enemy), new ColorBGRA(255, 204, 0, 170));
+                Indicator.drawDmg(Dmg.ExploitDamage(enemy), new ColorBGRA(255, 204, 0, 170));
             }
         }
     }

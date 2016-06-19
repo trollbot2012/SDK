@@ -49,7 +49,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Z3owkcv1FwT8m6XzuYqrVCsY9uuDbdAlOfaPrGRiLWQ=</dsig:DigestValue>
+        <dsig:DigestValue>IksfjwFcOywfjdYW3leJKSDZ3uNw9dTR/S0E+l8EJ00=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -78,14 +78,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.Sandbox.dll" size="40448">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.Sandbox.dll" size="36352">
       <assemblyIdentity name="LeagueSharp.Sandbox" version="1.0.0.0" publicKeyToken="0C92CB9C3763A33B" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>TRoJMm6pKnLfWGQiyIGaxqIsmho+PkYcGrZzQkzoK94=</dsig:DigestValue>
+        <dsig:DigestValue>6RgtNWHRxAOsGOU02KaQlyO7Kit7dNy6q4E2p5qwVFM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
