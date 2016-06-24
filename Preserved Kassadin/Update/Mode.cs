@@ -40,7 +40,7 @@ namespace Preserved_Kassadin.Update
                 Spells.Q.Cast(Target);
             }
             
-            if(Target.Distance(Player) <= Player.AttackRange)
+            if(Target.Distance(Player) <= Player.AttackRange + 50)
             {
                 if (Spells.W.IsReady())
                 Spells.W.Cast();
