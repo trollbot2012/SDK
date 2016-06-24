@@ -20,6 +20,8 @@ namespace Preserved_Kassadin
             Drawing.OnDraw += DrawSpells.OnDraw;
             Drawing.OnEndScene += DrawDmg.Draw;
 
+            AssemblyVersion.CheckVersion();
+
             Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Preserved Kassadin</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Loaded</font></b>");
         }
     }

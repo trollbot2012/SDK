@@ -56,7 +56,7 @@ namespace Preserved_Kassadin.Update
             {
                 if (Spells.R.IsReady())
 
-                if (Target.CountEnemyHeroesInRange(Spells.R.Range) > MenuConfig.SafeR) return;
+                if (Target.CountEnemyHeroesInRange(Spells.R.Range) > MenuConfig.SafeR.Value) return;
 
                 Spells.R.Cast(Target.ServerPosition);
             }
