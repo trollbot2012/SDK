@@ -64,7 +64,7 @@
     <Compile Include="AssemblyVersion.cs" />
     <Compile Include="Cores\Core.cs" />
     <Compile Include="Cores\Dmg.cs" />
-    <Compile Include="Cores\Killsteal.cs" />
+    <Compile Include="Update\Killsteal.cs" />
     <Compile Include="Cores\MenuConfig.cs" />
     <Compile Include="Cores\Spells.cs" />
     <Compile Include="Cores\Usables.cs" />

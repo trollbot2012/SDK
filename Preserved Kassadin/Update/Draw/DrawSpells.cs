@@ -13,9 +13,6 @@ namespace Preserved_Kassadin.Update.Draw
             if(MenuConfig.DrawQ) Render.Circle.DrawCircle(Player.Position, Spells.Q.Range, 
                 Spells.Q.IsReady() ? System.Drawing.Color.FromArgb(120, 0, 170, 255) : System.Drawing.Color.IndianRed);
 
-            if (MenuConfig.DrawW) Render.Circle.DrawCircle(Player.Position, Spells.W.Range,
-                Spells.W.IsReady() ? System.Drawing.Color.FromArgb(120, 0, 170, 255) : System.Drawing.Color.IndianRed);
-
             if (MenuConfig.DrawE) Render.Circle.DrawCircle(Player.Position, Spells.E.Range,
                 Spells.E.IsReady() ? System.Drawing.Color.FromArgb(120, 0, 170, 255) : System.Drawing.Color.IndianRed);
 

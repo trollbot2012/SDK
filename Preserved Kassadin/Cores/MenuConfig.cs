@@ -47,7 +47,6 @@ namespace Preserved_Kassadin.Cores
             DrawDmg = DrawMenu.Add(new MenuBool("DrawDmg", "Draw Damage", true));
             DisableDraw = DrawMenu.Add(new MenuBool("DisableDraw", "Don't Draw"));
             DrawQ = DrawMenu.Add(new MenuBool("DrawQ", "Q Range", true));
-            DrawW = DrawMenu.Add(new MenuBool("DrawW", "W Range"));
             DrawE = DrawMenu.Add(new MenuBool("DrawE", "E Range"));
             DrawR = DrawMenu.Add(new MenuBool("DrawR", "R Range", true));
             #endregion
@@ -89,7 +88,6 @@ namespace Preserved_Kassadin.Cores
         public static MenuBool DrawDmg;
         public static MenuBool DisableDraw;
         public static MenuBool DrawQ;
-        public static MenuBool DrawW;
         public static MenuBool DrawE;
         public static MenuBool DrawR;
         public static MenuBool KsQ;

@@ -39,26 +39,35 @@ namespace Preserved_Kassadin.Update
                 if (Spells.Q.IsReady())
                 Spells.Q.Cast(Target);
             }
-            
-            if(Target.Distance(Player) <= Player.AttackRange + 50)
-            {
-                if (Spells.W.IsReady())
-                Spells.W.Cast();
-            }
-
-            if (Target.Distance(Player) <= Spells.E.Range)
-            {
-                if (Spells.E.IsReady()) 
-                Spells.E.Cast(Target);
-            }
 
             if (Target.Distance(Player) <= Spells.R.Range)
             {
                 if (Spells.R.IsReady())
+                {
+                    if (Target.CountEnemyHeroesInRange(Spells.R.Range) >= MenuConfig.SafeR.Value) return;
 
-                if (Target.CountEnemyHeroesInRange(Spells.R.Range) > MenuConfig.SafeR.Value) return;
+                    var rPred = Spells.R.GetPrediction(Target).CastPosition;
+                    Spells.R.Cast(rPred);
+                }
+            }
 
-                Spells.R.Cast(Target.ServerPosition);
+            if (Target.Distance(Player) <= 250)
+            {
+                if (Spells.W.IsReady())
+                {
+                    Spells.W.Cast();
+                }
+            }
+
+            if (Target.Distance(Player) <= Spells.E.Range)
+            {
+                if (Spells.E.IsReady())
+                {
+                    var ePred = Spells.E.GetPrediction(Target).CastPosition;
+                    
+                    Spells.E.Cast(ePred);
+                }
+                    
             }
         }
 
