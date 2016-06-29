@@ -4,9 +4,8 @@ using LeagueSharp.SDK.Enumerations;
 using LeagueSharp.SDK.UI;
 using LeagueSharp.SDK.Utils;
 using SharpDX;
-using System;
-using System.Linq;
 using PrideStalker_Rengar.Main;
+using System.Linq;
 
 namespace PrideStalker_Rengar.Handlers
 {
@@ -22,13 +21,17 @@ namespace PrideStalker_Rengar.Handlers
                 }
                 if (MenuConfig.ComboMode.SelectedValue != "Ap Combo")
                 {
-                    if (Spells.Q.IsReady() && Player.HealthPercent >= 80 && Player.Mana == 5)
+                    if (Spells.Q.IsReady() && Player.HealthPercent >= 35 && Player.Mana == 5)
                     {
                         Spells.Q.Cast();
                     }
-                    if (Player.Mana < 5)
+                    var mob = ObjectManager.Get<Obj_AI_Minion>().Where(m => !m.IsDead && !m.IsZombie && m.Team == GameObjectTeam.Neutral && m.IsValidTarget(Spells.W.Range)).ToList();
+                    foreach(var m in mob)
                     {
-                        Spells.Q.Cast();
+                        if (Player.Mana < 5 && m.Health > Player.GetAutoAttackDamage(m))
+                        {
+                            Spells.Q.Cast();
+                        }
                     }
                 }
                 if(MenuConfig.ComboMode.SelectedValue == "Ap Combo")
