@@ -119,7 +119,9 @@ namespace PrideStalker_Rengar.Draw
                 return;
             }
             var heropos = Drawing.WorldToScreen(ObjectManager.Player.Position);
+
             DrawAnimation();
+
             if (MenuConfig.Passive.Active)
             {
                 Drawing.DrawText(heropos.X - 15, heropos.Y + 20, System.Drawing.Color.Cyan, "Stacking  (     )");

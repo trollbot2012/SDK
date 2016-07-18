@@ -1,7 +1,6 @@
 ﻿using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
-using LeagueSharp.SDK.UI;
 using LeagueSharp.SDK.Utils;
 using SharpDX;
 using System;
@@ -26,8 +25,8 @@ namespace PrideStalker_Rengar
                 return;
             }
 
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Nechrito Rengar</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Update 12</font></b>");
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Q AA Jungle & E Fix</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Nechrito Rengar</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Update 13</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Combo & Compiling Fix</font></b>");
 
             Spells.Load();
             MenuConfig.Load();
@@ -39,6 +38,7 @@ namespace PrideStalker_Rengar
 
             Drawing.OnDraw += DRAW.OnDraw;
             Drawing.OnEndScene += Drawing_OnEndScene;
+
             Game.OnUpdate += OnUpdate;
         }
 
@@ -51,13 +51,12 @@ namespace PrideStalker_Rengar
         }
         private static void OnUpdate(EventArgs args)
         {
-            if(Player.IsDead || Player.IsRecalling())
-            {
-                return;
-            }
+            if(Player.IsDead || Player.IsRecalling()) return;
+            
             DelayAction.Add(600, Mode.ChangeComboMode);
             KillSteal.Killsteal();
             Mode.Skin();
+
             if (Variables.Orbwalker.ActiveMode == OrbwalkingMode.Combo)
             {
                 switch(MenuConfig.ComboMode.SelectedValue)
@@ -76,7 +75,7 @@ namespace PrideStalker_Rengar
                         break;
                 }
             }
-            switch(Variables.Orbwalker.GetActiveMode())
+            switch(Variables.Orbwalker.ActiveMode)
             {
                 case OrbwalkingMode.LaneClear:
                     Mode.Lane();

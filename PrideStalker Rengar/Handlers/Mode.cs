@@ -120,11 +120,11 @@ namespace PrideStalker_Rengar.Handlers
             {
                 if (MenuConfig.IgnoreE)
                 {
-                    Spells.E.Cast(target.ServerPosition);
+                    Spells.E.Cast(target.Position);
                 }
                 else
                 {
-                    Spells.E.CastIfHitchanceEquals(target, HitChance.Collision);
+                    Spells.E.CastIfHitchanceEquals(target, HitChance.High);
                 }
             }
         }
@@ -170,11 +170,11 @@ namespace PrideStalker_Rengar.Handlers
                 {
                     if (MenuConfig.IgnoreE)
                     {
-                        Spells.E.Cast(target.ServerPosition);
+                        Spells.E.Cast(target.Position);
                     }
                     else
                     {
-                        Spells.E.CastIfHitchanceEquals(target, HitChance.Collision);
+                        Spells.E.CastIfHitchanceEquals(target, HitChance.High);
                     }
                 }
                 if (Spells.W.IsReady() && !Spells.Q.IsReady() && Player.Distance(target) <= Spells.W.Range)
@@ -217,11 +217,11 @@ namespace PrideStalker_Rengar.Handlers
                 {
                     if (MenuConfig.IgnoreE)
                     {
-                        Spells.E.Cast(target.ServerPosition);
+                        Spells.E.Cast(target.Position);
                     }
                     else
                     {
-                        Spells.E.CastIfHitchanceEquals(target, HitChance.Collision);
+                        Spells.E.CastIfHitchanceEquals(target, HitChance.High);
                     }
                 }
                 if (Spells.Q.IsReady() && target.Distance(Player) <= Spells.W.Range)
@@ -350,8 +350,6 @@ namespace PrideStalker_Rengar.Handlers
                     }
                    if (Spells.E.IsReady())
                     {
-                        if (!Spells.Q.IsReady() || Spells.W.IsReady()) return;
-
                         Spells.E.Cast(m.ServerPosition);
                     }
                 }
