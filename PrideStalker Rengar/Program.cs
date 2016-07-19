@@ -26,7 +26,7 @@ namespace PrideStalker_Rengar
             }
 
             Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Nechrito Rengar</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Update 13</font></b>");
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Combo & Compiling Fix</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Q AA</font></b>");
 
             Spells.Load();
             MenuConfig.Load();
@@ -34,7 +34,7 @@ namespace PrideStalker_Rengar
             Orbwalker.OnAction += AfterAA.OnAction;
             Orbwalker.OnAction += BeforeAA.OnAction;
 
-            Spellbook.OnCastSpell += OnSpell;
+            //Spellbook.OnCastSpell += OnSpell;
 
             Drawing.OnDraw += DRAW.OnDraw;
             Drawing.OnEndScene += Drawing_OnEndScene;
@@ -42,13 +42,13 @@ namespace PrideStalker_Rengar
             Game.OnUpdate += OnUpdate;
         }
 
-        private static void OnSpell(Spellbook sender, SpellbookCastSpellEventArgs args)
-        {
-            if (args.Slot == SpellSlot.Q)
-            {
-                Orbwalker.ResetSwingTimer();
-            }
-        }
+        //private static void OnSpell(Spellbook sender, SpellbookCastSpellEventArgs args)
+        //{
+        //    if (args.Slot == SpellSlot.Q)
+        //    {
+        //        Orbwalker.ResetSwingTimer();
+        //    }
+        //}
         private static void OnUpdate(EventArgs args)
         {
             if(Player.IsDead || Player.IsRecalling()) return;

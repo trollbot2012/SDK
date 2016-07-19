@@ -120,11 +120,11 @@ namespace PrideStalker_Rengar.Handlers
             {
                 if (MenuConfig.IgnoreE)
                 {
-                    Spells.E.Cast(target.Position);
+                    Spells.E.Cast(target.ServerPosition);
                 }
                 else
                 {
-                    Spells.E.CastIfHitchanceEquals(target, HitChance.High);
+                    Spells.E.CastIfHitchanceEquals(target, HitChance.Collision);
                 }
             }
         }
@@ -170,11 +170,11 @@ namespace PrideStalker_Rengar.Handlers
                 {
                     if (MenuConfig.IgnoreE)
                     {
-                        Spells.E.Cast(target.Position);
+                        Spells.E.Cast(target.ServerPosition);
                     }
                     else
                     {
-                        Spells.E.CastIfHitchanceEquals(target, HitChance.High);
+                        Spells.E.CastIfHitchanceEquals(target, HitChance.Collision);
                     }
                 }
                 if (Spells.W.IsReady() && !Spells.Q.IsReady() && Player.Distance(target) <= Spells.W.Range)
@@ -217,11 +217,11 @@ namespace PrideStalker_Rengar.Handlers
                 {
                     if (MenuConfig.IgnoreE)
                     {
-                        Spells.E.Cast(target.Position);
+                        Spells.E.Cast(target.ServerPosition);
                     }
                     else
                     {
-                        Spells.E.CastIfHitchanceEquals(target, HitChance.High);
+                        Spells.E.CastIfHitchanceEquals(target, HitChance.Collision);
                     }
                 }
                 if (Spells.Q.IsReady() && target.Distance(Player) <= Spells.W.Range)
