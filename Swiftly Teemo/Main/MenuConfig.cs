@@ -9,7 +9,7 @@ namespace Swiftly_Teemo.Main
 {
     internal class MenuConfig
     {
-        public Menu TargetSelectorMenu;
+       
         private const string MenuName = "Swiftly Teemo";
         public static Menu MainMenu { get; set; } = new Menu(MenuName, MenuName, true);
         public static void Load()
@@ -30,6 +30,7 @@ namespace Swiftly_Teemo.Main
             UseSkin = SkinMenu.Add(new MenuBool("UseSkin", "Use SkinChanger"));
             SkinChanger = SkinMenu.Add(new MenuList<string>("Skins", "Skins", new[] { "Default", "Happy Elf Teemo", "Recon Teemo", "Badger Teemo", "Astronaut Teemo", "Cottontail Teemo", "Super Teemo", "Panda Teemo", "Omega Squad Teemo" }));
             Flee = MainMenu.Add(new MenuKeyBind("Flee", "Flee", System.Windows.Forms.Keys.A, KeyBindType.Press));
+
             MainMenu.Attach();
         }
         public static Menu ComboMenu;

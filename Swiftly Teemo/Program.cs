@@ -1,11 +1,11 @@
 ﻿#region
 
-using System;
-using System.Linq;
 using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
 using SharpDX;
+using System;
+using System.Linq;
 using Swiftly_Teemo.Draw;
 using Swiftly_Teemo.Handler;
 using Swiftly_Teemo.Main;
@@ -28,8 +28,9 @@ namespace Swiftly_Teemo
                 Game.PrintChat("Failed to load Swiftly Teemo!");
                 return;
             }
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Swiftly Teemo</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Version: 4</font></b>");
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> TowerCheck & R Draw</font></b>");
+
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Swiftly Teemo</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Version: 5</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Compiling Error</font></b>");
 
              Spells.Load();
              MenuConfig.Load();
@@ -37,7 +38,7 @@ namespace Swiftly_Teemo
             Drawing.OnDraw += Drawings.OnDraw;
             Drawing.OnEndScene += Drawing_OnEndScene;
 
-            Spellbook.OnCastSpell += Mode.OnCastSpell;
+          //  Spellbook.OnCastSpell += Mode.OnCastSpell;
 
             Orbwalker.OnAction += AfterAa.OnAction;
 
@@ -51,7 +52,7 @@ namespace Swiftly_Teemo
             Mode.Skin();
             Mode.Flee();
           
-            switch (Orbwalker.GetActiveMode())
+            switch (Orbwalker.ActiveMode)
             {
                 case OrbwalkingMode.LaneClear:
                     Mode.Lane();
@@ -66,8 +67,6 @@ namespace Swiftly_Teemo
                     break;
                 case OrbwalkingMode.LastHit:
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
             
         }

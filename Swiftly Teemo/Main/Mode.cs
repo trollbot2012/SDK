@@ -13,7 +13,7 @@ namespace Swiftly_Teemo.Main
     {
         public static void Combo()
         {
-            if (Target == null || Target.IsZombie || Target.IsInvulnerable) return;
+            if (Target == null || Target.IsZombie) return;
             if (MenuConfig.TowerCheck && Target.IsUnderEnemyTurret()) return;
 
             var ammo = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.R).Ammo;
@@ -40,14 +40,14 @@ namespace Swiftly_Teemo.Main
                 Spells.W.Cast();
             }
         }
-        public static void OnCastSpell(Spellbook sender, SpellbookCastSpellEventArgs args)
-        {
-            if (args.Slot != SpellSlot.Q) return;
-            if (sender.Owner != Player) return;
+        //public static void OnCastSpell(Spellbook sender, SpellbookCastSpellEventArgs args)
+        //{
+        //    if (args.Slot != SpellSlot.Q) return;
+        //    if (sender.Owner != Player) return;
 
-            Orbwalker.SetAttackState(false);
-            DelayAction.Add(350, () => Orbwalker.SetAttackState(true));
-        }
+        //    Orbwalker.SetAttackState(false);
+        //    DelayAction.Add(350, () => Orbwalker.SetAttackState(true));
+        //}
         public static void Lane()
         {
             var minions = GameObjects.EnemyMinions.Where(m => m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral && m.IsValidTarget(800)).ToList();
@@ -74,15 +74,13 @@ namespace Swiftly_Teemo.Main
             var mob = GameObjects.Jungle.Where(m => m.IsValidTarget(Spells.Q.Range) && !GameObjects.JungleSmall.Contains(m)).ToList();
             var ammo = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.R).Ammo;
 
-            foreach (var m in mob)
+            foreach (var m in from m in mob where Spells.R.IsReady() &&
+                              m.Distance(Player) <= Spells.R.Range &&
+                              m.Health > Spells.R.GetDamage(m) where
+                              !m.SkinName.Contains("Sru_Crab") where
+                              ammo >= 3 select m)
             {
-                if (!Spells.R.IsReady() || !(m.Distance(Player) <= Spells.R.Range) || !(m.Health > Spells.R.GetDamage(m))) continue;
-                if (m.SkinName.Contains("Sru_Crab")) continue;
-
-                if(ammo >= 3)
-                {
-                    Spells.R.Cast(m);
-                }
+                Spells.R.Cast(m);
             }
         }
 
