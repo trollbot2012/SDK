@@ -94,6 +94,7 @@ namespace PrideStalker_Rengar.Handlers
                 }
             }
             if (!(Player.Mana < 5)) return;
+
             if (MenuConfig.UseItem && Spells.Q.IsReady() && Spells.W.IsReady() && HasPassive)
             {
                 ITEM.CastYomu();
@@ -102,7 +103,9 @@ namespace PrideStalker_Rengar.Handlers
             {
                 ITEM.CastProtobelt();
             }
+
             if (!(target.Distance(Player) <= Spells.W.Range)) return;
+
             if (MenuConfig.UseItem && Spells.W.IsReady())
             {
                 ITEM.CastHydra();
@@ -112,20 +115,15 @@ namespace PrideStalker_Rengar.Handlers
                 Spells.W.Cast(target);
                 Spells.W.Cast(target);
             }
-            else if (Spells.Q.IsReady())
+
+           else if (Spells.Q.IsReady())
             {
                 Spells.Q.Cast(target);
             }
-            else if (Spells.E.IsReady() && target.Distance(Player) <= Spells.W.Range + 225)
+
+            else if (Spells.E.IsReady() && !Spells.W.IsReady() && target.Distance(Player) <= float.MaxValue)
             {
-                if (MenuConfig.IgnoreE)
-                {
-                    Spells.E.Cast(target.ServerPosition);
-                }
-                else
-                {
-                    Spells.E.CastIfHitchanceEquals(target, HitChance.Collision);
-                }
+                Spells.E.Cast(target.ServerPosition);
             }
         }
         #endregion
@@ -137,7 +135,7 @@ namespace PrideStalker_Rengar.Handlers
 
             if (target == null || !target.IsValidTarget() || target.IsZombie) return;
 
-            if (Player.Mana == 5)
+            if (Player.Mana >= 5)
             {
                 if (MenuConfig.UseItem && Spells.Q.IsReady() && HasPassive)
                 {
@@ -153,38 +151,34 @@ namespace PrideStalker_Rengar.Handlers
                 }
             }
 
-            if (Player.Mana < 5)
+            if (!(Player.Mana < 5)) return;
+
+            
+            if (MenuConfig.UseItem && Spells.Q.IsReady() && Spells.W.IsReady())
             {
-                if (MenuConfig.UseItem && Spells.Q.IsReady() && Spells.W.IsReady())
+                ITEM.CastYomu();
+            }
+
+            if (Spells.Q.IsReady() && target.Distance(Player) <= Spells.W.Range)
+            {
+                if (!MenuConfig.TripleQAAReset)
                 {
-                    ITEM.CastYomu();
+                    Spells.Q.Cast();
                 }
-                if (Spells.Q.IsReady() && target.Distance(Player) <= Spells.W.Range)
+            }
+
+            if (Spells.E.IsReady() && !Spells.Q.IsReady() && target.Distance(Player) < float.MaxValue)
+            {
+                Spells.E.Cast(target.ServerPosition);
+            }
+
+            if (Spells.W.IsReady() && !Spells.Q.IsReady() && Player.Distance(target) <= Spells.W.Range)
+            {
+                if (MenuConfig.UseItem)
                 {
-                    if (!MenuConfig.TripleQAAReset)
-                    {
-                        Spells.Q.Cast();
-                    }
+                    ITEM.CastHydra();
                 }
-                if (Spells.E.IsReady() && !Spells.Q.IsReady() && target.Distance(Player) < Player.AttackRange)
-                {
-                    if (MenuConfig.IgnoreE)
-                    {
-                        Spells.E.Cast(target.ServerPosition);
-                    }
-                    else
-                    {
-                        Spells.E.CastIfHitchanceEquals(target, HitChance.Collision);
-                    }
-                }
-                if (Spells.W.IsReady() && !Spells.Q.IsReady() && Player.Distance(target) <= Spells.W.Range)
-                {
-                    if (MenuConfig.UseItem)
-                    {
-                        ITEM.CastHydra();
-                    }
-                    Spells.W.Cast(target);
-                }
+                Spells.W.Cast(target);
             }
         }
         #endregion
@@ -196,7 +190,8 @@ namespace PrideStalker_Rengar.Handlers
             GameObjects.EnemyMinions.Where(m => m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral && m.IsValidTarget(Spells.W.Range)).ToList();
 
             if (target == null || !target.IsValidTarget() || target.IsZombie) return;
-            if (Player.Mana == 5)
+
+            if (Player.Mana >= 5)
             {
                 if (MenuConfig.UseItem && Spells.Q.IsReady() && HasPassive)
                 {
@@ -207,36 +202,29 @@ namespace PrideStalker_Rengar.Handlers
                     Spells.Q.Cast();   
                 }
             }
-            if (Player.Mana < 5)
+
+            if (!(Player.Mana < 5)) return;
+
+            if (MenuConfig.UseItem && Spells.Q.IsReady() && Spells.W.IsReady())
             {
-                if (MenuConfig.UseItem && Spells.Q.IsReady() && Spells.W.IsReady())
-                {
-                    ITEM.CastYomu();
-                }
-                if (Spells.E.IsReady() && target.Distance(Player) <= Spells.W.Range + 225)
-                {
-                    if (MenuConfig.IgnoreE)
-                    {
-                        Spells.E.Cast(target.ServerPosition);
-                    }
-                    else
-                    {
-                        Spells.E.CastIfHitchanceEquals(target, HitChance.Collision);
-                    }
-                }
-                if (Spells.Q.IsReady() && target.Distance(Player) <= Spells.W.Range)
-                {
-                    Spells.Q.Cast();
-                }
-                if (Spells.W.IsReady() && Player.Distance(target) <= Spells.W.Range)
-                {
-                    if (MenuConfig.UseItem)
-                    {
-                        ITEM.CastHydra();
-                    }
-                    Spells.W.Cast(target);
-                }
+                ITEM.CastYomu();
             }
+            if (Spells.E.IsReady() && target.Distance(Player) <= Spells.W.Range + 225)
+            {
+                Spells.E.Cast(target.ServerPosition);
+            }
+            if (Spells.Q.IsReady() && target.Distance(Player) <= Spells.W.Range)
+            {
+                Spells.Q.Cast();
+            }
+
+            if (!Spells.W.IsReady() || !(Player.Distance(target) <= Spells.W.Range)) return;
+
+            if (MenuConfig.UseItem)
+            {
+                ITEM.CastHydra();
+            }
+            Spells.W.Cast(target);
         }
         
         #endregion
@@ -275,30 +263,30 @@ namespace PrideStalker_Rengar.Handlers
                         }
                     }
                 }
-                if (Player.Mana < 5)
+
+                if (!(Player.Mana < 5)) continue;
+
+                if (Spells.Q.IsReady())
                 {
-                    if (Spells.Q.IsReady())
-                    {
-                        Spells.Q.Cast(m);
-                    }
+                    Spells.Q.Cast(m);
+                }
 
-                    if (Spells.E.IsReady() && !HasPassive)
+                if (Spells.E.IsReady() && !HasPassive)
+                {
+                    if(Spells.Q.IsReady() || Spells.W.IsReady())
                     {
-                        if(Spells.Q.IsReady() || Spells.W.IsReady())
-                        {
-                            Spells.E.Cast(m);
-                        }
-                    }
-
-                    if (Spells.W.IsReady() && m.Distance(Player) <= Spells.W.Range)
-                    {
-                        if (MenuConfig.UseItem)
-                        {
-                            ITEM.CastHydra();
-                        }
-                        Spells.W.Cast(m);
+                        Spells.E.Cast(m);
                     }
                 }
+
+                if (!Spells.W.IsReady() || !(m.Distance(Player) <= Spells.W.Range)) continue;
+
+                if (MenuConfig.UseItem)
+                {
+                    ITEM.CastHydra();
+                }
+
+                Spells.W.Cast(m);
             }
               
         }
@@ -327,7 +315,7 @@ namespace PrideStalker_Rengar.Handlers
                     }
                     else
                     {
-                        if (Spells.W.IsReady() && m.Distance(Player) <= Spells.W.Range && Player.HealthPercent < 80)
+                        if (Spells.W.IsReady() && m.Distance(Player) <= Spells.W.Range && Player.HealthPercent < 20)
                         {
                             if (MenuConfig.UseItem)
                             {
@@ -337,21 +325,22 @@ namespace PrideStalker_Rengar.Handlers
                         }
                     }
                 }
-                if (Player.Mana < 5)
+
+                if (!(Player.Mana < 5)) continue;
+
+                if (Spells.W.IsReady() && m.Distance(Player) <= Spells.W.Range)
                 {
-                   
-                    if (Spells.W.IsReady() && m.Distance(Player) <= Spells.W.Range)
+                    if (MenuConfig.UseItem)
                     {
-                        if (MenuConfig.UseItem)
-                        {
-                            ITEM.CastHydra();
-                        }
-                        Spells.W.Cast(m.ServerPosition);
+                        ITEM.CastHydra();
                     }
-                   if (Spells.E.IsReady())
-                    {
-                        Spells.E.Cast(m.ServerPosition);
-                    }
+
+                    Spells.W.Cast(m.ServerPosition);
+                }
+
+                if (Spells.E.IsReady())
+                {
+                    Spells.E.Cast(m.ServerPosition);
                 }
             }
         }
