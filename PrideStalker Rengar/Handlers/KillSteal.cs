@@ -1,11 +1,7 @@
-﻿using LeagueSharp;
-using LeagueSharp.SDK;
+﻿using LeagueSharp.SDK;
 using PrideStalker_Rengar.Main;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LeagueSharp.SDK.Enumerations;
 
 namespace PrideStalker_Rengar.Handlers
 {
@@ -14,29 +10,23 @@ namespace PrideStalker_Rengar.Handlers
        
         public static void Killsteal()
         {
-            foreach (var target in GameObjects.EnemyHeroes.Where(x => x.IsValidTarget(800) && !x.IsDead && !x.IsZombie))
+            foreach (var target in GameObjects.EnemyHeroes.Where(x => x.IsValidTarget(800) && !x.IsDead && !x.IsZombie).Where(target => target.IsValidTarget()))
             {
-                if(target != null && target.IsValidTarget())
+                if(Spells.E.IsReady() && target.Health < Spells.E.GetDamage(target))
                 {
-                    if(Spells.E.IsReady() && target.Health < Spells.E.GetDamage(target))
-                    {
-                        Spells.E.Cast(target);
-                    }
-                    if (Spells.W.IsReady() && target.Health < Spells.W.GetDamage(target))
-                    {
-                        Spells.W.Cast(target);
-                    }
+                    Spells.E.CastIfHitchanceEquals(target, HitChance.High);
+                }
+                if (Spells.W.IsReady() && target.Health < Spells.W.GetDamage(target))
+                {
+                    Spells.W.Cast(target);
                 }
             }
-            if(MenuConfig.KillStealSummoner)
+
+            if (!MenuConfig.KillStealSummoner) return;
+
+            foreach (var target in GameObjects.EnemyHeroes.Where(t => t.IsValidTarget(600f)).Where(target => target.Health < Dmg.IgniteDmg && Spells.Ignite.IsReady()))
             {
-                foreach (var target in GameObjects.EnemyHeroes.Where(t => t.IsValidTarget(600f)))
-                {
-                    if (target.Health < Dmg.IgniteDmg && Spells.Ignite.IsReady())
-                    {
-                        GameObjects.Player.Spellbook.CastSpell(Spells.Ignite, target);
-                    }
-                }
+                GameObjects.Player.Spellbook.CastSpell(Spells.Ignite, target);
             }
         }
     }
