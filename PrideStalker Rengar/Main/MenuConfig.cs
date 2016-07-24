@@ -18,7 +18,7 @@ namespace PrideStalker_Rengar.Main
             ComboMenu = MainMenu.Add(new Menu("ComboMenu", "Combo"));
             ComboMode = ComboMenu.Add(new MenuList<string>("ComboMode", "Combo Mode", new[] { "Gank", "Triple Q", "Ap Combo", "OneShot" }));
             TripleQAAReset = ComboMenu.Add(new MenuBool("TripleQAAReset", "AA Q Reset In Triple Q", true));
-
+            EBackwards = ComboMenu.Add(new MenuBool("EBackwards", "E Backwards When Jumping", true));
 
             // Misc
             Misc = MainMenu.Add(new Menu("Misc", "Misc"));
@@ -55,6 +55,7 @@ namespace PrideStalker_Rengar.Main
         public static MenuKeyBind ChangeComboMode;
 
         public static MenuBool TripleQAAReset;
+       public static MenuBool EBackwards;
         public static MenuBool StackLastHit;
         public static MenuBool UseSkin;
         public static MenuBool KillStealSummoner;
