@@ -3,7 +3,7 @@ using LeagueSharp.SDK.UI;
 
 namespace Reforged_Riven.Main
 {
-    class MenuConfig
+    internal class MenuConfig
     {
         private const string MenuName = "Reforged Riven";
         public static Menu MainMenu { get; set; } = new Menu(MenuName, MenuName, true);
@@ -15,21 +15,21 @@ namespace Reforged_Riven.Main
             RKillable = ComboMenu.Add(new MenuBool("RKillable", "R2 For Max Damage"));
 
             FlashMenu = MainMenu.Add(new Menu("FlashMenu", "Flash"));
-            Flash = FlashMenu.Add(new MenuBool("Flash", "Flash If Selected && Killable"));
-            FlashEnemies = FlashMenu.Add(new MenuSlider("FlashEnemies", "Flash If X Enemies", 4, 0, 5));
+            Flash = FlashMenu.Add(new MenuBool("Flash", "Flash If Selected & Killable"));
+            FlashEnemies = FlashMenu.Add(new MenuSlider("FlashEnemies", "Don't Flash If X Enemies", 2, 0, 5));
 
             // Lane
             LaneMenu = MainMenu.Add(new Menu("LaneMenu", "Lane"));
             LaneVisible = LaneMenu.Add(new MenuBool("LaneVisible", "Only If No Enemy Visible", true));
-            LaneQ = LaneMenu.Add(new MenuBool("LaneQ", "Use Q"));
+            LaneQ = LaneMenu.Add(new MenuBool("LaneQ", "Use Q", true));
             LaneW = LaneMenu.Add(new MenuBool("LaneW", "Use W"));
             LaneE = LaneMenu.Add(new MenuBool("LaneE", "Use E"));
 
             // Jungle
             JungleMenu = MainMenu.Add(new Menu("JungleMenu", "Jungle"));
-            JungleQ = JungleMenu.Add(new MenuBool("JungleQ", "Use Q"));
-            JungleW = JungleMenu.Add(new MenuBool("JungleW", "Use W"));
-            JungleE = JungleMenu.Add(new MenuBool("JungleE", "Use E"));
+            JungleQ = JungleMenu.Add(new MenuBool("JungleQ", "Use Q", true));
+            JungleW = JungleMenu.Add(new MenuBool("JungleW", "Use W", true));
+            JungleE = JungleMenu.Add(new MenuBool("JungleE", "Use E", true));
 
             // Misc
             MiscMenu = MainMenu.Add(new Menu("MiscMenu", "Misc"));
@@ -39,22 +39,13 @@ namespace Reforged_Riven.Main
 
             // Draw
             DrawMenu = MainMenu.Add(new Menu("Draw", "Draw"));
-            DrawFleeSpots = DrawMenu.Add(new MenuBool("DrawFleeSpots", "Draw Flee Spots"));
-            dind = DrawMenu.Add(new MenuBool("dind", "Damage Indicator"));
+            Dind = DrawMenu.Add(new MenuBool("Dind", "Damage Indicator"));
+            DrawCombo = DrawMenu.Add(new MenuBool("DrawCombo", "Draw Combo Range", true));
 
             // Flee
             FleeMenu = MainMenu.Add(new Menu("Flee", "Flee"));
             WallFlee = FleeMenu.Add(new MenuBool("WallFlee", "WallFlee"));
-
-            // Trinket
-            TrinketMenu = MainMenu.Add(new Menu("TrinketMenu", "Trinket"));
-            BuyTrinket = TrinketMenu.Add(new MenuBool("BuyTrinket", "Buy Trinket"));
-            TrinketList = TrinketMenu.Add(new MenuList<string>("TrinketList", "Trinkets", new[] { "Oracle Alternation", "Farsight Alternation" }));
-
-            // Skin
-            SkinMenu = MainMenu.Add(new Menu("SkinMenu", "Skin"));
-            UseSkin = SkinMenu.Add(new MenuBool("UseSkin", "Use SkinChanger"));
-            SkinChanger = SkinMenu.Add(new MenuList<string>("Skins", "Skins", new[] { "Default", "Redeemed", "Crimson Elite", "Battle Bunny", "Championship", "Dragonblade", "Arcade" }));
+            FleeKey = FleeMenu.Add(new MenuKeyBind("FleeKey", "Flee Key", System.Windows.Forms.Keys.A, KeyBindType.Press));
 
             MainMenu.Attach();
         }
@@ -66,13 +57,8 @@ namespace Reforged_Riven.Main
         public static Menu MiscMenu;
         public static Menu DrawMenu;
         public static Menu FleeMenu;
-        public static Menu TrinketMenu;
-        public static Menu SkinMenu;
-
-        // List
-        public static MenuList<string> SkinChanger;
-        public static MenuList<string> TrinketList;
-
+       
+       
         // Slider
        public static MenuSlider FlashEnemies;
 
@@ -80,6 +66,7 @@ namespace Reforged_Riven.Main
        // Keybind
       //public static MenuKeyBind Passive;
 
+        public static MenuKeyBind FleeKey;
         public static MenuKeyBind QMove;
         public static MenuKeyBind ForceR;
 
@@ -95,11 +82,9 @@ namespace Reforged_Riven.Main
         public static MenuBool LaneQ;
         public static MenuBool LaneW;
         public static MenuBool LaneE;
-        public static MenuBool BuyTrinket;
         public static MenuBool KeepQ;
-        public static MenuBool DrawFleeSpots;
-        public static MenuBool dind;
+        public static MenuBool Dind;
+        public static MenuBool DrawCombo;
         public static MenuBool WallFlee;
-        public static MenuBool UseSkin;
     }
 }

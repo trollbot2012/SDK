@@ -14,42 +14,42 @@ namespace Reforged_Riven.Update
     {
         public static void Update(EventArgs args)
         {
-            foreach (var target in ObjectManager.Get<Obj_AI_Hero>().OrderBy(hp => hp.Health))
+            var target = Variables.TargetSelector.GetTarget(Spells.R.Range, DamageType.Physical);
+
+            if (target == null) return;
+
+            if (target.HasBuff("kindrednodeathbuff") || target.HasBuff("Undying Rage") ||
+                target.HasBuff("JudicatorIntervention")) return;
+
+            if (Spells.Q.IsReady())
             {
-                if(target == null) return;
-
-                if (target.HasBuff("kindrednodeathbuff") || target.HasBuff("Undying Rage") ||
-                    target.HasBuff("JudicatorIntervention")) return;
-
-                if (Spells.Q.IsReady())
+                if (target.Health < Spells.Q.GetDamage(target) && Logic.InQRange(target))
                 {
-                    if (target.Health < Spells.Q.GetDamage(target) && Logic.InQRange(target))
-                    {
-                        Spells.Q.Cast(target);
-                    }
+                    Spells.Q.Cast(target);
                 }
-                if (Spells.W.IsReady())
-                {
+            }
+            if (Spells.W.IsReady())
+            {
 
-                    if (target.Health < Spells.W.GetDamage(target) && Logic.InWRange(target))
-                    {
-                        Spells.W.Cast();
-                    }
-                }
-                if (Spells.R.IsReady() && Spells.R.Instance.Name == IsSecondR)
+                if (target.Health < Spells.W.GetDamage(target) && Logic.InWRange(target))
                 {
-
-                    if (target.Health < Dmg.Rdame(target, target.Health))
-                    {
-                        Spells.R.Cast(target.Position);
-                    }
+                    Spells.W.Cast();
                 }
-                if (!Spells.Ignite.IsReady() || !MenuConfig.Ignite) continue;
+            }
 
-                foreach (var x in GameObjects.EnemyHeroes.Where(t => t.IsValidTarget(600f)).Where(x => target.IsValidTarget(600f) && target.Health < Dmg.IgniteDmg))
+            if (Spells.R.IsReady() && Spells.R.Instance.Name != IsSecondR)
+            {
+                if (target.Health < Dmg.Rdame(target, target.Health))
                 {
-                    GameObjects.Player.Spellbook.CastSpell(Spells.Ignite, x);
+                    Spells.R.Cast(target.Position);
                 }
+            }
+
+            if (!Spells.Ignite.IsReady() || !MenuConfig.Ignite) return;
+
+            foreach (var x in GameObjects.EnemyHeroes.Where(t => t.IsValidTarget(600f) && t.Health < Dmg.IgniteDmg))
+            {
+                GameObjects.Player.Spellbook.CastSpell(Spells.Ignite, x);
             }
         }
     }

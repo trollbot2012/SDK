@@ -5,7 +5,7 @@ using Reforged_Riven.Main;
 
 namespace Reforged_Riven.Update
 {
-    class Animation : Logic
+    internal class Animation : Logic
     {
         public static float lastQ;
 

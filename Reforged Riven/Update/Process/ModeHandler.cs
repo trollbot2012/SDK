@@ -1,6 +1,5 @@
 ﻿#region
 
-using System;
 using System.Linq;
 using LeagueSharp;
 using LeagueSharp.SDK;
@@ -17,7 +16,7 @@ namespace Reforged_Riven.Update.Process
     {
         public static void OnDoCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            var spellName = args.SData.Name;
+           // var spellName = args.SData.Name;
 
             if (!sender.IsMe) return;
 
@@ -28,12 +27,15 @@ namespace Reforged_Riven.Update.Process
                 if (Orbwalker.ActiveMode == OrbwalkingMode.LaneClear)
                 {
                     Mode.Jungle();
-                    
-                    var minions =
-                        GameObjects.EnemyMinions.Where(m => m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral && m.IsValidTarget(Player.AttackRange + Player.BoundingRadius));
+
+                    var minions = GameObjects.EnemyMinions.Where(m =>
+                                m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral &&
+                                m.IsValidTarget(Player.AttackRange + 260));
 
                     foreach (var m in minions)
                     {
+                        if (m.Health < Player.GetAutoAttackDamage(m)) return;
+
                         if (Spells.E.IsReady() && MenuConfig.LaneE)
                         {
                             Spells.E.Cast(m);
@@ -42,14 +44,17 @@ namespace Reforged_Riven.Update.Process
                         if (Spells.Q.IsReady() && MenuConfig.LaneQ)
                         {
                             Logic.ForceCastQ(m);
-                            Usables.CastHydra();
+                            Logic.CastHydra();
                         }
 
                         if (Spells.W.IsReady() && MenuConfig.LaneW)
                         {
-                            if (m.Health < Spells.W.GetDamage(m) && Player.IsWindingUp)
+                            if (Logic.InWRange(m))
                             {
-                                Spells.W.Cast(m);
+                                if (m.Health < Spells.W.GetDamage(m) && Player.IsWindingUp)
+                                {
+                                    Spells.W.Cast(m);
+                                }
                             }
                         }
                     }
@@ -60,7 +65,8 @@ namespace Reforged_Riven.Update.Process
 
             if (turret != null)
             {
-                if (turret.IsValid && args.Target != null && Spells.Q.IsReady() && MenuConfig.LaneQ && Orbwalker.ActiveMode == OrbwalkingMode.LaneClear)
+                if (turret.IsValid && Spells.Q.IsReady() && MenuConfig.LaneQ &&
+                    Orbwalker.ActiveMode == OrbwalkingMode.LaneClear)
                 {
                     Logic.ForceCastQ(turret);
                 }
@@ -72,27 +78,26 @@ namespace Reforged_Riven.Update.Process
 
             if (Orbwalker.ActiveMode == OrbwalkingMode.Combo)
             {
-                if (Spells.E.IsReady())
+                if (Spells.E.IsReady() && Player.Distance(target.Position) <= Spells.E.Range + Player.AttackRange)
                 {
-                    Spells.E.Cast(target);
-                    Usables.CastHydra();
+                    Spells.E.Cast(target.Position);
                 }
 
                 if (Spells.W.IsReady() && Logic.InWRange(target))
                 {
-                    Usables.CastHydra();
                     Spells.W.Cast();
                 }
 
                 if (Spells.Q.IsReady())
                 {
                     Logic.ForceCastQ(target);
-                    Usables.CastHydra();
+                    Logic.CastHydra();
                 }
 
                 if (MenuConfig.RKillable)
                 {
-                    if (Spells.R.IsReady() && Spells.R.Instance.Name == IsSecondR && !Spells.Q.IsReady())
+                    if (Spells.R.IsReady() && Spells.R.Instance.Name == IsSecondR &&
+                        (!Spells.Q.IsReady() || Qstack >= 3))
                     {
                         Spells.R.Cast(target.Position);
                     }
@@ -106,10 +111,10 @@ namespace Reforged_Riven.Update.Process
                 }
             }
 
-            if (Orbwalker.ActiveMode != OrbwalkingMode.Hybrid || Qstack != 2 || !Spells.Q.IsReady()) return;
+            if (Orbwalker.ActiveMode != OrbwalkingMode.Hybrid || Qstack < 2 || !Spells.Q.IsReady()) return;
 
-            Usables.CastHydra();
-            Logic.ForceItem();
+           
+            Logic.CastHydra();
             Logic.ForceCastQ(target);
         }
     }

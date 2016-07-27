@@ -30,24 +30,40 @@ namespace Reforged_Riven.Main
                 : 265 >= Player.Distance(target.Position));
         }
 
-        public static void ForceItem()
-        {
-            if (Items.CanUseItem(Item) && Items.HasItem(Item) && Item != 0) _forceItem = true;
-            DelayAction.Add(500, () => _forceItem = false);
-        }
+        //public static void ForceItem()
+        //{
+        //    if (Items.CanUseItem(Item) && Items.HasItem(Item) && Item != 0) _forceItem = true;
+        //    DelayAction.Add(500, () => _forceItem = false);
+        //}
 
         public static void ForceSkill()
         {
-            if (_forceQ && Spells.Q.IsReady()) Spells.Q.Cast(_qtarget.Position);
-            if (_forceW) Spells.W.Cast();
-            if (_forceR && Spells.R.Instance.Name == IsFirstR) Spells.R.Cast();
-            if (_forceItem && Items.CanUseItem(Item) && Items.HasItem(Item) && Item != 0) Items.UseItem(Item);
-
-            if (_forceR2 && Spells.R.Instance.Name == IsSecondR)
+            if (_forceQ && Spells.Q.IsReady() && _qtarget != null)
             {
-                var target = Variables.TargetSelector.GetSelectedTarget();
-                if (target != null) Spells.R.Cast(target.Position);
+                Spells.Q.Cast(_qtarget.Position);
             }
+
+            if (_forceW)
+            {
+                Spells.W.Cast();
+            }
+
+            if (_forceR && Spells.R.Instance.Name == IsFirstR)
+            {
+                Spells.R.Cast();
+            }
+
+            //if (_forceItem && Items.CanUseItem(Item) && Items.HasItem(Item) && Item != 0)
+            //{
+            //    Items.UseItem(Item);
+            //}
+
+            if (!_forceR2 || Spells.R.Instance.Name != IsSecondR) return;
+
+            var target = Variables.TargetSelector.GetSelectedTarget();
+            if (target == null) return;
+
+            Spells.R.Cast(target.Position);
         }
 
         public static void ForceR()
@@ -104,11 +120,11 @@ namespace Reforged_Riven.Main
             if (args.SData.Name == IsFirstR) _forceR = false;
             if (args.SData.Name == IsSecondR) _forceR2 = false;
         }
-        public static int Item
-           =>
-               Items.CanUseItem(3077) && Items.HasItem(3077)
-                   ? 3077
-                   : Items.CanUseItem(3074) && Items.HasItem(3074) ? 3074 : 0;
+        //public static int Item
+        //   =>
+        //       Items.CanUseItem(3077) && Items.HasItem(3077)
+        //           ? 3077
+        //           : Items.CanUseItem(3074) && Items.HasItem(3074) ? 3074 : 0;
 
     }
 }

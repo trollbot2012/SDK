@@ -1,12 +1,10 @@
 ﻿#region
 
-using System;
 using System.Linq;
 using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
 using LeagueSharp.SDK.Utils;
-using Reforged_Riven.Extras;
 using Reforged_Riven.Main;
 
 #endregion
@@ -15,11 +13,39 @@ namespace Reforged_Riven.Update
 {
     internal class Mode : Core
     {
+        public static void Burst()
+        {
+            if (!MenuConfig.Flash) return;
+
+            if(!Spells.R.IsReady() || !Spells.W.IsReady() || !Spells.Q.IsReady()) return;
+
+            var target = Variables.TargetSelector.GetSelectedTarget();
+
+            if (target == null || !target.IsValidTarget(700) || target.IsDashing()) return;
+
+            if(target.CountEnemyHeroesInRange(1500) >= MenuConfig.FlashEnemies) return;
+
+            if(target.Health > Dmg.GetComboDamage(target) || target.Distance(Player) >= 600 ) return;
+
+            if (Spells.Flash == SpellSlot.Unknown || !Spells.Flash.IsReady()) return;
+
+            Spells.E.Cast(target.Position);
+
+            if (Spells.R.IsReady() && Spells.R.Instance.Name == IsFirstR)
+            {
+                Spells.R.Cast();
+            }
+
+            Player.Spellbook.CastSpell(Spells.Flash, target);
+            Spells.W.Cast();
+            DelayAction.Add(100, Logic.CastHydra);
+        }
+
         public static void Combo()
         {
-            var target = Variables.TargetSelector.GetTarget(Player.AttackRange + 320, DamageType.Physical);
+            var target = Variables.TargetSelector.GetTarget(Player.AttackRange + 450, DamageType.Physical);
 
-            if(target == null || !target.IsValid || target.IsZombie) return;
+            if (target == null || !target.IsValid || target.IsInvulnerable) return;
 
             if (Spells.R.IsReady() && Spells.R.Instance.Name == IsFirstR && MenuConfig.ForceR.Active) Logic.ForceR();
 
@@ -50,12 +76,12 @@ namespace Reforged_Riven.Update
             {
                 if (!Logic.InWRange(target))
                 {
-                    Spells.E.Cast(target);
+                    Spells.E.Cast(target.Position);
                 }
             }
         }
 
-       
+
         // Lane
         public static void Lane(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
@@ -64,11 +90,13 @@ namespace Reforged_Riven.Update
                 return;
             }
 
-            Logic._qtarget = (Obj_AI_Base)args.Target;
+            Logic._qtarget = (Obj_AI_Base) args.Target;
 
             if (!(args.Target is Obj_AI_Minion)) return;
 
-            var minions = GameObjects.EnemyMinions.Where(m => m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral && m.IsValidTarget(Player.AttackRange + Player.BoundingRadius + 260)).ToList();
+            var minions = GameObjects.EnemyMinions.Where(m =>
+                        m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral &&
+                        m.IsValidTarget(Player.AttackRange + Player.BoundingRadius + 260)).ToList();
 
             foreach (var m in minions)
             {
@@ -96,26 +124,29 @@ namespace Reforged_Riven.Update
         {
             if (Orbwalker.ActiveMode != OrbwalkingMode.LaneClear) return;
 
-            var mob = ObjectManager.Get<Obj_AI_Minion>().Where(m => !m.IsDead && !m.IsZombie && m.Team == GameObjectTeam.Neutral && m.IsValidTarget(Spells.W.Range)).ToList();
+            var mob = ObjectManager.Get<Obj_AI_Minion>().Where(m =>
+                            !m.IsDead && m.Team == GameObjectTeam.Neutral &&
+                            m.IsValidTarget(Player.AttackRange + 260))
+                            .ToList();
 
             foreach (var m in mob)
             {
-                if(!m.IsValid) return;
+                if (!m.IsValid) return;
 
                 if (Spells.E.IsReady() && MenuConfig.JungleE)
                 {
-                    Spells.E.Cast(m);
+                    Spells.E.Cast(m.Position);
                 }
 
-                if (Spells.Q.IsReady() && MenuConfig.JungleQ)
+                if (Spells.Q.IsReady() && MenuConfig.JungleQ && m.Health > Player.GetAutoAttackDamage(m))
                 {
-                    Logic.ForceItem();
+                    Logic.CastHydra();
                     Spells.Q.Cast(m);
                 }
 
                 if (!Spells.W.IsReady() || !MenuConfig.JungleW) continue;
 
-                Logic.ForceItem();
+                Logic.CastHydra();
                 Spells.W.Cast(m);
             }
         }
@@ -129,19 +160,19 @@ namespace Reforged_Riven.Update
                 {
                     Logic.ForceCastQ(target);
 
-                    if (target.Distance(Player) <= Spells.W.Range)
+                    if (Logic.InWRange(target))
                     {
                         Logic.ForceW();
                     }
                 }
             }
 
-            if (!Spells.Q.IsReady() || !Spells.E.IsReady() || Qstack != 3) return;
+            if (!Spells.Q.IsReady() || !Spells.E.IsReady() || Qstack < 3) return;
 
-            var epos = Player.ServerPosition + (Player.ServerPosition - target.ServerPosition).Normalized() * 300;
+            var epos = Player.ServerPosition + (Player.ServerPosition - target.ServerPosition).Normalized()*300;
 
             Spells.E.Cast(epos);
-            DelayAction.Add(150, () => Spells.Q.Cast(epos));
+            DelayAction.Add(190, () => Spells.Q.Cast(epos));
         }
 
         public static void QMove()
@@ -151,16 +182,18 @@ namespace Reforged_Riven.Update
                 return;
             }
 
-            Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
+            if (!Spells.Q.IsReady()) return;
 
-            if (Spells.Q.IsReady())
-            {
-                DelayAction.Add(50, () => Spells.Q.Cast(Game.CursorPos));
-            }
+            Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
+            DelayAction.Add(45, () => Spells.Q.Cast(Game.CursorPos));
         }
 
         public static void Flee()
         {
+            if(!MenuConfig.FleeKey.Active) return;
+
+            Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
+
             if (MenuConfig.WallFlee)
             {
                 var end = Player.ServerPosition.Extend(Game.CursorPos, Spells.Q.Range);
@@ -172,7 +205,9 @@ namespace Reforged_Riven.Update
                 Player.GetPath(WallPoint);
 
                 if (Spells.Q.IsReady() && Qstack < 3)
-                { Spells.Q.Cast(Game.CursorPos); }
+                {
+                    Spells.Q.Cast(Game.CursorPos);
+                }
 
 
                 if (!IsWallDash || Qstack != 3 || !(WallPoint.Distance(Player.ServerPosition) <= 800)) return;
@@ -190,7 +225,8 @@ namespace Reforged_Riven.Update
                     Spells.E.Cast(WallE);
                 }
 
-                if (Qstack != 3 || !(end.Distance(Player.Position) <= 260) || !IsWallDash || !WallPoint.IsValid()) return;
+                if (Qstack != 3 || !(end.Distance(Player.Position) <= 260) || !IsWallDash || !WallPoint.IsValid())
+                    return;
 
                 Player.IssueOrder(GameObjectOrder.MoveTo, WallPoint);
                 Spells.Q.Cast(WallPoint);
@@ -198,9 +234,11 @@ namespace Reforged_Riven.Update
 
             else
             {
-                var enemy = ObjectManager.Get<Obj_AI_Hero>().Where(hero => hero.IsValidTarget(Player.HasBuff("RivenFengShuiEngine")
-                           ? 70 + 195 + Player.BoundingRadius
-                           : 70 + 120 + Player.BoundingRadius) && Spells.W.IsReady());
+                var enemy =
+                    ObjectManager.Get<Obj_AI_Hero>()
+                        .Where(hero => hero.IsValidTarget(Player.HasBuff("RivenFengShuiEngine")
+                            ? 70 + 195 + Player.BoundingRadius
+                            : 70 + 120 + Player.BoundingRadius) && Spells.W.IsReady());
 
                 var x = Player.Position.Extend(Game.CursorPos, 300);
 

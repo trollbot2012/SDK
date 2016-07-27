@@ -1,6 +1,7 @@
 ﻿#region
 
 using LeagueSharp;
+using Reforged_Riven.Draw;
 using Reforged_Riven.Main;
 using Reforged_Riven.Update;
 using Reforged_Riven.Update.Process;
@@ -14,29 +15,25 @@ namespace Reforged_Riven
         public static void LoadAssembly()
         {
             MenuConfig.Load();
-            Core.Spells.Load();
-            
-             Obj_AI_Base.OnDoCast += LaneClear.OnDoCastLc;
-             Obj_AI_Base.OnDoCast += ModeHandler.OnDoCast;
-             Obj_AI_Base.OnProcessSpellCast += Logic.OnCast;
-             Obj_AI_Base.OnPlayAnimation += Animation.OnPlay;
+            Spells.Load();
 
-            //  Drawing.OnEndScene += DrawDmg.DmgDraw;
-            //  Drawing.OnDraw += DrawRange.RangeDraw;
-            //  Drawing.OnDraw += DrawWallSpot.WallDraw;
+            Obj_AI_Base.OnDoCast += LaneClear.OnDoCastLc;
+            Obj_AI_Base.OnDoCast += ModeHandler.OnDoCast;
+            Obj_AI_Base.OnProcessSpellCast += Logic.OnCast;
+            Obj_AI_Base.OnPlayAnimation += Animation.OnPlay;
 
-              Game.OnUpdate += Trinket.Update;
-              Game.OnUpdate += KillSteal.Update;
-              Game.OnUpdate += alwaysUpdate.Update;
-              Game.OnUpdate += SkinChanger.Update;
+            Drawing.OnEndScene += DrawDmg.DmgDraw;
+            Drawing.OnDraw += SpellRange.Draw;
 
-          //  Interrupter2.OnInterruptableTarget += Interrupt2.OnInterruptableTarget;
-          //  AntiGapcloser.OnEnemyGapcloser += Gapclose.gapcloser;
+            Game.OnUpdate += KillSteal.Update;
+            Game.OnUpdate += PermaActive.Update;
 
-          //   AssemblyVersion.CheckVersion();
-            
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Reforged Riven</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Version: 1</font></b>");
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Release</font></b>");
+            //  Interrupter2.OnInterruptableTarget += Interrupt2.OnInterruptableTarget;
+            //  AntiGapcloser.OnEnemyGapcloser += Gapclose.gapcloser;
+
+           AssemblyVersion.CheckVersion();
+
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Reforged Riven</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> - Loaded</font></b>");
         }
     }
 }
