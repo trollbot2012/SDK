@@ -18,7 +18,7 @@ namespace Reforged_Riven.Update.Process
         {
             if (!MenuConfig.LaneQ ||!sender.IsMe) return;
 
-            Logic._qtarget = (Obj_AI_Base)args.Target;
+            Logic.Qtarget = (Obj_AI_Base)args.Target;
 
             if (!(args.Target is Obj_AI_Minion)) return;
 

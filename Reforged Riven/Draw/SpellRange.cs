@@ -14,14 +14,14 @@ namespace Reforged_Riven.Draw
             {
                 if (Spells.E.IsReady())
                 {
-                    Render.Circle.DrawCircle(Player.Position, 450 + Player.AttackRange,
+                    Render.Circle.DrawCircle(Player.Position, 400 + Player.AttackRange,
                     Spells.Q.IsReady()
                     ? System.Drawing.Color.FromArgb(120, 0, 170, 255)
                     : System.Drawing.Color.IndianRed);
                 }
                 else
                 {
-                    Render.Circle.DrawCircle(Player.Position, 450,
+                    Render.Circle.DrawCircle(Player.Position, 400,
                      Spells.Q.IsReady()
                      ? System.Drawing.Color.FromArgb(120, 0, 170, 255)
                      : System.Drawing.Color.IndianRed);

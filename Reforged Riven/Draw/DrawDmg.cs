@@ -16,8 +16,8 @@ namespace Reforged_Riven.Draw
             {
                 if (!MenuConfig.Dind) return;
 
-                Indicator.unit = enemy;
-                Indicator.drawDmg(Dmg.GetComboDamage(enemy), Color.LightGoldenrodYellow);
+                Indicator.Unit = enemy;
+                Indicator.DrawDmg(Dmg.GetComboDamage(enemy), Color.GreenYellow);
             }
         }
     }

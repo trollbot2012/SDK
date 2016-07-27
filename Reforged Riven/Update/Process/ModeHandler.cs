@@ -20,7 +20,7 @@ namespace Reforged_Riven.Update.Process
 
             if (!sender.IsMe) return;
 
-            Logic._qtarget = (Obj_AI_Base) args.Target;
+            Logic.Qtarget = (Obj_AI_Base) args.Target;
 
             if (args.Target is Obj_AI_Minion)
             {
@@ -99,14 +99,16 @@ namespace Reforged_Riven.Update.Process
                     if (Spells.R.IsReady() && Spells.R.Instance.Name == IsSecondR &&
                         (!Spells.Q.IsReady() || Qstack >= 3))
                     {
-                        Spells.R.Cast(target.Position);
+                        var rPred = Spells.R.GetPrediction(target);
+                        Spells.R.Cast(rPred.CastPosition);
                     }
                 }
                 else
                 {
                     if (Spells.R.IsReady() && Qstack > 2 && Spells.R.Instance.Name == IsSecondR)
                     {
-                        Spells.R.Cast(target.Position);
+                        var rPred = Spells.R.GetPrediction(target);
+                        Spells.R.Cast(rPred.CastPosition);
                     }
                 }
             }

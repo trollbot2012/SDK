@@ -43,7 +43,7 @@ namespace Reforged_Riven.Update
 
         public static void Combo()
         {
-            var target = Variables.TargetSelector.GetTarget(Player.AttackRange + 450, DamageType.Physical);
+            var target = Variables.TargetSelector.GetTarget(Player.AttackRange + 400, DamageType.Physical);
 
             if (target == null || !target.IsValid || target.IsInvulnerable) return;
 
@@ -90,7 +90,7 @@ namespace Reforged_Riven.Update
                 return;
             }
 
-            Logic._qtarget = (Obj_AI_Base) args.Target;
+            Logic.Qtarget = (Obj_AI_Base) args.Target;
 
             if (!(args.Target is Obj_AI_Minion)) return;
 
@@ -197,12 +197,12 @@ namespace Reforged_Riven.Update
             if (MenuConfig.WallFlee)
             {
                 var end = Player.ServerPosition.Extend(Game.CursorPos, Spells.Q.Range);
-                var IsWallDash = FleeLogic.IsWallDash(end, Spells.Q.Range);
+                var isWallDash = FleeLogic.IsWallDash(end, Spells.Q.Range);
 
-                var Eend = Player.ServerPosition.Extend(Game.CursorPos, Spells.E.Range);
-                var WallE = FleeLogic.GetFirstWallPoint(Player.ServerPosition, Eend);
-                var WallPoint = FleeLogic.GetFirstWallPoint(Player.ServerPosition, end);
-                Player.GetPath(WallPoint);
+                var eend = Player.ServerPosition.Extend(Game.CursorPos, Spells.E.Range);
+                var wallE = FleeLogic.GetFirstWallPoint(Player.ServerPosition, eend);
+                var wallPoint = FleeLogic.GetFirstWallPoint(Player.ServerPosition, end);
+                Player.GetPath(wallPoint);
 
                 if (Spells.Q.IsReady() && Qstack < 3)
                 {
@@ -210,26 +210,26 @@ namespace Reforged_Riven.Update
                 }
 
 
-                if (!IsWallDash || Qstack != 3 || !(WallPoint.Distance(Player.ServerPosition) <= 800)) return;
+                if (!isWallDash || Qstack != 3 || !(wallPoint.Distance(Player.ServerPosition) <= 800)) return;
 
-                ObjectManager.Player.IssueOrder(GameObjectOrder.MoveTo, WallPoint);
+                ObjectManager.Player.IssueOrder(GameObjectOrder.MoveTo, wallPoint);
 
-                if (!(WallPoint.Distance(Player.ServerPosition) <= 600)) return;
+                if (!(wallPoint.Distance(Player.ServerPosition) <= 600)) return;
 
-                ObjectManager.Player.IssueOrder(GameObjectOrder.MoveTo, WallPoint);
+                ObjectManager.Player.IssueOrder(GameObjectOrder.MoveTo, wallPoint);
 
-                if (!(WallPoint.Distance(Player.ServerPosition) <= 45)) return;
+                if (!(wallPoint.Distance(Player.ServerPosition) <= 45)) return;
 
                 if (Spells.E.IsReady())
                 {
-                    Spells.E.Cast(WallE);
+                    Spells.E.Cast(wallE);
                 }
 
-                if (Qstack != 3 || !(end.Distance(Player.Position) <= 260) || !IsWallDash || !WallPoint.IsValid())
+                if (Qstack != 3 || !(end.Distance(Player.Position) <= 260) || !isWallDash || !wallPoint.IsValid())
                     return;
 
-                Player.IssueOrder(GameObjectOrder.MoveTo, WallPoint);
-                Spells.Q.Cast(WallPoint);
+                Player.IssueOrder(GameObjectOrder.MoveTo, wallPoint);
+                Spells.Q.Cast(wallPoint);
             }
 
             else

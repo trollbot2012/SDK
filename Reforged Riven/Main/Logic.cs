@@ -10,12 +10,12 @@ namespace Reforged_Riven.Main
 {
     internal class Logic : Core // I NEED to come up with better ways rather than this class
     {
-        public static bool _forceQ;
+        public static bool ForceQ;
         public static bool _forceW;
         public static bool _forceR;
         public static bool _forceR2;
-        public static bool _forceItem;
-        public static AttackableUnit _qtarget;
+        public static bool ForceItem;
+        public static AttackableUnit Qtarget;
 
         public static int WRange => Player.HasBuff("RivenFengShuiEngine")
             ? 330
@@ -38,9 +38,9 @@ namespace Reforged_Riven.Main
 
         public static void ForceSkill()
         {
-            if (_forceQ && Spells.Q.IsReady() && _qtarget != null)
+            if (ForceQ && Spells.Q.IsReady() && Qtarget != null)
             {
-                Spells.Q.Cast(_qtarget.Position);
+                Spells.Q.Cast(Qtarget.Position);
             }
 
             if (_forceW)
@@ -86,8 +86,8 @@ namespace Reforged_Riven.Main
 
         public static void ForceCastQ(AttackableUnit target)
         {
-            _forceQ = true;
-            _qtarget = target;
+            ForceQ = true;
+            Qtarget = target;
         }
 
         public static void CastHydra()
@@ -114,8 +114,8 @@ namespace Reforged_Riven.Main
             if (!sender.IsMe) return;
 
             
-            if (args.SData.Name.Contains("ItemTiamatCleave")) _forceItem = false;
-            if (args.SData.Name.Contains("RivenTriCleave")) _forceQ = false;
+            if (args.SData.Name.Contains("ItemTiamatCleave")) ForceItem = false;
+            if (args.SData.Name.Contains("RivenTriCleave")) ForceQ = false;
             if (args.SData.Name.Contains("RivenMartyr")) _forceW = false;
             if (args.SData.Name == IsFirstR) _forceR = false;
             if (args.SData.Name == IsSecondR) _forceR2 = false;
