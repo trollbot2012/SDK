@@ -49,7 +49,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>j63K+AdRYpQy7oa4nFhfVtJJi8P5rDk79kjVnWizTzc=</dsig:DigestValue>
+        <dsig:DigestValue>Etljt7gptC5fdiVAU1MhrF9BOqCNa5lGoN620Z5KKC8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -90,14 +90,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Reforged Riven.exe" size="34784">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Reforged Riven.exe" size="33792">
       <assemblyIdentity name="Reforged Riven" version="6.15.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>c/ZYcSHLu/APlXJVu4knIUQGJ0eIn4ANOp6E617j5RQ=</dsig:DigestValue>
+        <dsig:DigestValue>hOrn6EuwIynIZFgoq1NYecGjzdyVj0IQ2EKLmapWx0M=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
