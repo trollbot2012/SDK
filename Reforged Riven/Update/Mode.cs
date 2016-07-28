@@ -15,7 +15,7 @@ namespace Reforged_Riven.Update
     {
         public static void Burst()
         {
-            if (!MenuConfig.Flash) return;
+            if (!MenuConfig.Flash && !MenuConfig.ForceFlash) return;
 
             if (Spells.Flash == SpellSlot.Unknown || !Spells.Flash.IsReady()) return;
 
@@ -23,22 +23,25 @@ namespace Reforged_Riven.Update
 
             var target = Variables.TargetSelector.GetSelectedTarget();
 
-            if (target == null || !target.IsValidTarget(780) || target.IsDashing()) return;
+            if (target == null || !target.IsValidTarget(730) || target.IsDashing()) return;
 
-            if(target.CountEnemyHeroesInRange(1500) >= MenuConfig.FlashEnemies) return;
+            if (!MenuConfig.ForceFlash.Active)
+            {
+                if (target.CountEnemyHeroesInRange(1500) >= MenuConfig.FlashEnemies) return;
 
-            if(target.Health > Dmg.GetComboDamage(target) || target.Distance(Player) >= 600 ) return;
-
+                if (target.Health > Dmg.GetComboDamage(target) || target.Distance(Player) >= 600) return;
+            }
+           
             Spells.E.Cast(target.Position);
             Spells.R.Cast();
             Player.Spellbook.CastSpell(Spells.Flash, target);
             Spells.W.Cast();
-            DelayAction.Add(100, Logic.CastHydra);
+            DelayAction.Add(100, Logic.ForceItem);
         }
 
         public static void Combo()
         {
-            var target = Variables.TargetSelector.GetTarget(Player.AttackRange + 375, DamageType.Physical);
+            var target = Variables.TargetSelector.GetTarget(Player.AttackRange + 310, DamageType.Physical);
 
             if (target == null || !target.IsValid || target.IsInvulnerable) return;
 
@@ -50,9 +53,14 @@ namespace Reforged_Riven.Update
                 Spells.E.IsReady() && (Dmg.IsKillableR(target) || MenuConfig.ForceR))
             {
                 Logic.CastYomu();
-                if (Logic.InWRange(target)) return;
 
-                Spells.E.Cast(target.Position);
+                if (!Logic.InWRange(target))
+                {
+                    Spells.E.Cast(target.Position);
+                }
+
+                if (!Logic.InWRange(target)) return;
+
                 Logic.ForceR();
                 DelayAction.Add(70, Logic.ForceW);
                 DelayAction.Add(45, () => Logic.ForceCastQ(target));
@@ -60,7 +68,10 @@ namespace Reforged_Riven.Update
 
             else if (Spells.W.IsReady() && Spells.E.IsReady())
             {
-                Spells.E.Cast(target.Position);
+                if (!Logic.InWRange(target))
+                {
+                    Spells.E.Cast(target.Position);
+                }
 
                 if (!Logic.InWRange(target)) return;
 
@@ -70,15 +81,13 @@ namespace Reforged_Riven.Update
 
             else if (Spells.E.IsReady() && !Logic.InWRange(target))
             {
-                if (!Logic.InWRange(target))
-                {
-                    Spells.E.Cast(target.Position);
-                }
+                Spells.E.Cast(target.Position);
             }
         }
 
 
         // Lane
+        
         public static void Lane(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
             if (!sender.IsMe)
@@ -92,7 +101,7 @@ namespace Reforged_Riven.Update
 
             var minions = GameObjects.EnemyMinions.Where(m =>
                         m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral &&
-                        m.IsValidTarget(Player.AttackRange + Player.BoundingRadius + 375)).ToList();
+                        m.IsValidTarget(Player.AttackRange + Player.BoundingRadius + 300)).ToList();
 
             foreach (var m in minions)
             {
@@ -103,34 +112,29 @@ namespace Reforged_Riven.Update
                     Spells.E.Cast(m.ServerPosition);
                 }
 
-                if (Spells.Q.IsReady())
-                {
-                    Spells.Q.Cast(m.ServerPosition);
-                    Logic.CastHydra();
-                }
-
                 if (!Spells.W.IsReady() || !(m.Distance(Player) <= Spells.W.Range)) continue;
 
                 if (!(m.Health < Spells.W.GetDamage(m))) continue;
 
-                Logic.CastHydra();
+                Logic.ForceItem();
                 Spells.W.Cast(m);
             }
         }
-
+        
         public static void Jungle()
         {
             if (Orbwalker.ActiveMode != OrbwalkingMode.LaneClear) return;
 
             var mob = ObjectManager.Get<Obj_AI_Minion>().Where(m =>
                             !m.IsDead && m.Team == GameObjectTeam.Neutral &&
-                            m.IsValidTarget(Player.AttackRange + 375))
+                            m.IsValidTarget(Player.AttackRange + 300))
                             .ToList();
 
             foreach (var m in mob)
             {
                 if (!m.IsValid) return;
 
+               
                 if (Spells.E.IsReady() && MenuConfig.JungleE)
                 {
                     Spells.E.Cast(m.Position);
@@ -138,12 +142,13 @@ namespace Reforged_Riven.Update
 
                 if (Spells.Q.IsReady() && MenuConfig.JungleQ)
                 {
+                    Logic.ForceItem();
                     Spells.Q.Cast(m);
                 }
 
                 if (!Spells.W.IsReady() || !MenuConfig.JungleW) return;
 
-                Logic.CastHydra();
+                Logic.ForceItem();
                 Spells.W.Cast(m);  
             }
         }
@@ -183,7 +188,7 @@ namespace Reforged_Riven.Update
 
            
             Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
-            DelayAction.Add(40, () => Spells.Q.Cast(Game.CursorPos));
+            DelayAction.Add(47, () => Spells.Q.Cast(Game.CursorPos));
         }
 
         public static void Flee()
@@ -226,10 +231,11 @@ namespace Reforged_Riven.Update
                     Spells.E.Cast(wallE);
                 }
 
-                if (Qstack != 3 || !(end.Distance(Player.Position) <= 260) || !wallPoint.IsValid()) return;
+                if (Qstack != 3 || !(end.Distance(Player.ServerPosition) <= 260) || !wallPoint.IsValid()) return;
 
 
                 Player.IssueOrder(GameObjectOrder.MoveTo, wallPoint);
+
                 Spells.Q.Cast(wallPoint);
             }
 

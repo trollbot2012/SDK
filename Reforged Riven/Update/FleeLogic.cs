@@ -12,17 +12,17 @@ namespace Reforged_Riven.Update
     {
         public static Vector3 GetFirstWallPoint(Vector3 start, Vector3 end, int step = 1)
         {
-            if (start.IsValid() && end.IsValid())
-            {
-                var distance = start.Distance(end);
-                for (var i = 0; i < distance; i = i + step)
-                {
-                    var newPoint = start.Extend(end, i);
+            if (!start.IsValid() || !end.IsValid()) return Vector3.Zero;
 
-                    if (NavMesh.GetCollisionFlags(newPoint) == CollisionFlags.Wall || newPoint.IsWall())
-                    {
-                        return newPoint;
-                    }
+            var distance = start.Distance(end);
+
+            for (var i = 0; i < distance; i = i + step)
+            {
+                var newPoint = start.Extend(end, i);
+
+                if (NavMesh.GetCollisionFlags(newPoint) == CollisionFlags.Wall || newPoint.IsWall())
+                {
+                    return newPoint;
                 }
             }
             return Vector3.Zero;

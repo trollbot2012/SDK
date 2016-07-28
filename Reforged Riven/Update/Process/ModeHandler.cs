@@ -34,6 +34,8 @@ namespace Reforged_Riven.Update.Process
 
                     foreach (var m in minions)
                     {
+                        if (m.IsUnderEnemyTurret()) continue;
+
                         if (Spells.E.IsReady() && MenuConfig.LaneE)
                         {
                             Spells.E.Cast(m);
@@ -49,7 +51,7 @@ namespace Reforged_Riven.Update.Process
 
                         if (!Logic.InWRange(m)) continue;
 
-                        if (m.Health < Spells.W.GetDamage(m) && Player.IsWindingUp)
+                        if (m.Health < Spells.W.GetDamage(m))
                         {
                             Spells.W.Cast(m);
                         }
@@ -74,7 +76,7 @@ namespace Reforged_Riven.Update.Process
 
             if (Orbwalker.ActiveMode == OrbwalkingMode.Combo)
             {
-                if (Spells.E.IsReady() && Player.Distance(target.Position) <= Spells.E.Range + Player.AttackRange)
+                if (Spells.E.IsReady() && Player.Distance(target.Position) >= Player.AttackRange)
                 {
                     Spells.E.Cast(target.Position);
                 }

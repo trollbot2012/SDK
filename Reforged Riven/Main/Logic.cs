@@ -14,7 +14,7 @@ namespace Reforged_Riven.Main
         internal static bool _forceW;
         internal static bool _forceR;
         internal static bool _forceR2;
-        internal static bool ForceItem;
+        internal static bool _forceItem;
         public static AttackableUnit Qtarget;
 
         public static int WRange => Player.HasBuff("RivenFengShuiEngine")
@@ -30,11 +30,11 @@ namespace Reforged_Riven.Main
                 : 265 >= Player.Distance(target.Position));
         }
 
-        //public static void ForceItem()
-        //{
-        //    if (Items.CanUseItem(Item) && Items.HasItem(Item) && Item != 0) _forceItem = true;
-        //    DelayAction.Add(500, () => _forceItem = false);
-        //}
+        public static void ForceItem()
+        {
+            if (Items.CanUseItem(Item) && Items.HasItem(Item) && Item != 0) _forceItem = true;
+            DelayAction.Add(500, () => _forceItem = false);
+        }
 
         public static void ForceSkill()
         {
@@ -53,10 +53,10 @@ namespace Reforged_Riven.Main
                 Spells.R.Cast();
             }
 
-            //if (_forceItem && Items.CanUseItem(Item) && Items.HasItem(Item) && Item != 0)
-            //{
-            //    Items.UseItem(Item);
-            //}
+            if (_forceItem && Items.CanUseItem(Item) && Items.HasItem(Item) && Item != 0)
+            {
+                Items.UseItem(Item);
+            }
 
             if (!_forceR2 || Spells.R.Instance.Name != IsSecondR) return;
 
@@ -95,11 +95,13 @@ namespace Reforged_Riven.Main
             if (Items.CanUseItem(3074))
             {
                 Items.UseItem(3074);
+                Player.CanCancelAutoAttack();
             }
 
             if (Items.CanUseItem(3077))
             {
                 Items.UseItem(3077);
+                Player.CanCancelAutoAttack();
             }
         }
 
@@ -115,17 +117,17 @@ namespace Reforged_Riven.Main
             if (!sender.IsMe) return;
 
 
-            if (args.SData.Name.Contains("ItemTiamatCleave")) ForceItem = false;
+            if (args.SData.Name.Contains("ItemTiamatCleave")) _forceItem = false;
             if (args.SData.Name.Contains("RivenTriCleave")) ForceQ = false;
             if (args.SData.Name.Contains("RivenMartyr")) _forceW = false;
             if (args.SData.Name == IsFirstR) _forceR = false;
             if (args.SData.Name == IsSecondR) _forceR2 = false;
         }
 
-        //           : Items.CanUseItem(3074) && Items.HasItem(3074) ? 3074 : 0;
-        //           ? 3077
-        //       Items.CanUseItem(3077) && Items.HasItem(3077)
-        //   =>
-        //public static int Item
+        private static int Item
+           =>
+               Items.CanUseItem(3077) && Items.HasItem(3077)
+                   ? 3077
+                   : Items.CanUseItem(3074) && Items.HasItem(3074) ? 3074 : 0;
     }
 }
