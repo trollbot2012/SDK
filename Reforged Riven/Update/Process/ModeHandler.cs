@@ -30,12 +30,10 @@ namespace Reforged_Riven.Update.Process
 
                     var minions = GameObjects.EnemyMinions.Where(m =>
                                 m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral &&
-                                m.IsValidTarget(Player.AttackRange + 260));
+                                m.IsValidTarget(Player.AttackRange + 375));
 
                     foreach (var m in minions)
                     {
-                        if (m.Health < Player.GetAutoAttackDamage(m)) return;
-
                         if (Spells.E.IsReady() && MenuConfig.LaneE)
                         {
                             Spells.E.Cast(m);
@@ -47,15 +45,13 @@ namespace Reforged_Riven.Update.Process
                             Logic.CastHydra();
                         }
 
-                        if (Spells.W.IsReady() && MenuConfig.LaneW)
+                        if (!Spells.W.IsReady() || !MenuConfig.LaneW) continue;
+
+                        if (!Logic.InWRange(m)) continue;
+
+                        if (m.Health < Spells.W.GetDamage(m) && Player.IsWindingUp)
                         {
-                            if (Logic.InWRange(m))
-                            {
-                                if (m.Health < Spells.W.GetDamage(m) && Player.IsWindingUp)
-                                {
-                                    Spells.W.Cast(m);
-                                }
-                            }
+                            Spells.W.Cast(m);
                         }
                     }
                 }

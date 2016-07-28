@@ -11,7 +11,7 @@ namespace Reforged_Riven.Main
         {
             // Combo
             ComboMenu = MainMenu.Add(new Menu("ComboMenu", "Combo"));
-            ForceR = ComboMenu.Add(new MenuKeyBind("ForceR", "Force R", System.Windows.Forms.Keys.G, KeyBindType.Toggle));
+            ForceR = ComboMenu.Add(new MenuBool("ForceR", "Force R", true));
             RKillable = ComboMenu.Add(new MenuBool("RKillable", "R2 For Max Damage"));
 
             FlashMenu = MainMenu.Add(new Menu("FlashMenu", "Flash"));
@@ -40,6 +40,7 @@ namespace Reforged_Riven.Main
             // Draw
             DrawMenu = MainMenu.Add(new Menu("Draw", "Draw"));
             Dind = DrawMenu.Add(new MenuBool("Dind", "Damage Indicator"));
+           // HealthDmg = DrawMenu.Add(new MenuBool("HealthDmg", "Write Dmg On Target"));
             DrawCombo = DrawMenu.Add(new MenuBool("DrawCombo", "Draw Combo Range", true));
 
             // Flee
@@ -68,10 +69,12 @@ namespace Reforged_Riven.Main
 
         public static MenuKeyBind FleeKey;
         public static MenuKeyBind QMove;
-        public static MenuKeyBind ForceR;
+
 
 
         // Menu Bool
+        //public static MenuBool HealthDmg;
+        public static MenuBool ForceR;
         public static MenuBool RKillable;
         public static MenuBool Flash;
         public static MenuBool Ignite;

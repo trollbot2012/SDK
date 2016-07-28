@@ -10,11 +10,11 @@ namespace Reforged_Riven.Main
 {
     internal class Logic : Core // I NEED to come up with better ways rather than this class
     {
-        public static bool ForceQ;
-        public static bool _forceW;
-        public static bool _forceR;
-        public static bool _forceR2;
-        public static bool ForceItem;
+        internal static bool ForceQ;
+        internal static bool _forceW;
+        internal static bool _forceR;
+        internal static bool _forceR2;
+        internal static bool ForceItem;
         public static AttackableUnit Qtarget;
 
         public static int WRange => Player.HasBuff("RivenFengShuiEngine")
@@ -63,7 +63,7 @@ namespace Reforged_Riven.Main
             var target = Variables.TargetSelector.GetSelectedTarget();
             if (target == null) return;
 
-            Spells.R.Cast(target.Position);
+            Spells.R.Cast(target);
         }
 
         public static void ForceR()
@@ -102,29 +102,30 @@ namespace Reforged_Riven.Main
                 Items.UseItem(3077);
             }
         }
+
         public static void CastYomu()
         {
             if (!Items.CanUseItem(3142)) return;
 
-             Items.UseItem(3142);
+            Items.UseItem(3142);
         }
 
         public static void OnCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
             if (!sender.IsMe) return;
 
-            
+
             if (args.SData.Name.Contains("ItemTiamatCleave")) ForceItem = false;
             if (args.SData.Name.Contains("RivenTriCleave")) ForceQ = false;
             if (args.SData.Name.Contains("RivenMartyr")) _forceW = false;
             if (args.SData.Name == IsFirstR) _forceR = false;
             if (args.SData.Name == IsSecondR) _forceR2 = false;
         }
-        //public static int Item
-        //   =>
-        //       Items.CanUseItem(3077) && Items.HasItem(3077)
-        //           ? 3077
-        //           : Items.CanUseItem(3074) && Items.HasItem(3074) ? 3074 : 0;
 
+        //           : Items.CanUseItem(3074) && Items.HasItem(3074) ? 3074 : 0;
+        //           ? 3077
+        //       Items.CanUseItem(3077) && Items.HasItem(3077)
+        //   =>
+        //public static int Item
     }
 }

@@ -37,11 +37,13 @@ namespace Reforged_Riven.Update
                 }
             }
 
-            if (Spells.R.IsReady() && Spells.R.Instance.Name != IsSecondR)
+            if (Spells.R.IsReady() && Spells.R.Instance.Name == IsSecondR)
             {
                 if (target.Health < Dmg.Rdame(target, target.Health))
                 {
-                    Spells.R.Cast(target.Position);
+                    var rPred = Spells.R.GetPrediction(target).CastPosition;
+
+                    Spells.R.Cast(rPred);
                 }
             }
 

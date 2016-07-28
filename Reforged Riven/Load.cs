@@ -17,9 +17,12 @@ namespace Reforged_Riven
             MenuConfig.Load();
             Spells.Load();
 
+            AssemblyVersion.CheckVersion();
+
             Obj_AI_Base.OnDoCast += LaneClear.OnDoCastLc;
             Obj_AI_Base.OnDoCast += ModeHandler.OnDoCast;
             Obj_AI_Base.OnProcessSpellCast += Logic.OnCast;
+            Obj_AI_Base.OnProcessSpellCast += AntiSpell.OnCasting;
             Obj_AI_Base.OnPlayAnimation += Animation.OnPlay;
 
             Drawing.OnEndScene += DrawDmg.DmgDraw;
@@ -27,11 +30,6 @@ namespace Reforged_Riven
 
             Game.OnUpdate += KillSteal.Update;
             Game.OnUpdate += PermaActive.Update;
-
-            //  Interrupter2.OnInterruptableTarget += Interrupt2.OnInterruptableTarget;
-            //  AntiGapcloser.OnEnemyGapcloser += Gapclose.gapcloser;
-
-           AssemblyVersion.CheckVersion();
 
             Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Reforged Riven</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> - Loaded</font></b>");
         }
