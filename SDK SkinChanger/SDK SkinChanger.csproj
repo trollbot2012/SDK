@@ -34,13 +34,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LeagueSharp">
-      <HintPath>C:\Software\LeagueSharp\System\LeagueSharp.dll</HintPath>
+      <HintPath>C:\Software\PlaySharp\References\LeagueSharp.dll</HintPath>
     </Reference>
     <Reference Include="LeagueSharp.Data">
-      <HintPath>C:\Software\LeagueSharp\System\LeagueSharp.Data.dll</HintPath>
+      <HintPath>C:\Software\PlaySharp\References\LeagueSharp.Data.dll</HintPath>
     </Reference>
     <Reference Include="LeagueSharp.SDKEx">
-      <HintPath>..\..\..\..\..\..\..\Software\LeagueSharp\System\LeagueSharp.SDKEx.dll</HintPath>
+      <HintPath>C:\Software\PlaySharp\References\LeagueSharp.SDKEx.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
