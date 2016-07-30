@@ -30,7 +30,7 @@ namespace Reforged_Riven.Update.Process
           
             foreach (var m in minions)
             {
-                if(m.Health > Player.GetAutoAttackDamage(m)) return;
+              //  if(m.Health > Player.GetAutoAttackDamage(m)) return;
                 //Spells.Q.CastOnBestTarget(Spells.Q.Range, true, 1);
                 Logic.ForceCastQ(m);
                 Usables.CastHydra();

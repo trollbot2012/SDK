@@ -49,7 +49,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Etljt7gptC5fdiVAU1MhrF9BOqCNa5lGoN620Z5KKC8=</dsig:DigestValue>
+        <dsig:DigestValue>rQiEQWVM5fsAcz86635pa5yOeXLBx+AlnYO4wqq2jmY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -61,7 +61,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>+SFsjtI4Z/fQ87RjXWWy8p3gorHTk12jsCr3M0jZrKA=</dsig:DigestValue>
+        <dsig:DigestValue>QF3byHFTRPoxKdy999XMHqy1gvk9nCn0hfDucTg8pgQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -73,7 +73,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>KnHV+2LmUrIKbZOEyzyzRsV8aO5+aoICyyl7laaPl00=</dsig:DigestValue>
+        <dsig:DigestValue>vbHA9Y0pUwEJeELsAZ8xerWY+Cuq/NMANcue/3b4R0I=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -90,14 +90,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Reforged Riven.exe" size="33792">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Reforged Riven.exe" size="33280">
       <assemblyIdentity name="Reforged Riven" version="6.15.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>hOrn6EuwIynIZFgoq1NYecGjzdyVj0IQ2EKLmapWx0M=</dsig:DigestValue>
+        <dsig:DigestValue>4wYpWs0vYfPcG11b78PlZzhzIL9xlfKS++3xNeyxjpw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

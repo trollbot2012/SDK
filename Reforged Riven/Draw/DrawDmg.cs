@@ -13,12 +13,12 @@ namespace Reforged_Riven.Draw
 
         public static void DmgDraw(EventArgs args)
         {
-            foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().Where(ene => ene.IsValidTarget(1300) && !ene.IsDead && ene.IsVisible))
+            foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().Where(ene => ene.IsValidTarget(1500) && !ene.IsDead && ene.IsVisible))
             {
                 if (!MenuConfig.Dind) return;
 
                 Indicator.Unit = enemy;
-                Indicator.DrawDmg(Dmg.GetComboDamage(enemy), Color.GreenYellow);
+                Indicator.DrawDmg(Dmg.GetComboDamage(enemy), Color.LawnGreen);
             }
         }
     }

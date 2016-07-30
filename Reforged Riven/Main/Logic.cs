@@ -1,8 +1,12 @@
 ﻿#region
 
+using System;
+using System.Collections.Generic;
 using LeagueSharp;
 using LeagueSharp.SDK;
+using LeagueSharp.SDK.Enumerations;
 using LeagueSharp.SDK.Utils;
+using SharpDX;
 
 #endregion
 
@@ -17,6 +21,7 @@ namespace Reforged_Riven.Main
         internal static bool _forceItem;
         public static AttackableUnit Qtarget;
 
+       
         public static int WRange => Player.HasBuff("RivenFengShuiEngine")
             ? 330
             : 265;
@@ -63,7 +68,11 @@ namespace Reforged_Riven.Main
             var target = Variables.TargetSelector.GetSelectedTarget();
             if (target == null) return;
 
-            Spells.R.Cast(target);
+            var pred = Spells.R.GetPrediction(target);
+            if (pred.Hitchance > HitChance.High)
+            {
+                Spells.R.Cast(pred.CastPosition);
+            }
         }
 
         public static void ForceR()
@@ -90,27 +99,32 @@ namespace Reforged_Riven.Main
             Qtarget = target;
         }
 
-        public static void CastHydra()
-        {
-            if (Items.CanUseItem(3074))
-            {
-                Items.UseItem(3074);
-                Player.CanCancelAutoAttack();
-            }
-
-            if (Items.CanUseItem(3077))
-            {
-                Items.UseItem(3077);
-                Player.CanCancelAutoAttack();
-            }
-        }
-
         public static void CastYomu()
         {
             if (!Items.CanUseItem(3142)) return;
 
             Items.UseItem(3142);
         }
+
+        public static List<string> eAntiSpell = new List<string>()
+        {
+           "MonkeyKingSpinToWin", "MonkeyKingQAttack", "KatarinaRTrigger", "YasuoDash", "HungeringStrike", "FizzPiercingStrike", "TwitchEParticle",
+            "RengarPassiveBuffDashAADummy", "RengarPassiveBuffDash", "RengarQ", "GarenQAttack", "GarenRPreCast", "IreliaEquilibriumStrike", "BraumBasicAttackPassiveOverride",
+            "FioraEAttack", "gnarwproc", "hecarimrampattack", "illaoiwattack", "JaxEmpowerTwo", "JayceThunderingBlow", "PoppyPassiveAttack", "RenektonSuperExecute", "vaynesilvereddebuff",
+            "viktorqbuff"
+        };
+
+        public static List<string> wAntiSpell = new List<string>()
+        {
+            "RenektonPreExecute",
+            "TalonCutthroat",
+            "IreliaEquilibriumStrike",
+            "XenZhaoThrust3",
+            "KatarinaRTrigger",
+            "KatarinaE",
+            "MonkeyKingSpinToWin"
+        };
+            
 
         public static void OnCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {

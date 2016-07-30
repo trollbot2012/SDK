@@ -1,5 +1,7 @@
-﻿using LeagueSharp.SDK.Enumerations;
+﻿using System;
+using LeagueSharp.SDK.Enumerations;
 using LeagueSharp.SDK.UI;
+
 
 namespace Reforged_Riven.Main
 {
@@ -14,10 +16,11 @@ namespace Reforged_Riven.Main
             ForceR = ComboMenu.Add(new MenuBool("ForceR", "Force R", true));
             RKillable = ComboMenu.Add(new MenuBool("RKillable", "R2 For Max Damage"));
 
-            FlashMenu = MainMenu.Add(new Menu("FlashMenu", "Flash"));
-            ForceFlash = FlashMenu.Add(new MenuKeyBind("ForceFlash", "Force Flash!", System.Windows.Forms.Keys.G, KeyBindType.Toggle));
-            Flash = FlashMenu.Add(new MenuBool("Flash", "Flash If Selected & Killable"));
-            FlashEnemies = FlashMenu.Add(new MenuSlider("FlashEnemies", "Don't Flash If X Enemies", 2, 0, 5));
+            BurstMenu = MainMenu.Add(new Menu("Burst", "Burst"));
+            DontFlash = BurstMenu.Add(new MenuBool("DontFlash", "Disable Burst"));
+            Flash = BurstMenu.Add(new MenuBool("Flash", "Check Killable", true));
+            //BurstKey = BurstMenu.Add(new MenuKeyBind("BurstKey", "Burst Keybind", System.Windows.Forms.Keys.T, KeyBindType.Press));
+            
 
             // Lane
             LaneMenu = MainMenu.Add(new Menu("LaneMenu", "Lane"));
@@ -50,36 +53,30 @@ namespace Reforged_Riven.Main
             WallFlee = FleeMenu.Add(new MenuBool("WallFlee", "WallFlee"));
             FleeKey = FleeMenu.Add(new MenuKeyBind("FleeKey", "Flee Key", System.Windows.Forms.Keys.A, KeyBindType.Press));
 
+           
             MainMenu.Attach();
         }
         // Menu
         public static Menu ComboMenu;
-        public static Menu FlashMenu;
+        public static Menu BurstMenu;
         public static Menu LaneMenu;
         public static Menu JungleMenu;
         public static Menu MiscMenu;
         public static Menu DrawMenu;
         public static Menu FleeMenu;
+
        
-       
-        // Slider
-       public static MenuSlider FlashEnemies;
-
-
-       // Keybind
-      //public static MenuKeyBind Passive;
-
+        // Keybind
         public static MenuKeyBind FleeKey;
         public static MenuKeyBind QMove;
+        public static MenuKeyBind BurstKey;
         public static MenuKeyBind ForceFlash;
 
-
         // Menu Bool
-        //public static MenuBool HealthDmg;
+        public static MenuBool DontFlash;
+        public static MenuBool Flash;
         public static MenuBool ForceR;
         public static MenuBool RKillable;
-        
-        public static MenuBool Flash;
         public static MenuBool Ignite;
         public static MenuBool JungleQ;
         public static MenuBool JungleW;

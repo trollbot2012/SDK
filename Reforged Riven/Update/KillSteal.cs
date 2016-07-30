@@ -4,7 +4,9 @@ using System;
 using System.Linq;
 using LeagueSharp;
 using LeagueSharp.SDK;
+using LeagueSharp.SDK.Enumerations;
 using Reforged_Riven.Main;
+
 
 #endregion
 
@@ -39,11 +41,13 @@ namespace Reforged_Riven.Update
 
             if (Spells.R.IsReady() && Spells.R.Instance.Name == IsSecondR)
             {
-                if (target.Health < Dmg.Rdame(target, target.Health))
+                if (target.Health < Dmg.RDmg(target))
                 {
-                    var rPred = Spells.R.GetPrediction(target).CastPosition;
-
-                    Spells.R.Cast(rPred);
+                    var pred = Spells.R.GetPrediction(target);
+                    if (pred.Hitchance > HitChance.High)
+                    {
+                        Spells.R.Cast(pred.CastPosition);
+                    }
                 }
             }
 

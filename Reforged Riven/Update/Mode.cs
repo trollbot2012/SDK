@@ -7,6 +7,7 @@ using LeagueSharp.SDK.Enumerations;
 using LeagueSharp.SDK.Utils;
 using Reforged_Riven.Main;
 
+
 #endregion
 
 namespace Reforged_Riven.Update
@@ -15,23 +16,26 @@ namespace Reforged_Riven.Update
     {
         public static void Burst()
         {
-            if (!MenuConfig.Flash && !MenuConfig.ForceFlash) return;
+            if(MenuConfig.DontFlash) return;
 
-            if (Spells.Flash == SpellSlot.Unknown || !Spells.Flash.IsReady()) return;
-
-            if (!Spells.R.IsReady() || !Spells.W.IsReady() || !Spells.Q.IsReady()) return;
+            if (!Spells.R.IsReady() || !Spells.W.IsReady() || !Spells.Q.IsReady() ||
+                Spells.Flash == SpellSlot.Unknown || !Spells.Flash.IsReady()) return;
 
             var target = Variables.TargetSelector.GetSelectedTarget();
 
-            if (target == null || !target.IsValidTarget(730) || target.IsDashing()) return;
+            if (target == null || !target.IsValidTarget(725)) return;
 
-            if (!MenuConfig.ForceFlash.Active)
+            if (MenuConfig.Flash && target.Health > Dmg.GetComboDamage(target))
             {
-                if (target.CountEnemyHeroesInRange(1500) >= MenuConfig.FlashEnemies) return;
-
-                if (target.Health > Dmg.GetComboDamage(target) || target.Distance(Player) >= 600) return;
+                return;
             }
-           
+
+
+            //Spells.E.Cast(target.Position);
+            //Logic.ForceR();
+            //DelayAction.Add(100, () => Player.Spellbook.CastSpell(Spells.Flash, target));
+            //DelayAction.Add(110, Logic.ForceW);
+            //DelayAction.Add(140, Logic.ForceItem);
             Spells.E.Cast(target.Position);
             Spells.R.Cast();
             Player.Spellbook.CastSpell(Spells.Flash, target);
@@ -50,7 +54,7 @@ namespace Reforged_Riven.Update
             if (Spells.W.IsReady() && Logic.InWRange(target)) Spells.W.Cast();
 
             if (Spells.R.IsReady() && Spells.R.Instance.Name == IsFirstR && Spells.W.IsReady() &&
-                Spells.E.IsReady() && (Dmg.IsKillableR(target) || MenuConfig.ForceR))
+                Spells.E.IsReady() && (Dmg.RDmg(target) > target.Health|| MenuConfig.ForceR))
             {
                 Logic.CastYomu();
 
@@ -71,12 +75,17 @@ namespace Reforged_Riven.Update
                 if (!Logic.InWRange(target))
                 {
                     Spells.E.Cast(target.Position);
+
+                    if (target.Health < Dmg.GetComboDamage(target) * 1.2)
+                    {
+                        Spells.Q.Cast(target.Position);
+                    }
                 }
 
                 if (!Logic.InWRange(target)) return;
 
-                DelayAction.Add(160, Logic.ForceW);
-                DelayAction.Add(90, () => Logic.ForceCastQ(target));
+                DelayAction.Add(170, Logic.ForceW);
+                DelayAction.Add(230, () => Logic.ForceCastQ(target));
             }
 
             else if (Spells.E.IsReady() && !Logic.InWRange(target))

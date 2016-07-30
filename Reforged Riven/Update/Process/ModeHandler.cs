@@ -30,7 +30,7 @@ namespace Reforged_Riven.Update.Process
 
                     var minions = GameObjects.EnemyMinions.Where(m =>
                                 m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral &&
-                                m.IsValidTarget(Player.AttackRange + 375));
+                                m.IsValidTarget(Player.AttackRange + 350));
 
                     foreach (var m in minions)
                     {
@@ -44,14 +44,14 @@ namespace Reforged_Riven.Update.Process
                         if (Spells.Q.IsReady() && MenuConfig.LaneQ)
                         {
                             Logic.ForceCastQ(m);
-                            Logic.CastHydra();
+                            Logic.ForceItem();
                         }
 
                         if (!Spells.W.IsReady() || !MenuConfig.LaneW) continue;
 
                         if (!Logic.InWRange(m)) continue;
 
-                        if (m.Health < Spells.W.GetDamage(m))
+                        if (m.Health < Spells.W.GetDamage(m) && Player.IsWindingUp)
                         {
                             Spells.W.Cast(m);
                         }
@@ -86,10 +86,10 @@ namespace Reforged_Riven.Update.Process
                     Spells.W.Cast();
                 }
 
-                if (Spells.Q.IsReady())
+                if (Spells.Q.IsReady() && Logic.InQRange(target))
                 {
                     Logic.ForceCastQ(target);
-                    Logic.CastHydra();
+                    Logic.ForceItem();
                 }
 
                 if (MenuConfig.RKillable)
@@ -97,24 +97,30 @@ namespace Reforged_Riven.Update.Process
                     if (Spells.R.IsReady() && Spells.R.Instance.Name == IsSecondR &&
                         (!Spells.Q.IsReady() || Qstack >= 3))
                     {
-                        var rPred = Spells.R.GetPrediction(target);
-                        Spells.R.Cast(rPred.CastPosition);
+                        var pred = Spells.R.GetPrediction(target);
+                        if (pred.Hitchance > HitChance.High)
+                        {
+                            Spells.R.Cast(pred.CastPosition);
+                        }
                     }
                 }
                 else
                 {
                     if (Spells.R.IsReady() && Qstack > 2 && Spells.R.Instance.Name == IsSecondR)
                     {
-                        var rPred = Spells.R.GetPrediction(target);
-                        Spells.R.Cast(rPred.CastPosition);
+                        var pred = Spells.R.GetPrediction(target);
+                        if (pred.Hitchance > HitChance.High)
+                        {
+                            Spells.R.Cast(pred.CastPosition);
+                        }
                     }
                 }
             }
 
             if (Orbwalker.ActiveMode != OrbwalkingMode.Hybrid || Qstack < 2 || !Spells.Q.IsReady()) return;
 
-           
-            Logic.CastHydra();
+
+            Logic.ForceItem();
             Logic.ForceCastQ(target);
         }
     }

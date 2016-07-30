@@ -4,6 +4,7 @@ using System;
 using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
+using LeagueSharp.SDK.Utils;
 using Reforged_Riven.Main;
 
 #endregion
@@ -26,6 +27,11 @@ namespace Reforged_Riven.Update
                 Spells.Q.Cast(Game.CursorPos);
             }
 
+            //if (MenuConfig.BurstKey.Active)
+            //{
+            //    Mode.Burst();
+            //}
+
             Logic.ForceSkill();
 
             switch (Variables.Orbwalker.ActiveMode)
@@ -33,7 +39,7 @@ namespace Reforged_Riven.Update
                 case OrbwalkingMode.Combo:
                 {
                     Mode.Combo();
-                    Mode.Burst(); // Need to find a better way
+                    Mode.Burst();
                 }
                     break;
                 case OrbwalkingMode.None:
@@ -42,10 +48,9 @@ namespace Reforged_Riven.Update
                     Mode.QMove();
                 }
                     break;
+
                 case OrbwalkingMode.Hybrid:
-                {
                     Mode.Harass();
-                }
                     break;
             }
         }

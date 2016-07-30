@@ -14,14 +14,7 @@ namespace Reforged_Riven.Draw
         {
             if (Player.IsDead) return;
 
-            if (MenuConfig.ForceFlash.Active)
-            {
-                var textPos = Drawing.WorldToScreen(Player.Position);
-
-                Drawing.DrawText(textPos.X - 15, textPos.Y + 20, Color.LightSeaGreen, "Force Flash  (     )");
-                Drawing.DrawText(textPos.X + 83, textPos.Y + 20,
-                    Spells.Flash.IsReady() ? Color.White : Color.Red, Spells.Flash.IsReady()? "On" : "Off");
-            }
+            var textPos = Drawing.WorldToScreen(Player.Position);
 
             if (MenuConfig.DrawFlee)
             {
@@ -30,7 +23,6 @@ namespace Reforged_Riven.Draw
 
                 var wallPoint = FleeLogic.GetFirstWallPoint(Player.ServerPosition, end);
                
-
                 if (isWallDash && wallPoint.Distance(Player.ServerPosition) < 260)
                 {
                     Render.Circle.DrawCircle(wallPoint, 60, Color.LightGreen);
@@ -44,21 +36,21 @@ namespace Reforged_Riven.Draw
 
             if (!MenuConfig.DrawCombo) return;
 
-            if (Spells.Flash.IsReady() && MenuConfig.Flash && Spells.R.IsReady())
+            if (Spells.Flash.IsReady() && Spells.R.IsReady() && !MenuConfig.DontFlash)
             {
-                Render.Circle.DrawCircle(Player.Position, 730, Color.LightGreen);
+                Render.Circle.DrawCircle(Player.Position, 720, Color.LightGreen);
             }
 
             else if (Spells.E.IsReady())
             {
                 Render.Circle.DrawCircle(Player.Position, 310 + Player.AttackRange,
-                    Spells.Q.IsReady()
+                    Qstack != 1
                         ? Color.LightBlue
                         : Color.DarkSlateGray);
             }
             else
             {
-                Render.Circle.DrawCircle(Player.Position, Player.AttackRange,
+                Render.Circle.DrawCircle(Player.Position, Player.GetRealAutoAttackRange(Player),
                     Spells.Q.IsReady()
                         ? Color.LightBlue
                         : Color.DarkSlateGray);
