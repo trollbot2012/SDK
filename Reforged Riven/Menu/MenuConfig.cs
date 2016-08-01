@@ -12,7 +12,7 @@ namespace Reforged_Riven.Main
         {
             // Combo
             ComboMenu = MainMenu.Add(new Menu("ComboMenu", "Combo"));
-           // EngageQ = ComboMenu.Add(new MenuBool("EngageQ", "Engage Q (Without R)"));
+            DoubleCast = ComboMenu.Add(new MenuBool("DoubleCast", "DoubleCast (E WQ)"));
             ForceR = ComboMenu.Add(new MenuBool("ForceR", "Force R", true));
             RKillable = ComboMenu.Add(new MenuBool("RKillable", "R2 For Max Damage"));
 
@@ -73,7 +73,7 @@ namespace Reforged_Riven.Main
 
         // Menu Bool
         // public static MenuBool EngageQ;
-
+        public static MenuBool DoubleCast;
         public static MenuBool Flash;
         public static MenuBool ForceR;
         public static MenuBool RKillable;

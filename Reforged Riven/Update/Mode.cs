@@ -24,7 +24,7 @@ namespace Reforged_Riven.Update
 
             var target = Variables.TargetSelector.GetSelectedTarget();
 
-            if (target == null || !target.IsValidTarget(725)) return;
+            if (target == null || !target.IsValidTarget(425 + Spells.W.Range - 35)) return;
 
             if (MenuConfig.Flash && target.Health > Dmg.GetComboDamage(target))
             {
@@ -34,9 +34,9 @@ namespace Reforged_Riven.Update
             Spells.E.Cast(target.Position);
             Logic.ForceR();
             Player.Spellbook.CastSpell(Spells.Flash, target);
-            DelayAction.Add(50, Logic.ForceW);
+            Logic.ForceW();
             DelayAction.Add(140, Logic.ForceItem);
-            DelayAction.Add(190, Logic.ForceR2);
+            Spells.R.Cast(target);
 
         }
 
@@ -60,6 +60,17 @@ namespace Reforged_Riven.Update
 
                 Logic.ForceR();
                 DelayAction.Add(70, Logic.ForceW);
+
+                if (Qstack != 1) return;
+
+                DelayAction.Add(160, () => Logic.ForceCastQ(target));
+            }
+
+            else if (MenuConfig.DoubleCast && Spells.W.IsReady() && Spells.Q.IsReady())
+            {
+                if (!Logic.InWRange(target)) return;
+
+                Logic.ForceW();
                 DelayAction.Add(160, () => Logic.ForceCastQ(target));
             }
 
@@ -161,7 +172,7 @@ namespace Reforged_Riven.Update
            
             Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
 
-            DelayAction.Add(Game.Ping + 1, () => Spells.Q.Cast(Player.Position - 15));
+            DelayAction.Add(Game.Ping + 2, () => Spells.Q.Cast(Player.Position - 15));
             
         }
 

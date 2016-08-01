@@ -46,7 +46,7 @@ namespace Reforged_Riven.Draw
 
             if (Spells.Flash.IsReady() && Spells.R.IsReady() && MenuConfig.BurstKeyBind.Active)
             {
-                Render.Circle.DrawCircle(Player.Position, 720, Color.LightGreen);
+                Render.Circle.DrawCircle(Player.Position, 425 + Spells.W.Range - 35, Color.LightGreen);
             }
 
            if (Spells.E.IsReady())
