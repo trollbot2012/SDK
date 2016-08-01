@@ -104,12 +104,26 @@ namespace Reforged_Riven.Main
             Items.UseItem(3142);
         }
 
+        public static List<string> targetedAntiSpell = new List<string>()
+        {
+            "MonkeyKingQAttack", "YasuoDash",
+            "FizzPiercingStrike", "RengarQ",
+            "GarenQAttack", "GarenRPreCast",
+            "PoppyPassiveAttack", "viktorqbuff" ,
+            "FioraEAttack",
+        };
+
         public static List<string> eAntiSpell = new List<string>()
         {
-           "MonkeyKingSpinToWin", "MonkeyKingQAttack", "KatarinaRTrigger", "YasuoDash", "HungeringStrike", "FizzPiercingStrike", "TwitchEParticle",
-            "RengarPassiveBuffDashAADummy", "RengarPassiveBuffDash", "RengarQ", "GarenQAttack", "GarenRPreCast", "IreliaEquilibriumStrike", "BraumBasicAttackPassiveOverride",
-            "FioraEAttack", "gnarwproc", "hecarimrampattack", "illaoiwattack", "JaxEmpowerTwo", "JayceThunderingBlow", "PoppyPassiveAttack", "RenektonSuperExecute", "vaynesilvereddebuff",
-            "viktorqbuff"
+           "MonkeyKingSpinToWin",  "KatarinaRTrigger",
+            "HungeringStrike", "TwitchEParticle",
+            "RengarPassiveBuffDashAADummy", "RengarPassiveBuffDash",
+            "IreliaEquilibriumStrike", "BraumBasicAttackPassiveOverride",
+            "gnarwproc", "hecarimrampattack",
+            "illaoiwattack", "JaxEmpowerTwo",
+            "JayceThunderingBlow", "RenektonSuperExecute",
+            "vaynesilvereddebuff",
+           
         };
 
         public static List<string> wAntiSpell = new List<string>()
