@@ -4,7 +4,6 @@ using System;
 using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
-using LeagueSharp.SDK.Utils;
 using Reforged_Riven.Main;
 
 #endregion
@@ -21,16 +20,11 @@ namespace Reforged_Riven.Update
                 return;
             }
 
-            if (Environment.TickCount - Animation.LastQ >= 3650 && Qstack != 1 &&
+            if (Environment.TickCount - Animation.LastQ >= 3650 - Game.Ping && Qstack != 1 &&
                 !Player.InFountain() && MenuConfig.KeepQ && Player.HasBuff("RivenTriCleave"))
             {
                 Spells.Q.Cast(Game.CursorPos);
             }
-
-            //if (MenuConfig.BurstKey.Active)
-            //{
-            //    Mode.Burst();
-            //}
 
             Logic.ForceSkill();
 
@@ -48,7 +42,6 @@ namespace Reforged_Riven.Update
                     Mode.QMove();
                 }
                     break;
-
                 case OrbwalkingMode.Hybrid:
                     Mode.Harass();
                     break;

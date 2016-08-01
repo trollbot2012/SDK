@@ -61,7 +61,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>QF3byHFTRPoxKdy999XMHqy1gvk9nCn0hfDucTg8pgQ=</dsig:DigestValue>
+        <dsig:DigestValue>JKnzDdDDgDVmHg6jw7c8kwW1E+BRuhLnbA8MfSANJS4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -73,7 +73,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>vbHA9Y0pUwEJeELsAZ8xerWY+Cuq/NMANcue/3b4R0I=</dsig:DigestValue>
+        <dsig:DigestValue>DBlXlrs+SwzWlXQNvvggKII51Jh9+QVv4p3USL+Uu/Q=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -90,14 +90,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Reforged Riven.exe" size="33280">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Reforged Riven.exe" size="32768">
       <assemblyIdentity name="Reforged Riven" version="6.15.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>4wYpWs0vYfPcG11b78PlZzhzIL9xlfKS++3xNeyxjpw=</dsig:DigestValue>
+        <dsig:DigestValue>feGWo5dOjj2kOmjWHMPwfXwOJ5tDG12tisZ3eEPEYwk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

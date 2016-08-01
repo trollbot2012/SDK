@@ -1,6 +1,5 @@
 ﻿using System;
 using LeagueSharp;
-using LeagueSharp.SDK;
 using Reforged_Riven.Main;
 
 namespace Reforged_Riven.Update
@@ -26,10 +25,6 @@ namespace Reforged_Riven.Update
                 case "Spell1c":
                     LastQ = Environment.TickCount;
                     Qstack = 1;
-                    break;
-                case "Spell4b":
-                    var target = Variables.TargetSelector.GetSelectedTarget();
-                    if (Spells.Q.IsReady() && target.IsValidTarget()) ForceCastQ(target);
                     break;
             }
         }

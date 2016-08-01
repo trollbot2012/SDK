@@ -1,5 +1,6 @@
 ﻿#region
 
+using System;
 using System.Linq;
 using LeagueSharp;
 using LeagueSharp.SDK;
@@ -16,7 +17,7 @@ namespace Reforged_Riven.Update
     {
         public static void Burst()
         {
-            if(MenuConfig.DontFlash) return;
+            if(!MenuConfig.BurstKeyBind.Active) return;
 
             if (!Spells.R.IsReady() || !Spells.W.IsReady() || !Spells.Q.IsReady() ||
                 Spells.Flash == SpellSlot.Unknown || !Spells.Flash.IsReady()) return;
@@ -30,17 +31,13 @@ namespace Reforged_Riven.Update
                 return;
             }
 
-
-            //Spells.E.Cast(target.Position);
-            //Logic.ForceR();
-            //DelayAction.Add(100, () => Player.Spellbook.CastSpell(Spells.Flash, target));
-            //DelayAction.Add(110, Logic.ForceW);
-            //DelayAction.Add(140, Logic.ForceItem);
             Spells.E.Cast(target.Position);
-            Spells.R.Cast();
+            Logic.ForceR();
             Player.Spellbook.CastSpell(Spells.Flash, target);
-            Spells.W.Cast();
-            DelayAction.Add(100, Logic.ForceItem);
+            DelayAction.Add(50, Logic.ForceW);
+            DelayAction.Add(140, Logic.ForceItem);
+            DelayAction.Add(190, Logic.ForceR2);
+
         }
 
         public static void Combo()
@@ -51,99 +48,65 @@ namespace Reforged_Riven.Update
 
             if (Spells.R.IsReady() && Spells.R.Instance.Name == IsFirstR && MenuConfig.ForceR) Logic.ForceR();
 
-            if (Spells.W.IsReady() && Logic.InWRange(target)) Spells.W.Cast();
+            if (Spells.E.IsReady() && !Logic.InWRange(target))
+            {
+                Spells.E.Cast(target.ServerPosition);
+            }
 
             if (Spells.R.IsReady() && Spells.R.Instance.Name == IsFirstR && Spells.W.IsReady() &&
-                Spells.E.IsReady() && (Dmg.RDmg(target) > target.Health|| MenuConfig.ForceR))
+                Spells.Q.IsReady() && MenuConfig.ForceR && !(Dmg.GetComboDamage(target) < target.Health))
             {
                 Logic.CastYomu();
 
-                if (!Logic.InWRange(target))
-                {
-                    Spells.E.Cast(target.Position);
-                }
-
-                if (!Logic.InWRange(target)) return;
-
                 Logic.ForceR();
                 DelayAction.Add(70, Logic.ForceW);
-                DelayAction.Add(45, () => Logic.ForceCastQ(target));
+                DelayAction.Add(160, () => Logic.ForceCastQ(target));
             }
 
-            else if (Spells.W.IsReady() && Spells.E.IsReady())
+           else if (Spells.W.IsReady() && Logic.InWRange(target))
             {
-                if (!Logic.InWRange(target))
-                {
-                    Spells.E.Cast(target.Position);
-
-                    if (target.Health < Dmg.GetComboDamage(target) * 1.2)
-                    {
-                        Spells.Q.Cast(target.Position);
-                    }
-                }
-
-                if (!Logic.InWRange(target)) return;
-
-                DelayAction.Add(170, Logic.ForceW);
-                DelayAction.Add(230, () => Logic.ForceCastQ(target));
-            }
-
-            else if (Spells.E.IsReady() && !Logic.InWRange(target))
-            {
-                Spells.E.Cast(target.Position);
+                Logic.ForceW();
             }
         }
 
-
-        // Lane
-        
-        public static void Lane(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+        public static void Lane()
         {
-            if (!sender.IsMe)
-            {
-                return;
-            }
-
-            Logic.Qtarget = (Obj_AI_Base) args.Target;
-
-            if (!(args.Target is Obj_AI_Minion)) return;
-
-            var minions = GameObjects.EnemyMinions.Where(m =>
-                        m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral &&
-                        m.IsValidTarget(Player.AttackRange + Player.BoundingRadius + 300)).ToList();
+            var minions = GameObjects.EnemyMinions.Where(m => m.IsValidTarget(Player.AttackRange + 350));
 
             foreach (var m in minions)
             {
-                if(m.IsUnderEnemyTurret()) return;
+                if (m.IsUnderEnemyTurret()) continue;
 
-                if (Spells.E.IsReady())
+                if (Spells.E.IsReady() && MenuConfig.LaneE)
                 {
-                    Spells.E.Cast(m.ServerPosition);
+                    Spells.E.Cast(m);
                 }
 
-                if (!Spells.W.IsReady() || !(m.Distance(Player) <= Spells.W.Range)) continue;
+                if (Spells.Q.IsReady() && MenuConfig.LaneQ)
+                {
+                    Logic.ForceItem();
+                    Logic.ForceCastQ(m);
+                }
 
-                if (!(m.Health < Spells.W.GetDamage(m))) continue;
+                if (!Spells.W.IsReady() || !MenuConfig.LaneW) continue;
 
-                Logic.ForceItem();
-                Spells.W.Cast(m);
+                if (!Logic.InWRange(m)) continue;
+
+                if (m.Health < Spells.W.GetDamage(m) && !Player.IsWindingUp)
+                {
+                    Spells.W.Cast(m);
+                }
             }
         }
-        
+
         public static void Jungle()
         {
-            if (Orbwalker.ActiveMode != OrbwalkingMode.LaneClear) return;
+            var mobs = GameObjects.Jungle.Where(x => x.IsValidTarget(Player.GetRealAutoAttackRange(Player)));
 
-            var mob = ObjectManager.Get<Obj_AI_Minion>().Where(m =>
-                            !m.IsDead && m.Team == GameObjectTeam.Neutral &&
-                            m.IsValidTarget(Player.AttackRange + 300))
-                            .ToList();
-
-            foreach (var m in mob)
+            foreach (var m in mobs)
             {
                 if (!m.IsValid) return;
 
-               
                 if (Spells.E.IsReady() && MenuConfig.JungleE)
                 {
                     Spells.E.Cast(m.Position);
@@ -158,7 +121,7 @@ namespace Reforged_Riven.Update
                 if (!Spells.W.IsReady() || !MenuConfig.JungleW) return;
 
                 Logic.ForceItem();
-                Spells.W.Cast(m);  
+                Spells.W.Cast(m);
             }
         }
 
@@ -167,7 +130,7 @@ namespace Reforged_Riven.Update
             var target = Variables.TargetSelector.GetTarget(400, DamageType.Physical);
             if (Spells.Q.IsReady() && Spells.W.IsReady() && Spells.E.IsReady() && Qstack == 1)
             {
-                if (target.IsValidTarget() && !target.IsZombie)
+                if (target.IsValidTarget())
                 {
                     Logic.ForceCastQ(target);
 
@@ -197,7 +160,9 @@ namespace Reforged_Riven.Update
 
            
             Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
-            DelayAction.Add(47, () => Spells.Q.Cast(Game.CursorPos));
+
+            DelayAction.Add(Game.Ping + 1, () => Spells.Q.Cast(Player.Position - 15));
+            
         }
 
         public static void Flee()
@@ -205,8 +170,6 @@ namespace Reforged_Riven.Update
             if(!MenuConfig.FleeKey.Active) return;
 
             Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
-
-            
 
             if (MenuConfig.WallFlee)
             {

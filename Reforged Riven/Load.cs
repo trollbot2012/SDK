@@ -1,6 +1,7 @@
 ﻿#region
 
 using LeagueSharp;
+using LeagueSharp.SDK;
 using Reforged_Riven.Draw;
 using Reforged_Riven.Main;
 using Reforged_Riven.Update;
@@ -19,7 +20,8 @@ namespace Reforged_Riven
 
             AssemblyVersion.CheckVersion();
 
-            Obj_AI_Base.OnDoCast += LaneClear.OnDoCastLc;
+            Events.OnInterruptableTarget += Interrupt.OnInterruptableTarget;
+
             Obj_AI_Base.OnDoCast += ModeHandler.OnDoCast;
             Obj_AI_Base.OnProcessSpellCast += Logic.OnCast;
             Obj_AI_Base.OnProcessSpellCast += AntiSpell.OnCasting;

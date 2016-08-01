@@ -14,8 +14,6 @@ namespace Reforged_Riven.Draw
         {
             if (Player.IsDead) return;
 
-            var textPos = Drawing.WorldToScreen(Player.Position);
-
             if (MenuConfig.DrawFlee)
             {
                 var end = Player.Position.Extend(Game.CursorPos, 200);
@@ -34,14 +32,24 @@ namespace Reforged_Riven.Draw
                 }
             }
 
+            if (MenuConfig.BurstKeyBind.Active)
+            {
+                var textPos = Drawing.WorldToScreen(Player.Position);
+
+                Drawing.DrawText(textPos.X - 27, textPos.Y + 15, Spells.Flash.IsReady()
+                    ? Color.LightCyan
+                    : Color.DarkSlateGray,
+                    "Flash Burst");
+            }
+
             if (!MenuConfig.DrawCombo) return;
 
-            if (Spells.Flash.IsReady() && Spells.R.IsReady() && !MenuConfig.DontFlash)
+            if (Spells.Flash.IsReady() && Spells.R.IsReady() && MenuConfig.BurstKeyBind.Active)
             {
                 Render.Circle.DrawCircle(Player.Position, 720, Color.LightGreen);
             }
 
-            else if (Spells.E.IsReady())
+           if (Spells.E.IsReady())
             {
                 Render.Circle.DrawCircle(Player.Position, 310 + Player.AttackRange,
                     Qstack != 1

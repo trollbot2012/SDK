@@ -1,11 +1,10 @@
 ﻿#region
 
+using System;
 using System.Linq;
 using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
-using LeagueSharp.SDK.Utils;
-using Reforged_Riven.Extras;
 using Reforged_Riven.Main;
 
 #endregion
@@ -16,98 +15,56 @@ namespace Reforged_Riven.Update.Process
     {
         public static void OnDoCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-           // var spellName = args.SData.Name;
-
             if (!sender.IsMe) return;
 
-            Logic.Qtarget = (Obj_AI_Base) args.Target;
-
-            if (args.Target is Obj_AI_Minion)
+            if (Orbwalker.ActiveMode == OrbwalkingMode.LaneClear)
             {
-                if (Orbwalker.ActiveMode == OrbwalkingMode.LaneClear)
+                if (args.Target is Obj_AI_Minion)
                 {
                     Mode.Jungle();
 
-                    var minions = GameObjects.EnemyMinions.Where(m =>
-                                m.IsMinion && m.IsEnemy && m.Team != GameObjectTeam.Neutral &&
-                                m.IsValidTarget(Player.AttackRange + 350));
+                    Mode.Lane();
+                }
 
-                    foreach (var m in minions)
+                var turret = args.Target as Obj_AI_Turret;
+
+                if (turret != null && MenuConfig.LaneQ)
+                {
+                    if (turret.IsValid && Spells.Q.IsReady())
                     {
-                        if (m.IsUnderEnemyTurret()) continue;
-
-                        if (Spells.E.IsReady() && MenuConfig.LaneE)
-                        {
-                            Spells.E.Cast(m);
-                        }
-
-                        if (Spells.Q.IsReady() && MenuConfig.LaneQ)
-                        {
-                            Logic.ForceCastQ(m);
-                            Logic.ForceItem();
-                        }
-
-                        if (!Spells.W.IsReady() || !MenuConfig.LaneW) continue;
-
-                        if (!Logic.InWRange(m)) continue;
-
-                        if (m.Health < Spells.W.GetDamage(m) && Player.IsWindingUp)
-                        {
-                            Spells.W.Cast(m);
-                        }
+                        Logic.ForceCastQ(turret);
                     }
                 }
             }
 
-            var turret = args.Target as Obj_AI_Turret;
+            var a = GameObjects.EnemyHeroes.Where(x => x.IsValidTarget(Player.AttackRange + 360));
 
-            if (turret != null)
-            {
-                if (turret.IsValid && Spells.Q.IsReady() && MenuConfig.LaneQ &&
-                    Orbwalker.ActiveMode == OrbwalkingMode.LaneClear)
-                {
-                    Logic.ForceCastQ(turret);
-                }
-            }
-
-            var target = args.Target as Obj_AI_Hero;
-
-            if (target == null) return;
+            var targets = a as Obj_AI_Hero[] ?? a.ToArray();
 
             if (Orbwalker.ActiveMode == OrbwalkingMode.Combo)
             {
-                if (Spells.E.IsReady() && Player.Distance(target.Position) >= Player.AttackRange)
+                foreach (var target in targets)
                 {
-                    Spells.E.Cast(target.Position);
-                }
-
-                if (Spells.W.IsReady() && Logic.InWRange(target))
-                {
-                    Spells.W.Cast();
-                }
-
-                if (Spells.Q.IsReady() && Logic.InQRange(target))
-                {
-                    Logic.ForceCastQ(target);
-                    Logic.ForceItem();
-                }
-
-                if (MenuConfig.RKillable)
-                {
-                    if (Spells.R.IsReady() && Spells.R.Instance.Name == IsSecondR &&
-                        (!Spells.Q.IsReady() || Qstack >= 3))
+                    if (Spells.Q.IsReady() && Logic.InQRange(target))
                     {
+                        Logic.ForceItem();
+                        Logic.ForceCastQ(target);
+                    }
+
+                    if (MenuConfig.RKillable)
+                    {
+                        if (!Spells.R.IsReady() || Spells.R.Instance.Name != IsSecondR || Spells.Q.IsReady()) continue;
+
                         var pred = Spells.R.GetPrediction(target);
                         if (pred.Hitchance > HitChance.High)
                         {
                             Spells.R.Cast(pred.CastPosition);
                         }
                     }
-                }
-                else
-                {
-                    if (Spells.R.IsReady() && Qstack > 2 && Spells.R.Instance.Name == IsSecondR)
+                    else
                     {
+                        if (!Spells.R.IsReady() || !Spells.Q.IsReady() || Spells.R.Instance.Name != IsSecondR) continue;
+
                         var pred = Spells.R.GetPrediction(target);
                         if (pred.Hitchance > HitChance.High)
                         {
@@ -119,9 +76,11 @@ namespace Reforged_Riven.Update.Process
 
             if (Orbwalker.ActiveMode != OrbwalkingMode.Hybrid || Qstack < 2 || !Spells.Q.IsReady()) return;
 
-
-            Logic.ForceItem();
-            Logic.ForceCastQ(target);
+            foreach (var target in targets)
+            {
+                Logic.ForceItem();
+                Logic.ForceCastQ(target);
+            }
         }
     }
 }

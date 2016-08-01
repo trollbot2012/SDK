@@ -5,6 +5,7 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
+using Reforged_Riven.Extras;
 using Reforged_Riven.Main;
 
 
@@ -30,9 +31,9 @@ namespace Reforged_Riven.Update
                     Spells.Q.Cast(target);
                 }
             }
+
             if (Spells.W.IsReady())
             {
-
                 if (target.Health < Spells.W.GetDamage(target) && Logic.InWRange(target))
                 {
                     Spells.W.Cast();
@@ -46,6 +47,10 @@ namespace Reforged_Riven.Update
                     var pred = Spells.R.GetPrediction(target);
                     if (pred.Hitchance > HitChance.High)
                     {
+                        if (Spells.E.IsReady())
+                        {
+                            Spells.E.Cast(target.ServerPosition);
+                        }
                         Spells.R.Cast(pred.CastPosition);
                     }
                 }

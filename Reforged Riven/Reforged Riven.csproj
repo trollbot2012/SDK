@@ -99,17 +99,17 @@
     <Compile Include="Extras\Dmg.cs" />
     <Compile Include="Extras\Usables.cs" />
     <Compile Include="Load.cs" />
-    <Compile Include="Main\Logic.cs" />
-    <Compile Include="Main\MenuConfig.cs" />
+    <Compile Include="Extras\Logic.cs" />
+    <Compile Include="Menu\MenuConfig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Update\alwaysUpdate.cs" />
     <Compile Include="Update\Animation.cs" />
     <Compile Include="Update\Anti-Spell.cs" />
     <Compile Include="Update\FleeLogic.cs" />
+    <Compile Include="Update\Interrupt.cs" />
     <Compile Include="Update\KillSteal.cs" />
     <Compile Include="Update\Mode.cs" />
-    <Compile Include="Update\Process\LaneClear.cs" />
     <Compile Include="Update\Process\ModeHandler.cs" />
   </ItemGroup>
   <ItemGroup>

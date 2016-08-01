@@ -24,6 +24,7 @@ namespace Reforged_Riven
         public static Spell W { get; set; }
         public static Spell E { get; set; }
         public static Spell R { get; set; }
+
         public static void Load()
         {
             Q = new Spell(SpellSlot.Q, 260f);

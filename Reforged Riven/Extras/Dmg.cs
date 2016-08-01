@@ -1,7 +1,5 @@
 ﻿#region
 
-using System;
-using System.Linq;
 using LeagueSharp;
 using LeagueSharp.SDK;
 
@@ -13,6 +11,7 @@ namespace Reforged_Riven.Main
     {
         public static int IgniteDmg = 50 + 20 * GameObjects.Player.Level;
 
+        
         public static float GetComboDamage(Obj_AI_Base enemy)
         {
             if (enemy == null) return 0;
