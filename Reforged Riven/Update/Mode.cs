@@ -33,8 +33,8 @@ namespace Reforged_Riven.Update
 
             Spells.E.Cast(target.Position);
             Logic.ForceR();
-            Player.Spellbook.CastSpell(Spells.Flash, target);
-            Logic.ForceW();
+            DelayAction.Add(35, ()=> Player.Spellbook.CastSpell(Spells.Flash, target));
+            DelayAction.Add(50, Logic.ForceW);
             DelayAction.Add(140, Logic.ForceItem);
             Spells.R.Cast(target);
 
@@ -60,13 +60,10 @@ namespace Reforged_Riven.Update
 
                 Logic.ForceR();
                 DelayAction.Add(70, Logic.ForceW);
-
-                if (Qstack != 1) return;
-
                 DelayAction.Add(160, () => Logic.ForceCastQ(target));
             }
 
-            else if (MenuConfig.DoubleCast && Spells.W.IsReady() && Spells.Q.IsReady())
+            else if (MenuConfig.DoubleCast && Spells.W.IsReady() && Spells.Q.IsReady() && Qstack == 1)
             {
                 if (!Logic.InWRange(target)) return;
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Utils;
@@ -13,6 +14,19 @@ namespace Reforged_Riven.Draw
         public static void Draw(EventArgs args)
         {
             if (Player.IsDead) return;
+
+            if (MenuConfig.QMinionDraw)
+            {
+                var minions = GameObjects.EnemyMinions.Where(m => m.IsValidTarget(Player.AttackRange + 350));
+
+                foreach (var m in minions)
+                {
+                    if (m.Health <= Spells.Q.GetDamage(m))
+                    {
+                        Render.Circle.DrawCircle(m.Position, m.BoundingRadius, Color.LightSeaGreen);
+                    }
+                }
+            }
 
             if (MenuConfig.DrawFlee)
             {

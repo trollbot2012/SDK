@@ -23,12 +23,12 @@ namespace Reforged_Riven.Update
                 }
             }
 
-            if (Logic.eAntiSpell.Contains(args.SData.Name) && Spells.E.IsReady())
+            if (Logic.eAntiSpell.Contains(args.SData.Name) && Spells.E.IsReady() && args.Target.IsMe)
             {
                 Spells.E.Cast(epos);
             }
 
-            if (!Logic.wAntiSpell.Contains(args.SData.Name) && Spells.W.IsReady()) return;
+            if (!Logic.wAntiSpell.Contains(args.SData.Name) || !Spells.W.IsReady()) return;
 
                Spells.W.Cast();
         }

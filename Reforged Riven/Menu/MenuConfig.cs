@@ -43,6 +43,7 @@ namespace Reforged_Riven.Main
 
             // Draw
             DrawMenu = MainMenu.Add(new Menu("Draw", "Draw"));
+            QMinionDraw = DrawMenu.Add(new MenuBool("QMinionDraw", "Minion Killable Q"));
             Dind = DrawMenu.Add(new MenuBool("Dind", "Damage Indicator"));
             DrawFlee = DrawMenu.Add(new MenuBool("DrawFlee", "Draw Flee Spots"));
            // HealthDmg = DrawMenu.Add(new MenuBool("HealthDmg", "Write Dmg On Target"));
@@ -88,6 +89,7 @@ namespace Reforged_Riven.Main
         public static MenuBool KeepQ;
         public static MenuBool Dind;
         public static MenuBool DrawFlee;
+        public static MenuBool QMinionDraw;
         public static MenuBool DrawCombo;
         public static MenuBool WallFlee;
     }
