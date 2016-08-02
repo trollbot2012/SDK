@@ -33,8 +33,12 @@ namespace Reforged_Riven.Update
 
             Spells.E.Cast(target.Position);
             Logic.ForceR();
-            DelayAction.Add(180, ()=> Player.Spellbook.CastSpell(Spells.Flash, target));
-            DelayAction.Add(200, Logic.ForceW);
+            DelayAction.Add(70, ()=> Player.Spellbook.CastSpell(Spells.Flash, target));
+            DelayAction.Add(10, Logic.ForceItem);
+            DelayAction.Add(160, () => Spells.W.Cast());
+
+            if (Qstack != 1) return;
+            DelayAction.Add(190, () => Logic.ForceCastQ(target));
         }
 
         public static void Combo()
@@ -65,6 +69,7 @@ namespace Reforged_Riven.Update
             if (Spells.W.IsReady() && Spells.Q.IsReady() && Spells.E.IsReady())
             {
                 Spells.E.Cast(target.ServerPosition);
+                Logic.CastYomu();
 
                 if (Spells.R.IsReady() && Spells.R.Instance.Name == IsFirstR && MenuConfig.ForceR &&
                     !(Dmg.GetComboDamage(target) < target.Health))
@@ -72,17 +77,23 @@ namespace Reforged_Riven.Update
                     Logic.ForceR();
                 }
 
-                DelayAction.Add(10, Logic.ForceItem);
-                DelayAction.Add(70, () => Spells.W.Cast());
+                    DelayAction.Add(10, Logic.ForceItem);
+                    DelayAction.Add(130, () => Spells.W.Cast());
 
-                if (Qstack != 1) return;
-                DelayAction.Add(160, ()=> Logic.ForceCastQ(target));
-                return;
+                    if (Qstack != 1) return;
+                    DelayAction.Add(160, () => Logic.ForceCastQ(target));
+                    return;
+                
             }
 
-            if (Spells.E.IsReady() && !Logic.InWRange(target))
+            if (Spells.E.IsReady())
             {
                 Spells.E.Cast(target.ServerPosition);
+            }
+
+            else if (Spells.W.IsReady() && Logic.InWRange(target))
+            {
+                Logic.ForceW();
             }
         }
 

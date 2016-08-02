@@ -46,13 +46,7 @@ namespace Reforged_Riven.Update.Process
             {
                 foreach (var target in targets)
                 {
-                   
-                    if (Spells.W.IsReady() && Logic.InWRange(target))
-                    {
-                        Logic.ForceW();
-                    }
-
-                    else if (Spells.Q.IsReady() && Logic.InWRange(target))
+                    if (Spells.Q.IsReady() && Logic.InWRange(target))
                     {
                         Logic.ForceItem();
                         Logic.ForceCastQ(target);
