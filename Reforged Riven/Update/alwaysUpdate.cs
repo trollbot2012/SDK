@@ -20,7 +20,7 @@ namespace Reforged_Riven.Update
                 return;
             }
 
-            if (Environment.TickCount - Animation.LastQ >= 3650 - Game.Ping && Qstack != 1 &&
+            if (Environment.TickCount - Animation.LastQ >= 3700 - Game.Ping && Qstack != 1 &&
                 !Player.InFountain() && MenuConfig.KeepQ && Player.HasBuff("RivenTriCleave"))
             {
                 Spells.Q.Cast(Game.CursorPos);

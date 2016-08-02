@@ -33,11 +33,8 @@ namespace Reforged_Riven.Update
 
             Spells.E.Cast(target.Position);
             Logic.ForceR();
-            DelayAction.Add(35, ()=> Player.Spellbook.CastSpell(Spells.Flash, target));
-            DelayAction.Add(50, Logic.ForceW);
-            DelayAction.Add(140, Logic.ForceItem);
-            Spells.R.Cast(target);
-
+            DelayAction.Add(180, ()=> Player.Spellbook.CastSpell(Spells.Flash, target));
+            DelayAction.Add(200, Logic.ForceW);
         }
 
         public static void Combo()
@@ -46,39 +43,28 @@ namespace Reforged_Riven.Update
 
             if (target == null || !target.IsValid || target.IsInvulnerable) return;
 
-            if (Spells.R.IsReady() && Spells.R.Instance.Name == IsFirstR && MenuConfig.ForceR) Logic.ForceR();
+            if (Spells.R.IsReady() && Spells.R.Instance.Name == IsFirstR && MenuConfig.ForceR && (Spells.Q.IsReady() || Spells.E.IsReady())) Logic.ForceR();
 
+            if (Spells.R.IsReady() && Spells.R.Instance.Name == IsSecondR)
+            {
+                var pred = Spells.R.GetPrediction(target);
+
+                if (Qstack > 1 && !MenuConfig.RKillable)
+                {
+                    Spells.R.Cast(pred.CastPosition);
+                }
+                else if (MenuConfig.RKillable && Qstack == 1 && !Spells.Q.IsReady())
+                {
+                    if (pred.Hitchance > HitChance.High)
+                    {
+                        Spells.R.Cast(pred.CastPosition);
+                    }
+                }
+            }
+          
             if (Spells.E.IsReady() && !Logic.InWRange(target))
             {
                 Spells.E.Cast(target.ServerPosition);
-            }
-
-            if (Spells.R.IsReady() && Spells.R.Instance.Name == IsFirstR && Spells.W.IsReady() &&
-                Spells.Q.IsReady() && MenuConfig.ForceR && !(Dmg.GetComboDamage(target) < target.Health))
-            {
-                Logic.CastYomu();
-
-                if (!Logic.InWRange(target)) return;
-
-                Logic.ForceR();
-                DelayAction.Add(70, Logic.ForceW);
-                DelayAction.Add(130, () => Logic.ForceCastQ(target));
-            }
-
-            else if (MenuConfig.DoubleCast && Spells.W.IsReady() && Spells.Q.IsReady() && Qstack == 1)
-            {
-                if (!Logic.InWRange(target)) return;
-
-                DelayAction.Add(70, Logic.ForceW);
-
-                if(Qstack != 1) return;
-
-                DelayAction.Add(130, () => Logic.ForceCastQ(target));
-            }
-
-           else if (Spells.W.IsReady() && Logic.InWRange(target))
-            {
-                Logic.ForceW();
             }
         }
 

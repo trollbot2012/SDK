@@ -15,3 +15,4 @@ C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Reforged Riven\Reforged Riv
 C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Reforged Riven\Reforged Riven\bin\Debug\Reforged Riven.application
 C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Reforged Riven\Reforged Riven\obj\Debug\Reforged Riven.exe.manifest
 C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Reforged Riven\Reforged Riven\obj\Debug\Reforged Riven.application
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Reforged Riven\Reforged Riven\obj\Debug\Reforged Riven.csprojResolveAssemblyReference.cache

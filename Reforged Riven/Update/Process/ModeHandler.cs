@@ -46,32 +46,32 @@ namespace Reforged_Riven.Update.Process
             {
                 foreach (var target in targets)
                 {
-                    
-                    if (Spells.Q.IsReady() && Logic.InQRange(target))
+                    if (Spells.W.IsReady() && Spells.Q.IsReady() && Spells.E.IsReady())
+                    {
+                        Spells.E.Cast(target.ServerPosition);
+
+                        if (Spells.R.IsReady() && Spells.R.Instance.Name == IsFirstR && MenuConfig.ForceR &&
+                            !(Dmg.GetComboDamage(target) < target.Health))
+                        {
+                            Logic.ForceR();
+                        }
+
+                        DelayAction.Add(10, Logic.ForceItem);
+                        DelayAction.Add(70, ()=> Spells.W.Cast());
+
+                        if (Qstack != 1) return;
+                        DelayAction.Add(160, () => Logic.ForceCastQ(target));
+                    }
+
+                    else if (Spells.W.IsReady() && Logic.InWRange(target))
+                    {
+                        Logic.ForceW();
+                    }
+
+                    else if (Spells.Q.IsReady() && Logic.InWRange(target))
                     {
                         Logic.ForceItem();
                         Logic.ForceCastQ(target);
-                    }
-
-                    if (MenuConfig.RKillable)
-                    {
-                        if (!Spells.R.IsReady() || Spells.R.Instance.Name != IsSecondR || Spells.Q.IsReady()) continue;
-
-                        var pred = Spells.R.GetPrediction(target);
-                        if (pred.Hitchance > HitChance.High)
-                        {
-                            Spells.R.Cast(pred.CastPosition);
-                        }
-                    }
-                    else
-                    {
-                        if (!Spells.R.IsReady() || !Spells.Q.IsReady() || Spells.R.Instance.Name != IsSecondR) continue;
-
-                        var pred = Spells.R.GetPrediction(target);
-                        if (pred.Hitchance > HitChance.High)
-                        {
-                            Spells.R.Cast(pred.CastPosition);
-                        }
                     }
                 }
             }
