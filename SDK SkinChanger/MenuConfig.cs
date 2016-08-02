@@ -1,5 +1,4 @@
-﻿using LeagueSharp.SDK.Enumerations;
-using LeagueSharp.SDK.UI;
+﻿using LeagueSharp.SDK.UI;
 
 namespace SDK_SkinChanger
 {
