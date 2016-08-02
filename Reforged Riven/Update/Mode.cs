@@ -61,7 +61,25 @@ namespace Reforged_Riven.Update
                     }
                 }
             }
-          
+
+            if (Spells.W.IsReady() && Spells.Q.IsReady() && Spells.E.IsReady())
+            {
+                Spells.E.Cast(target.ServerPosition);
+
+                if (Spells.R.IsReady() && Spells.R.Instance.Name == IsFirstR && MenuConfig.ForceR &&
+                    !(Dmg.GetComboDamage(target) < target.Health))
+                {
+                    Logic.ForceR();
+                }
+
+                DelayAction.Add(10, Logic.ForceItem);
+                DelayAction.Add(70, () => Spells.W.Cast());
+
+                if (Qstack != 1) return;
+                DelayAction.Add(160, ()=> Logic.ForceCastQ(target));
+                return;
+            }
+
             if (Spells.E.IsReady() && !Logic.InWRange(target))
             {
                 Spells.E.Cast(target.ServerPosition);
@@ -70,10 +88,13 @@ namespace Reforged_Riven.Update
 
         public static void Lane()
         {
-            var minions = GameObjects.EnemyMinions.Where(m => m.IsValidTarget(Player.AttackRange + 350));
+            var minions = GameObjects.EnemyMinions.Where(m => m.IsValidTarget(Player.AttackRange + 380));
+
+            
 
             foreach (var m in minions)
             {
+                if (MenuConfig.LaneVisible && m.CountEnemyHeroesInRange(1500) > 0) continue;
                 if (m.IsUnderEnemyTurret()) continue;
 
                 if (Spells.E.IsReady() && MenuConfig.LaneE)
@@ -117,7 +138,7 @@ namespace Reforged_Riven.Update
                     Spells.Q.Cast(m);
                 }
 
-                if (!Spells.W.IsReady() || !MenuConfig.JungleW) return;
+               else if (!Spells.W.IsReady() || !MenuConfig.JungleW) return;
 
                 Logic.ForceItem();
                 Spells.W.Cast(m);

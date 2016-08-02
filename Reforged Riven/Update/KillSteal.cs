@@ -24,13 +24,13 @@ namespace Reforged_Riven.Update
             if (target.HasBuff("kindrednodeathbuff") || target.HasBuff("Undying Rage") ||
                 target.HasBuff("JudicatorIntervention")) return;
 
-            if (Spells.Q.IsReady())
-            {
-                if (target.Health < Spells.Q.GetDamage(target) && Logic.InQRange(target))
-                {
-                    Spells.Q.Cast(target);
-                }
-            }
+            //if (Spells.Q.IsReady())
+            //{
+            //    if (target.Health < Spells.Q.GetDamage(target) && Logic.InQRange(target))
+            //    {
+            //        Spells.Q.Cast(target);
+            //    }
+            //}
 
             if (Spells.W.IsReady())
             {
