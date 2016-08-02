@@ -58,17 +58,22 @@ namespace Reforged_Riven.Update
             {
                 Logic.CastYomu();
 
+                if (!Logic.InWRange(target)) return;
+
                 Logic.ForceR();
                 DelayAction.Add(70, Logic.ForceW);
-                DelayAction.Add(160, () => Logic.ForceCastQ(target));
+                DelayAction.Add(130, () => Logic.ForceCastQ(target));
             }
 
             else if (MenuConfig.DoubleCast && Spells.W.IsReady() && Spells.Q.IsReady() && Qstack == 1)
             {
                 if (!Logic.InWRange(target)) return;
 
-                Logic.ForceW();
-                DelayAction.Add(160, () => Logic.ForceCastQ(target));
+                DelayAction.Add(70, Logic.ForceW);
+
+                if(Qstack != 1) return;
+
+                DelayAction.Add(130, () => Logic.ForceCastQ(target));
             }
 
            else if (Spells.W.IsReady() && Logic.InWRange(target))
@@ -163,10 +168,9 @@ namespace Reforged_Riven.Update
             {
                 return;
             }
-
+        
             if (!Spells.Q.IsReady()) return;
 
-           
             Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
 
             DelayAction.Add(Game.Ping + 2, () => Spells.Q.Cast(Player.Position - 15));

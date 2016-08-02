@@ -90,14 +90,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Reforged Riven.exe" size="32256">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Reforged Riven.exe" size="32768">
       <assemblyIdentity name="Reforged Riven" version="6.15.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>tanGF3rsDVg1AxpY0TeGJAJQ5fXFSFjlhNLerWXK0lk=</dsig:DigestValue>
+        <dsig:DigestValue>FR4nq3MS3jyt/qZtJ9tgmkF9hJacQssBHnv39nmFH5k=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

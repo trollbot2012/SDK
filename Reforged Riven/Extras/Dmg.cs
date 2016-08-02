@@ -1,5 +1,6 @@
 ﻿#region
 
+using System;
 using LeagueSharp;
 using LeagueSharp.SDK;
 
@@ -11,7 +12,43 @@ namespace Reforged_Riven.Main
     {
         public static int IgniteDmg = 50 + 20 * GameObjects.Player.Level;
 
-        
+        public static float TargetDamage(Obj_AI_Hero target)
+        {
+            if (target == null) return 0;
+
+            float dmg = 0;
+          
+            dmg += (float)target.GetAutoAttackDamage(Player);
+
+            var spells = target.Spellbook.Spells;
+
+            foreach (var spell in spells) // <-- Credits to Soresu for this
+            {
+                var cd = spell.CooldownExpires - Game.Time;
+
+                if (spell.Level <= 0 || !(cd < 0.5) || !(target.GetSpellDamage(Player, spell.Slot) > 0)) continue; 
+
+                if (spell.Slot == SpellSlot.Q)
+                {
+                    dmg += (float) target.GetSpellDamage(Player, spell.Slot);
+                }
+                if (spell.Slot == SpellSlot.W)
+                {
+                    dmg += (float)target.GetSpellDamage(Player, spell.Slot);
+                }
+                if (spell.Slot == SpellSlot.E)
+                {
+                    dmg += (float)target.GetSpellDamage(Player, spell.Slot);
+                }
+                if (spell.Slot == SpellSlot.R)
+                {
+                    dmg += (float)target.GetSpellDamage(Player, spell.Slot);
+                }
+            }
+
+            return dmg;
+        }
+
         public static float GetComboDamage(Obj_AI_Base enemy)
         {
             if (enemy == null) return 0;

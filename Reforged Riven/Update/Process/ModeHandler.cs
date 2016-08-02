@@ -5,6 +5,7 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
+using LeagueSharp.SDK.Utils;
 using Reforged_Riven.Main;
 
 #endregion
@@ -45,6 +46,7 @@ namespace Reforged_Riven.Update.Process
             {
                 foreach (var target in targets)
                 {
+                    
                     if (Spells.Q.IsReady() && Logic.InQRange(target))
                     {
                         Logic.ForceItem();
