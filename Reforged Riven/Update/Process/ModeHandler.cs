@@ -6,7 +6,8 @@ using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
 using LeagueSharp.SDK.Utils;
-using Reforged_Riven.Main;
+using Reforged_Riven.Extras;
+using Reforged_Riven.Menu;
 
 #endregion
 
@@ -24,7 +25,17 @@ namespace Reforged_Riven.Update.Process
                 {
                     Mode.Jungle();
 
-                    Mode.Lane();
+                    var minions = GameObjects.EnemyMinions.Where(m => m.IsValidTarget(Player.AttackRange + 380));
+                    foreach (var m in minions)
+                    {
+                        if (MenuConfig.LaneVisible && m.CountEnemyHeroesInRange(1500) > 0) continue;
+                        if (m.IsUnderEnemyTurret()) continue;
+
+                        if (!Spells.Q.IsReady() || !MenuConfig.LaneQ) continue;
+
+                        Logic.ForceItem();
+                        Logic.ForceCastQ(m);
+                    }
                 }
 
                 var turret = args.Target as Obj_AI_Turret;
@@ -46,11 +57,10 @@ namespace Reforged_Riven.Update.Process
             {
                 foreach (var target in targets)
                 {
-                    if (Spells.Q.IsReady() && Logic.InWRange(target))
-                    {
-                        Logic.ForceItem();
-                        Logic.ForceCastQ(target);
-                    }
+                    if (!Spells.Q.IsReady() || !Logic.InWRange(target)) continue;
+
+                    Logic.ForceItem();
+                    Logic.ForceCastQ(target);
                 }
             }
 

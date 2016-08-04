@@ -6,8 +6,7 @@ using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
 using Reforged_Riven.Extras;
-using Reforged_Riven.Main;
-
+using Reforged_Riven.Menu;
 
 #endregion
 

@@ -4,7 +4,7 @@ using System.Linq;
 using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Utils;
-using Reforged_Riven.Main;
+using Reforged_Riven.Menu;
 using Reforged_Riven.Update;
 
 namespace Reforged_Riven.Draw
@@ -66,7 +66,7 @@ namespace Reforged_Riven.Draw
            if (Spells.E.IsReady())
             {
                 Render.Circle.DrawCircle(Player.Position, 310 + Player.AttackRange,
-                    Qstack != 1
+                   Spells.Q.IsReady()
                         ? Color.LightBlue
                         : Color.DarkSlateGray);
             }

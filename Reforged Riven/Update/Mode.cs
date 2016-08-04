@@ -6,8 +6,8 @@ using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
 using LeagueSharp.SDK.Utils;
-using Reforged_Riven.Main;
-
+using Reforged_Riven.Extras;
+using Reforged_Riven.Menu;
 
 #endregion
 
@@ -33,12 +33,9 @@ namespace Reforged_Riven.Update
 
             Spells.E.Cast(target.Position);
             Logic.ForceR();
-            DelayAction.Add(70, ()=> Player.Spellbook.CastSpell(Spells.Flash, target));
-            DelayAction.Add(10, Logic.ForceItem);
-            DelayAction.Add(160, () => Spells.W.Cast());
-
-            if (Qstack != 1) return;
-            DelayAction.Add(190, () => Logic.ForceCastQ(target));
+            DelayAction.Add(190, ()=> Player.Spellbook.CastSpell(Spells.Flash, target));
+            DelayAction.Add(191, ()=> Spells.W.Cast());
+           
         }
 
         public static void Combo()
@@ -53,13 +50,13 @@ namespace Reforged_Riven.Update
             {
                 var pred = Spells.R.GetPrediction(target);
 
-                if (Qstack > 1 && !MenuConfig.RKillable)
+                if (pred.Hitchance > HitChance.High)
                 {
-                    Spells.R.Cast(pred.CastPosition);
-                }
-                else if (MenuConfig.RKillable && Qstack == 1 && !Spells.Q.IsReady())
-                {
-                    if (pred.Hitchance > HitChance.High)
+                    if (Qstack > 1 && !MenuConfig.RKillable)
+                    {
+                        Spells.R.Cast(pred.CastPosition);
+                    }
+                    if (MenuConfig.RKillable && Qstack == 1 && !Spells.Q.IsReady())
                     {
                         Spells.R.Cast(pred.CastPosition);
                     }
@@ -83,7 +80,6 @@ namespace Reforged_Riven.Update
                     if (Qstack != 1) return;
                     DelayAction.Add(160, () => Logic.ForceCastQ(target));
                     return;
-                
             }
 
             if (Spells.E.IsReady())
@@ -91,7 +87,7 @@ namespace Reforged_Riven.Update
                 Spells.E.Cast(target.ServerPosition);
             }
 
-            else if (Spells.W.IsReady() && Logic.InWRange(target))
+            if (Spells.W.IsReady() && Logic.InWRange(target))
             {
                 Logic.ForceW();
             }
@@ -100,23 +96,13 @@ namespace Reforged_Riven.Update
         public static void Lane()
         {
             var minions = GameObjects.EnemyMinions.Where(m => m.IsValidTarget(Player.AttackRange + 380));
-
-            
-
             foreach (var m in minions)
             {
-                if (MenuConfig.LaneVisible && m.CountEnemyHeroesInRange(1500) > 0) continue;
                 if (m.IsUnderEnemyTurret()) continue;
 
                 if (Spells.E.IsReady() && MenuConfig.LaneE)
                 {
                     Spells.E.Cast(m);
-                }
-
-                if (Spells.Q.IsReady() && MenuConfig.LaneQ)
-                {
-                    Logic.ForceItem();
-                    Logic.ForceCastQ(m);
                 }
 
                 if (!Spells.W.IsReady() || !MenuConfig.LaneW) continue;
@@ -130,6 +116,7 @@ namespace Reforged_Riven.Update
             }
         }
 
+       
         public static void Jungle()
         {
             var mobs = GameObjects.Jungle.Where(x => x.IsValidTarget(Player.GetRealAutoAttackRange(Player)));

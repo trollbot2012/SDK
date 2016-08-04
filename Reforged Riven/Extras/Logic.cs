@@ -8,7 +8,7 @@ using LeagueSharp.SDK.Utils;
 
 #endregion
 
-namespace Reforged_Riven.Main
+namespace Reforged_Riven.Extras
 {
     internal class Logic : Core
     {

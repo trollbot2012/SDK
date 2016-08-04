@@ -1,6 +1,6 @@
 ﻿using System;
 using LeagueSharp;
-using Reforged_Riven.Main;
+using Reforged_Riven.Extras;
 
 namespace Reforged_Riven.Update
 {

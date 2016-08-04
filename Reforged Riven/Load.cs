@@ -3,7 +3,8 @@
 using LeagueSharp;
 using LeagueSharp.SDK;
 using Reforged_Riven.Draw;
-using Reforged_Riven.Main;
+using Reforged_Riven.Extras;
+using Reforged_Riven.Menu;
 using Reforged_Riven.Update;
 using Reforged_Riven.Update.Process;
 

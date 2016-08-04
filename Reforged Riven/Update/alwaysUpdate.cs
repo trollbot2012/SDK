@@ -4,7 +4,8 @@ using System;
 using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
-using Reforged_Riven.Main;
+using Reforged_Riven.Extras;
+using Reforged_Riven.Menu;
 
 #endregion
 
@@ -36,6 +37,9 @@ namespace Reforged_Riven.Update
                     Mode.Burst();
                 }
                     break;
+                    case OrbwalkingMode.LaneClear:
+                        Mode.Lane();
+                        break;
                 case OrbwalkingMode.None:
                 {
                     Mode.Flee();

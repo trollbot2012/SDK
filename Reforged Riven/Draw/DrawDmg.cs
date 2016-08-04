@@ -2,7 +2,8 @@
 using System.Linq;
 using LeagueSharp;
 using LeagueSharp.SDK;
-using Reforged_Riven.Main;
+using Reforged_Riven.Extras;
+using Reforged_Riven.Menu;
 using SharpDX;
 
 namespace Reforged_Riven.Draw
@@ -19,12 +20,6 @@ namespace Reforged_Riven.Draw
             {
                 Indicator.Unit = enemy;
                 Indicator.DrawDmg(Dmg.GetComboDamage(enemy), Color.LawnGreen);
-
-                var target = Variables.TargetSelector.GetSelectedTarget();
-
-                if (target == null) continue;
-                Indicator.Unit = Player;
-                Indicator.DrawDmg(Dmg.TargetDamage(Player), Color.IndianRed);
             }
         }
     }

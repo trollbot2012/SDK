@@ -1,7 +1,7 @@
 ﻿using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
-using Reforged_Riven.Main;
+using Reforged_Riven.Extras;
 
 namespace Reforged_Riven.Update
 {
@@ -15,13 +15,13 @@ namespace Reforged_Riven.Update
 
             if (!(Player.Distance(sender.ServerPosition) <= args.SData.CastRange)) return;
 
-            if (args.SData.TargettingType == SpellDataTargetType.SelfAoe && Spells.E.IsReady())
-            {
-                if (Orbwalker.ActiveMode == OrbwalkingMode.LastHit || Orbwalker.ActiveMode == OrbwalkingMode.LaneClear)
-                {
-                   Spells.E.Cast(epos);
-                }
-            }
+            //if (args.SData.TargettingType == SpellDataTargetType.SelfAoe && Spells.E.IsReady()) // Wasteful af.
+            //{
+            //    if (Orbwalker.ActiveMode == OrbwalkingMode.LastHit || Orbwalker.ActiveMode == OrbwalkingMode.LaneClear)
+            //    {
+            //       Spells.E.Cast(epos);
+            //    }
+            //}
 
             if (Spells.E.IsReady())
             {
