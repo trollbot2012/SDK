@@ -38,8 +38,12 @@ namespace Reforged_Riven.Update
                 }
                     break;
                     case OrbwalkingMode.LaneClear:
-                        Mode.Lane();
-                        break;
+                {
+                    Mode.Lane();
+                    Mode.Jungle();
+                }
+
+                    break;
                 case OrbwalkingMode.None:
                 {
                     Mode.Flee();

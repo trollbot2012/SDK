@@ -24,7 +24,7 @@ namespace Reforged_Riven.Update
 
             var target = Variables.TargetSelector.GetSelectedTarget();
 
-            if (target == null || !target.IsValidTarget(425 + Spells.W.Range - 35)) return;
+            if (target == null || !target.IsValidTarget(425 + Spells.W.Range - 35) || target.Distance(Player) <= 375) return;
 
             if (MenuConfig.Flash && target.Health > Dmg.GetComboDamage(target))
             {
@@ -34,8 +34,7 @@ namespace Reforged_Riven.Update
             Spells.E.Cast(target.Position);
             Logic.ForceR();
             DelayAction.Add(190, ()=> Player.Spellbook.CastSpell(Spells.Flash, target));
-            DelayAction.Add(191, ()=> Spells.W.Cast());
-           
+            DelayAction.Add(191, () => Spells.W.Cast());
         }
 
         public static void Combo()
@@ -52,7 +51,7 @@ namespace Reforged_Riven.Update
 
                 if (pred.Hitchance > HitChance.High)
                 {
-                    if (Qstack > 1 && !MenuConfig.RKillable)
+                    if (Qstack > 2 && !MenuConfig.RKillable)
                     {
                         Spells.R.Cast(pred.CastPosition);
                     }
@@ -119,27 +118,16 @@ namespace Reforged_Riven.Update
        
         public static void Jungle()
         {
-            var mobs = GameObjects.Jungle.Where(x => x.IsValidTarget(Player.GetRealAutoAttackRange(Player)));
+            var mobs = GameObjects.Jungle.Where(x => x.IsValidTarget(Player.GetRealAutoAttackRange(Player) + Spells.E.Range));
 
             foreach (var m in mobs)
             {
                 if (!m.IsValid) return;
 
-                if (Spells.E.IsReady() && MenuConfig.JungleE)
+                if (Spells.E.IsReady() && MenuConfig.JungleE && !Player.IsWindingUp)
                 {
                     Spells.E.Cast(m.Position);
                 }
-
-                if (Spells.Q.IsReady() && MenuConfig.JungleQ)
-                {
-                    Logic.ForceItem();
-                    Spells.Q.Cast(m);
-                }
-
-               else if (!Spells.W.IsReady() || !MenuConfig.JungleW) return;
-
-                Logic.ForceItem();
-                Spells.W.Cast(m);
             }
         }
 

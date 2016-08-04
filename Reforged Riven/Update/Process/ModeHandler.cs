@@ -23,9 +23,9 @@ namespace Reforged_Riven.Update.Process
             {
                 if (args.Target is Obj_AI_Minion)
                 {
-                    Mode.Jungle();
-
+                    // Minions
                     var minions = GameObjects.EnemyMinions.Where(m => m.IsValidTarget(Player.AttackRange + 380));
+
                     foreach (var m in minions)
                     {
                         if (MenuConfig.LaneVisible && m.CountEnemyHeroesInRange(1500) > 0) continue;
@@ -38,6 +38,7 @@ namespace Reforged_Riven.Update.Process
                     }
                 }
 
+                // Turret
                 var turret = args.Target as Obj_AI_Turret;
 
                 if (turret != null && MenuConfig.LaneQ)
@@ -46,6 +47,25 @@ namespace Reforged_Riven.Update.Process
                     {
                         Logic.ForceCastQ(turret);
                     }
+                }
+
+                // Jungle
+                var mobs = GameObjects.Jungle.Where(x => x.IsValidTarget(Player.GetRealAutoAttackRange(Player)));
+
+                foreach (var m in mobs)
+                {
+                    if (!m.IsValid) return;
+
+                    if (Spells.Q.IsReady() && MenuConfig.JungleQ)
+                    {
+                        Logic.ForceItem();
+                        Spells.Q.Cast(m);
+                    }
+
+                    else if (!Spells.W.IsReady() || !MenuConfig.JungleW) return;
+
+                    Logic.ForceItem();
+                    Spells.W.Cast(m);
                 }
             }
 
