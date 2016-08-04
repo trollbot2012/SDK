@@ -16,27 +16,27 @@ namespace Swiftly_Teemo
         public static Obj_AI_Hero Target => Variables.TargetSelector.GetTarget(Player.GetRealAutoAttackRange(), DamageType.Physical);
         public static Obj_AI_Hero Player => ObjectManager.Player;
        // public static bool NoxiousTrap => Target.Buffs.Any(x => x.Name.ToLower().Contains("Noxious Trap"));
+    }
 
-        public class Spells
+    public class Spells
+    {
+        public static SpellSlot Ignite;
+        public static Spell Q { get; set; }
+        public static Spell W { get; set; }
+        public static Spell E { get; set; }
+        public static Spell R { get; set; }
+
+        public static void Load()
         {
-            public static SpellSlot Ignite;
-            public static Spell Q { get; set; }
-            public static Spell W { get; set; }
-            public static Spell E { get; set; }
-            public static Spell R { get; set; }
+            Q = new Spell(SpellSlot.Q, 680);
+            W = new Spell(SpellSlot.W);
+            E = new Spell(SpellSlot.E);
+            R = new Spell(SpellSlot.R, 300);
 
-            public static void Load()
-            {
-                Q = new Spell(SpellSlot.Q, 680);
-                W = new Spell(SpellSlot.W);
-                E = new Spell(SpellSlot.E);
-                R = new Spell(SpellSlot.R, 300);
+            Q.SetTargetted(0.5f, 1500f);
+            R.SetSkillshot(0.5f, 120f, 1000f, false, SkillshotType.SkillshotCircle);
 
-                Q.SetTargetted(0.5f, 1500f);
-                R.SetSkillshot(0.5f, 120f, 1000f, false, SkillshotType.SkillshotCircle);
-
-                Ignite = Player.GetSpellSlot("SummonerDot");
-            }
+            Ignite = GameObjects.Player.GetSpellSlot("SummonerDot");
         }
     }
 }

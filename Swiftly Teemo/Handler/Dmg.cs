@@ -2,7 +2,7 @@
 
 using LeagueSharp;
 using LeagueSharp.SDK;
-using Swiftly_Teemo.Main;
+using Swiftly_Teemo.Menu;
 
 #endregion
 
@@ -15,23 +15,25 @@ namespace Swiftly_Teemo.Handler
         {
             if (enemy == null) return 0;
 
-            float damage = 0;
+            float dmg = 0;
+
             if (MenuConfig.KillStealSummoner)
             {
                 if (Spells.Ignite.IsReady())
                 {
-                    damage = damage + IgniteDmg;
+                    dmg = dmg + IgniteDmg;
                 }
             }
-            if (Player.CanAttack) damage = damage + (float)Player.GetAutoAttackDamage(enemy);
 
-            if (Spells.E.IsReady()) damage = damage + Spells.E.GetDamage(enemy);
+            dmg += (float)Player.GetAutoAttackDamage(enemy);
 
-            if (Spells.R.IsReady()) damage = damage + Spells.R.GetDamage(enemy);
+            if (Spells.E.IsReady()) dmg += Spells.E.GetDamage(enemy);
 
-            if (Spells.Q.IsReady()) damage = damage + Spells.Q.GetDamage(enemy);
+            if (Spells.R.IsReady()) dmg += Spells.R.GetDamage(enemy);
 
-            return damage;
+            if (Spells.Q.IsReady()) dmg += Spells.Q.GetDamage(enemy);
+
+            return dmg;
         }
         public static bool IsLethal(Obj_AI_Base unit)
         {

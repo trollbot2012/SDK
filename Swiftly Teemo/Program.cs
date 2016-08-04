@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using Swiftly_Teemo.Draw;
 using Swiftly_Teemo.Handler;
-using Swiftly_Teemo.Main;
+using Swiftly_Teemo.Menu;
 
 #endregion
 
@@ -21,6 +21,7 @@ namespace Swiftly_Teemo
             Bootstrap.Init(args);
             Events.OnLoad += Load;
         }
+
         private static void Load(object sender, EventArgs e)
         {
             if (GameObjects.Player.ChampionName != "Teemo")
@@ -38,12 +39,11 @@ namespace Swiftly_Teemo
             Drawing.OnDraw += Drawings.OnDraw;
             Drawing.OnEndScene += Drawing_OnEndScene;
 
-          //  Spellbook.OnCastSpell += Mode.OnCastSpell;
-
-            Orbwalker.OnAction += AfterAa.OnAction;
-
+            Obj_AI_Base.OnDoCast += ModeHandler.OnDoCast;
+            
             Game.OnUpdate += OnUpdate;
         }
+
         private static void OnUpdate(EventArgs args)
         {
             if (Player.IsDead || Player.IsRecalling()) return;
@@ -55,32 +55,23 @@ namespace Swiftly_Teemo
             switch (Orbwalker.ActiveMode)
             {
                 case OrbwalkingMode.LaneClear:
-                    Mode.Lane();
                     Mode.Jungle();
                     break;
                 case OrbwalkingMode.Combo:
-                    Mode.Combo();
-                    break;
-                case OrbwalkingMode.None:
-                    break;
-                case OrbwalkingMode.Hybrid:
-                    break;
-                case OrbwalkingMode.LastHit:
+                   Mode.Combo();
                     break;
             }
             
         }
 
+        private static readonly HpBarIndicator Indicator = new HpBarIndicator();
+
         private static void Drawing_OnEndScene(EventArgs args)
         {
-            foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().Where(ene => ene.IsValidTarget() && ene.IsValidTarget(1000) && !ene.IsZombie))
+           foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().Where(ene => ene.IsValidTarget(1500) && !ene.IsDead && ene.IsVisible))
             {
-                if (!MenuConfig.Dind) continue;
-
-                var easyKill = Spells.Q.IsReady() && Dmg.IsLethal(enemy) ? new ColorBGRA(0, 255, 0, 120) : new ColorBGRA(255, 255, 0, 120);
-
-                Drawings.DrawHpBar.unit = enemy;
-                Drawings.DrawHpBar.drawDmg(Dmg.ComboDmg(enemy), easyKill);
+                Indicator.Unit = enemy;
+                Indicator.DrawDmg(Dmg.ComboDmg(enemy), enemy.Health <= Dmg.ComboDmg(enemy) * 1.65 ? Color.LawnGreen : Color.Yellow);
             }
         }
     }
