@@ -1,9 +1,5 @@
 ﻿using LeagueSharp;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PrideStalker_Rengar.Main;
 using LeagueSharp.SDK.Utils;
 using Nechrito_Rengar;
@@ -11,7 +7,7 @@ using LeagueSharp.SDK.Enumerations;
 
 namespace PrideStalker_Rengar.Draw
 {
-    class DRAW : Core
+    internal class DRAW : Core
     {
         public static HpBarDraw DrawHpBar = new HpBarDraw();
         public static void DrawAnimation()

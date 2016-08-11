@@ -51,20 +51,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LeagueSharp">
-      <HintPath>C:\Software\PlaySharp\References\LeagueSharp.dll</HintPath>
+      <HintPath>C:\Software\XoKn7ol1m\References\LeagueSharp.dll</HintPath>
     </Reference>
     <Reference Include="LeagueSharp.Data">
-      <HintPath>C:\Software\PlaySharp\References\LeagueSharp.Data.dll</HintPath>
+      <HintPath>C:\Software\XoKn7ol1m\References\LeagueSharp.Data.dll</HintPath>
     </Reference>
     <Reference Include="LeagueSharp.SDKEx, Version=3.0.1.5, Culture=neutral, PublicKeyToken=ae325b57d943987e, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Software\PlaySharp\References\LeagueSharp.SDKEx.dll</HintPath>
+      <HintPath>C:\Software\XoKn7ol1m\References\LeagueSharp.SDKEx.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX">
-      <HintPath>C:\Software\PlaySharp\References\SharpDX.dll</HintPath>
+      <HintPath>C:\Software\XoKn7ol1m\References\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D9">
-      <HintPath>C:\Software\PlaySharp\References\SharpDX.Direct3D9.dll</HintPath>
+      <HintPath>C:\Software\XoKn7ol1m\References\SharpDX.Direct3D9.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -81,12 +81,11 @@
     <Compile Include="Core.cs" />
     <Compile Include="Draw\Draw.cs" />
     <Compile Include="Draw\HpBarDraw.cs" />
-    <Compile Include="Handlers\AfterAA.cs" />
-    <Compile Include="Handlers\BeforeAA.cs" />
     <Compile Include="Handlers\Dmg.cs" />
     <Compile Include="Handlers\Items.cs" />
     <Compile Include="Handlers\KillSteal.cs" />
     <Compile Include="Handlers\Mode.cs" />
+    <Compile Include="Handlers\QReset.cs" />
     <Compile Include="Main\MenuConfig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

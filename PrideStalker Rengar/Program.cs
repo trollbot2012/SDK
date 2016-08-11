@@ -5,19 +5,21 @@ using LeagueSharp.SDK.Utils;
 using SharpDX;
 using System;
 using System.Linq;
+using Nechrito_Rengar;
 using PrideStalker_Rengar.Main;
 using PrideStalker_Rengar.Handlers;
 using PrideStalker_Rengar.Draw;
 
 namespace PrideStalker_Rengar
 {
-    class Program : Core
+    internal class Program : Core
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Bootstrap.Init(args);
             Events.OnLoad += Load;
         }
+
         private static void Load(object sender, EventArgs e)
         {
             if (GameObjects.Player.ChampionName != "Rengar")
@@ -25,16 +27,12 @@ namespace PrideStalker_Rengar
                 return;
             }
 
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Nechrito Rengar</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Update 14</font></b>");
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> E Backwards</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Nechrito Rengar</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Loaded</font></b>");;
 
             Spells.Load();
             MenuConfig.Load();
 
-            Orbwalker.OnAction += AfterAA.OnAction;
-            Orbwalker.OnAction += BeforeAA.OnAction;
-
-            //Spellbook.OnCastSpell += OnSpell;
+            Obj_AI_Base.OnDoCast += QReset.OnDoCast;
 
             Drawing.OnDraw += DRAW.OnDraw;
             Drawing.OnEndScene += Drawing_OnEndScene;
@@ -42,13 +40,6 @@ namespace PrideStalker_Rengar
             Game.OnUpdate += OnUpdate;
         }
 
-        //private static void OnSpell(Spellbook sender, SpellbookCastSpellEventArgs args)
-        //{
-        //    if (args.Slot == SpellSlot.Q)
-        //    {
-        //        Orbwalker.ResetSwingTimer();
-        //    }
-        //}
         private static void OnUpdate(EventArgs args)
         {
             if(Player.IsDead || Player.IsRecalling()) return;
@@ -75,6 +66,7 @@ namespace PrideStalker_Rengar
                         break;
                 }
             }
+
             switch(Variables.Orbwalker.ActiveMode)
             {
                 case OrbwalkingMode.LaneClear:
@@ -86,19 +78,17 @@ namespace PrideStalker_Rengar
                     break;
             }
         }
+
+        private static readonly HpBarDraw Indicator = new HpBarDraw();
+
         private static void Drawing_OnEndScene(EventArgs args)
         {
-            foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().Where(ene => ene.IsValidTarget() && !ene.IsZombie))
+            foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().Where(ene => ene.IsValidTarget(1500)))
             {
-                if (MenuConfig.dind)
-                {
-                    var EasyKill = Spells.Q.IsReady() && enemy.IsValidTarget(Player.AttackRange + 75) && Dmg.IsLethal(enemy)
-                       ? new ColorBGRA(0, 255, 0, 120)
-                       : new ColorBGRA(255, 255, 0, 120);
+                if (!MenuConfig.Dind) continue;
 
-                    DRAW.DrawHpBar.unit = enemy;
-                    DRAW.DrawHpBar.drawDmg(Dmg.ComboDmg(enemy), EasyKill);
-                }
+                Indicator.Unit = enemy;
+                Indicator.DrawDmg(Dmg.ComboDmg(enemy), Color.LawnGreen);
             }
         }
     }

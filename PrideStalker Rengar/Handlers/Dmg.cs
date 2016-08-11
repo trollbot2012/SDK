@@ -1,16 +1,10 @@
 ﻿using LeagueSharp;
 using LeagueSharp.SDK;
-using LeagueSharp.SDK.Enumerations;
-using LeagueSharp.SDK.UI;
-using LeagueSharp.SDK.Utils;
-using SharpDX;
-using System;
-using System.Linq;
 using PrideStalker_Rengar.Main;
 
 namespace PrideStalker_Rengar.Handlers
 {
-    class Dmg : Core
+    internal class Dmg : Core
     {
         public static int IgniteDmg = 50 + 20 * GameObjects.Player.Level;
 

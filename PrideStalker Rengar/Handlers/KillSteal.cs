@@ -5,26 +5,30 @@ using LeagueSharp.SDK.Enumerations;
 
 namespace PrideStalker_Rengar.Handlers
 {
-    class KillSteal : Core
+    internal class KillSteal : Core
     {
        
         public static void Killsteal()
         {
-            foreach (var target in GameObjects.EnemyHeroes.Where(x => x.IsValidTarget(800) && !x.IsDead && !x.IsZombie).Where(target => target.IsValidTarget()))
+            if (Spells.E.IsReady())
             {
-                if(Spells.E.IsReady() && target.Health < Spells.E.GetDamage(target))
+                foreach (var target in GameObjects.EnemyHeroes.Where(x => x.IsValidTarget(Spells.E.Range) && x.Health < Spells.E.GetDamage(x)))
                 {
                     Spells.E.CastIfHitchanceEquals(target, HitChance.High);
                 }
-                if (Spells.W.IsReady() && target.Health < Spells.W.GetDamage(target))
+            }
+
+            if (Spells.W.IsReady())
+            {
+                foreach (var target in GameObjects.EnemyHeroes.Where(x => x.IsValidTarget(Spells.W.Range) && x.Health < Spells.W.GetDamage(x)))
                 {
-                    Spells.W.Cast(target);
+                     Spells.W.Cast(target);   
                 }
             }
 
-            if (!MenuConfig.KillStealSummoner) return;
+            if (!MenuConfig.KillStealSummoner || !Spells.Ignite.IsReady()) return;
 
-            foreach (var target in GameObjects.EnemyHeroes.Where(t => t.IsValidTarget(600f)).Where(target => target.Health < Dmg.IgniteDmg && Spells.Ignite.IsReady()))
+            foreach (var target in GameObjects.EnemyHeroes.Where(t => t.IsValidTarget(600f)).Where(target => target.Health < Dmg.IgniteDmg))
             {
                 GameObjects.Player.Spellbook.CastSpell(Spells.Ignite, target);
             }

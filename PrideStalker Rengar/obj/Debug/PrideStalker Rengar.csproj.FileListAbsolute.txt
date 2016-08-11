@@ -1,1 +1,14 @@
 C:\Users\Nechr\Documents\Visual Studio 2015\Projects\PrideStalker Rengar\PrideStalker Rengar\bin\Debug\PrideStalker Rengar.exe.config
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\PrideStalker Rengar\PrideStalker Rengar\bin\Debug\PrideStalker Rengar.exe
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\PrideStalker Rengar\PrideStalker Rengar\bin\Debug\PrideStalker Rengar.pdb
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\PrideStalker Rengar\PrideStalker Rengar\bin\Debug\LeagueSharp.Data.dll
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\PrideStalker Rengar\PrideStalker Rengar\bin\Debug\LeagueSharp.dll
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\PrideStalker Rengar\PrideStalker Rengar\bin\Debug\LeagueSharp.SDKEx.dll
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\PrideStalker Rengar\PrideStalker Rengar\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\PrideStalker Rengar\PrideStalker Rengar\bin\Debug\SharpDX.dll
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\PrideStalker Rengar\PrideStalker Rengar\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\PrideStalker Rengar\PrideStalker Rengar\bin\Debug\LeagueSharp.Data.pdb
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\PrideStalker Rengar\PrideStalker Rengar\bin\Debug\LeagueSharp.SDKEx.pdb
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\PrideStalker Rengar\PrideStalker Rengar\obj\Debug\PrideStalker Rengar.csprojResolveAssemblyReference.cache
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\PrideStalker Rengar\PrideStalker Rengar\obj\Debug\PrideStalker Rengar.exe
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\PrideStalker Rengar\PrideStalker Rengar\obj\Debug\PrideStalker Rengar.pdb

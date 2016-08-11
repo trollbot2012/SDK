@@ -12,13 +12,12 @@ namespace PrideStalker_Rengar.Main
         public Menu TargetSelectorMenu;
         private const string MenuName = "PrideStalker Rengar";
         public static Menu MainMenu { get; set; } = new Menu(MenuName, MenuName, true);
+
         public static void Load()
         {
             // Combo
             ComboMenu = MainMenu.Add(new Menu("ComboMenu", "Combo"));
             ComboMode = ComboMenu.Add(new MenuList<string>("ComboMode", "Combo Mode", new[] { "Gank", "Triple Q", "Ap Combo", "OneShot" }));
-            TripleQAAReset = ComboMenu.Add(new MenuBool("TripleQAAReset", "AA Q Reset In Triple Q", true));
-            EBackwards = ComboMenu.Add(new MenuBool("EBackwards", "E Backwards When Jumping", true));
 
             // Misc
             Misc = MainMenu.Add(new Menu("Misc", "Misc"));
@@ -33,7 +32,7 @@ namespace PrideStalker_Rengar.Main
             DrawCombo = Draw.Add(new MenuBool("DrawCombo", "Draw ComboMode", true));
             DrawAnim = Draw.Add(new MenuBool("DrawAnim", "Draw Animation", true));
             DrawHelp = Draw.Add(new MenuBool("DrawHelp", "Draw Tips", true));
-            dind = Draw.Add(new MenuBool("dind", "Damage Indicator", true));
+            Dind = Draw.Add(new MenuBool("dind", "Damage Indicator", true));
             EngageDraw = Draw.Add(new MenuBool("EngageDraw", "Draw Engage", true));
 
             // Skin
@@ -54,8 +53,6 @@ namespace PrideStalker_Rengar.Main
         public static MenuKeyBind Passive;
         public static MenuKeyBind ChangeComboMode;
 
-        public static MenuBool TripleQAAReset;
-       public static MenuBool EBackwards;
         public static MenuBool StackLastHit;
         public static MenuBool UseSkin;
         public static MenuBool KillStealSummoner;
@@ -63,7 +60,7 @@ namespace PrideStalker_Rengar.Main
         public static MenuBool DrawCombo;
         public static MenuBool DrawAnim;
         public static MenuBool DrawHelp;
-        public static MenuBool dind;
+        public static MenuBool Dind;
         public static MenuBool EngageDraw;
     }
 }
