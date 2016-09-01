@@ -3,7 +3,6 @@
 using System;
 using Infected_Twitch.Core;
 using Infected_Twitch.Menus;
-using LeagueSharp;
 using LeagueSharp.SDK;
 
 #endregion

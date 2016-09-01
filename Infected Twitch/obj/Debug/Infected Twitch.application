@@ -7,14 +7,14 @@
     <framework targetVersion="4.5.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Infected Twitch.exe.manifest" size="8270">
+    <dependentAssembly dependencyType="install" codebase="Infected Twitch.exe.manifest" size="6898">
       <assemblyIdentity name="Infected Twitch.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>dJjr+ezW4WprbMooC0E19ckBP6t+dEqh/wtGynGzvDk=</dsig:DigestValue>
+        <dsig:DigestValue>TdadrH0RLVuGeHT0MUNqL7JhDdkeEbXFvLbJsypakJc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

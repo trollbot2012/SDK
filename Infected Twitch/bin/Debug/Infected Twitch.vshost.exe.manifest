@@ -49,7 +49,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Z3owkcv1FwT8m6XzuYqrVCsY9uuDbdAlOfaPrGRiLWQ=</dsig:DigestValue>
+        <dsig:DigestValue>ax1LbujwwNLg85puuckadW7B6ePciI/Mzu/Xvasxo/o=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -66,38 +66,38 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.Data.dll" size="4345344">
-      <assemblyIdentity name="LeagueSharp.Data" version="1.1.0.0" publicKeyToken="7B6E8D26EAF0534F" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.Data.dll" size="4263936">
+      <assemblyIdentity name="LeagueSharp.Data" version="1.1.0.1" publicKeyToken="7B6E8D26EAF0534F" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>G1JqlBWef1awGiurm+uqZyCaU/xCURIRlsfiVyhJx4k=</dsig:DigestValue>
+        <dsig:DigestValue>JSuiLiUPtpVIscCtO+VaPN45xfI0RxAytUcNK4g6gOQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.Sandbox.dll" size="40448">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.Sandbox.dll" size="36352">
       <assemblyIdentity name="LeagueSharp.Sandbox" version="1.0.0.0" publicKeyToken="0C92CB9C3763A33B" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>TRoJMm6pKnLfWGQiyIGaxqIsmho+PkYcGrZzQkzoK94=</dsig:DigestValue>
+        <dsig:DigestValue>Sqsnly8V6mEeGyMUf1Uigc0Zmq4yWHNEes4uxbkJF4s=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.SDKEx.dll" size="1410048">
-      <assemblyIdentity name="LeagueSharp.SDKEx" version="3.0.1.3" publicKeyToken="AE325B57D943987E" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.SDKEx.dll" size="1413120">
+      <assemblyIdentity name="LeagueSharp.SDKEx" version="3.0.1.4" publicKeyToken="AE325B57D943987E" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>77AxAj6/XvFWf7J5Dlj2CeYJZxcF8Z8qSQJ/q+vpgVA=</dsig:DigestValue>
+        <dsig:DigestValue>QNddIWqH82WwvG/Ed+jGYbMxO1jQ9dF4J2pTVp6LJSY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -137,13 +137,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Infected Twitch.exe.config" size="189">
+  <file name="Infected Twitch.exe.config" size="534">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>6N7MliNbVJSIAIPrecIshMbZ7zEoKLr5SQvud4LDUOw=</dsig:DigestValue>
+      <dsig:DigestValue>vx3mmr7Mwest3NJNZX4fPzr+ioJTHIXq5d1v0xbi67Y=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

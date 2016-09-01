@@ -18,3 +18,4 @@ C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected
 C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\obj\x86\Debug\Infected Twitch.exe.manifest
 C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\obj\x86\Debug\Infected Twitch.application
 C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\LeagueSharp.Sandbox.pdb
+C:\Users\Nechrito\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\obj\x86\Debug\Infected Twitch.csproj.Infected Twitch.exe.config

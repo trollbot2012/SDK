@@ -1,18 +1,18 @@
 ﻿#region
 
-using System.Windows.Forms;
 using LeagueSharp.SDK.Enumerations;
-using LeagueSharp.SDK.UI;
-using Menu = LeagueSharp.SDK.UI.Menu;
+using System.Windows.Forms;
 
 #endregion
 
 namespace Infected_Twitch.Menus
 {
+    using LeagueSharp.SDK.UI;
+
     internal class MenuConfig
     {
         private const string MenuName = "Infected Twitch";
-        private static Menu MainMenu { get; set; } = new Menu(MenuName, MenuName, true);
+        private static Menu MainMenu { get; } = new Menu(MenuName, MenuName, true);
 
         public static void Load()
         {
@@ -66,15 +66,7 @@ namespace Infected_Twitch.Menus
             UseSkin = SkinMenu.Add(new MenuBool("UseSkin", "Use Skinchanger"));
             SkinList = SkinMenu.Add(new MenuList<string>("Skins", "Skins", new[] { "Default", "Kingping Twitch", "Whistler Village Twitch", "Medieval Twitch", "Gangster Twitch", "Vandal Twitch", "Pickpocket Twitch", "SSW Twitch" }));
 
-            // Exploit / Mechanic
-            ExploitMenu = MainMenu.Add(new Menu("ExploitMenu", "Exploit"));
-            ExploitMenu.Add(new Menu("x", "Note: This is safe to use!"));
-            UseExploit = ExploitMenu.Add(new MenuBool("UseExploit", "Exploit"));
-            Eaaq = ExploitMenu.Add(new MenuBool("EAAQ", "E AA Q"));
-            Eaaaaq = ExploitMenu.Add(new MenuBool("EAAAAQ", "E AA AA Q"));
-            //  DisableAA = ExploitMenu.Add(new MenuBool("DisableAA", "Disable AA After Q (Good for Repositioning)"));
-
-            Debug = MainMenu.Add(new MenuBool("Debug", "Debug Mode (Prints chat)"));
+            Debug = MainMenu.Add(new MenuBool("Debug", "Debug Mode"));
 
             MainMenu.Attach();
         }
@@ -88,8 +80,6 @@ namespace Infected_Twitch.Menus
         public static Menu KillstealMenu;
         public static Menu TrinketMenu;
         public static Menu SkinMenu;
-        public static Menu ExploitMenu;
-        
 
         // List
         public static MenuList<string> SkinList;
@@ -114,9 +104,6 @@ namespace Infected_Twitch.Menus
         public static MenuBool UseYoumuu;
         public static MenuBool BuyTrinket;
         public static MenuBool UseSkin;
-        public static MenuBool UseExploit;
-        public static MenuBool Eaaq;
-        public static MenuBool Eaaaaq;
         public static MenuBool StealEpic;
         public static MenuBool StealRed;
         public static MenuBool DrawDmg;

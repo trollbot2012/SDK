@@ -17,3 +17,13 @@ C:\Users\Nechrito\documents\visual studio 2015\Projects\Infected Twitch\Infected
 C:\Users\Nechrito\documents\visual studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\LeagueSharp.SDKEx.pdb
 C:\Users\Nechrito\documents\visual studio 2015\Projects\Infected Twitch\Infected Twitch\obj\Debug\Infected Twitch.exe.manifest
 C:\Users\Nechrito\documents\visual studio 2015\Projects\Infected Twitch\Infected Twitch\obj\Debug\Infected Twitch.application
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\Infected Twitch.exe.config
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\obj\Debug\Infected Twitch.exe
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\obj\Debug\Infected Twitch.pdb
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\obj\Debug\Infected Twitch.csproj.Infected Twitch.exe.config
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\Infected Twitch.exe.manifest
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\Infected Twitch.application
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\Infected Twitch.exe
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\bin\Debug\Infected Twitch.pdb
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\obj\Debug\Infected Twitch.exe.manifest
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Infected Twitch\Infected Twitch\obj\Debug\Infected Twitch.application

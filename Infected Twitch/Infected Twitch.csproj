@@ -89,7 +89,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyVersion.cs" />
     <Compile Include="Core\Core.cs" />
     <Compile Include="Core\Dmg.cs" />
     <Compile Include="Core\Spells.cs" />
@@ -97,7 +96,6 @@
     <Compile Include="Event\DrawDmg.cs" />
     <Compile Include="Event\DrawSpells.cs" />
     <Compile Include="Event\EOnDeath.cs" />
-    <Compile Include="Event\Exploit.cs" />
     <Compile Include="Event\Killsteal.cs" />
     <Compile Include="Event\Modes.cs" />
     <Compile Include="Event\Recall.cs" />

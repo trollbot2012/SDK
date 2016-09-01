@@ -19,18 +19,14 @@ namespace Infected_Twitch
 
             Game.OnUpdate += Killsteal.Update;
             Game.OnUpdate += Skinchanger.Update;
-            Game.OnUpdate += Exploit.Update;
             Game.OnUpdate += Modes.Update;
             Game.OnUpdate += EOnDeath.Update;
             Game.OnUpdate += Trinkets.Update;
+
             Drawing.OnDraw += DrawSpells.OnDraw;
+            Drawing.OnEndScene += DrawDmg.OnEndScene;
 
-            Drawing.OnEndScene += DrawDmg.Draw;
-
-            AssemblyVersion.CheckVersion();
-
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Infected Twitch</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Version: 8</font></b>");
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Lag, E</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Infected Twitch</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> 6.17</font></b>");
         }
     }
 }

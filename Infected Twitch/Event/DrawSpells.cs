@@ -2,39 +2,24 @@
 
 using System;
 using System.Drawing;
-using Infected_Twitch.Core;
 using Infected_Twitch.Menus;
 using LeagueSharp;
-using LeagueSharp.SDK;
 using LeagueSharp.SDK.Utils;
 
 #endregion
 
 namespace Infected_Twitch.Event
 {
-    internal class DrawSpells : Core.Core
+    using Core;
+    internal class DrawSpells : Core
     {
         public static void OnDraw(EventArgs args)
         {
-            if (Player.IsDead) return;
-            var heropos = Drawing.WorldToScreen(ObjectManager.Player.Position);
+            if (Player.IsDead || !HasPassive || !MenuConfig.DrawTimer) return;
 
-            if (HasPassive)
-            {
-                var passiveTime = Math.Max(0, Player.GetBuff("TwitchHideInShadows").EndTime) - Game.Time;
+            var passiveTime = Math.Max(0, Player.GetBuff("TwitchHideInShadows").EndTime) - Game.Time;
 
-                if (!MenuConfig.DrawTimer) return;
-                Drawing.DrawText(heropos.X - 30, heropos.Y + 60, Color.White, "Q Time: " + passiveTime);
-                Render.Circle.DrawCircle(Player.Position, passiveTime * Player.MoveSpeed, Color.Gray);
-            }
-            if(Target == null || Target.IsDead || Target.IsInvulnerable || !Target.IsValidTarget()) return;
-
-            if (!MenuConfig.DrawKillable) return;
-
-            if (Target.Health <= Dmg.EDamage(Target))
-            {
-                Drawing.DrawText(heropos.X - 60, heropos.Y + 120, Color.White, Target.Name + " Is Killable By Passive");
-            }
+            Render.Circle.DrawCircle(Player.Position, passiveTime * Player.MoveSpeed, Color.Gray);
         }
     }
 }

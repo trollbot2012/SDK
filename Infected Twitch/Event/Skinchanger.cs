@@ -11,12 +11,7 @@ namespace Infected_Twitch.Event
     {
         public static void Update(EventArgs args)
         {
-            if (!MenuConfig.UseSkin)
-            {
-                Player.SetSkin(Player.CharData.BaseSkinName, Player.BaseSkinId);
-                return;
-            }
-            Player.SetSkin(Player.CharData.BaseSkinName, MenuConfig.SkinList.Index);
+            Player.SetSkin(Player.CharData.BaseSkinName, MenuConfig.UseSkin ? MenuConfig.SkinList.Index : Player.BaseSkinId);
         }
     }
 }
