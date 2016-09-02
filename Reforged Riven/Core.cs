@@ -10,7 +10,7 @@ namespace Reforged_Riven
 
         public const string IsFirstR = "RivenFengShuiEngine";
         public const string IsSecondR = "RivenIzunaBlade";
-
+        public static void AttackMove(AttackableUnit x) => Player.IssueOrder(GameObjectOrder.AttackTo, x); // NOTE: This is just for test!
         public static Orbwalker Orbwalker => Variables.Orbwalker;
         public static Obj_AI_Hero Player => ObjectManager.Player;
 

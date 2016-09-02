@@ -14,5 +14,6 @@ C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Reforged Riven\Reforged Riv
 C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Reforged Riven\Reforged Riven\obj\x86\Debug\Reforged Riven.pdb
 C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Reforged Riven\Reforged Riven\bin\Debug\Reforged Riven.exe.manifest
 C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Reforged Riven\Reforged Riven\bin\Debug\Reforged Riven.application
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Reforged Riven\Reforged Riven\obj\x86\Debug\Reforged Riven.TrustInfo.xml
 C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Reforged Riven\Reforged Riven\obj\x86\Debug\Reforged Riven.exe.manifest
 C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Reforged Riven\Reforged Riven\obj\x86\Debug\Reforged Riven.application

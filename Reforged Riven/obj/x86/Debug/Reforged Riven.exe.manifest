@@ -3,28 +3,28 @@
   <asmv1:assemblyIdentity name="Reforged Riven.exe" version="6.15.0.3" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Reforged Riven" version="6.15.0.0" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="Reforged Riven" version="6.17.0.0" language="neutral" processorArchitecture="x86" />
     <commandLine file="Reforged Riven.exe" parameters="" />
   </entryPoint>
   <trustInfo>
     <security>
       <applicationRequestMinimum>
-        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <PermissionSet version="1" class="System.Security.NamedPermissionSet" Name="LocalIntranet" Description="Default rights given to applications on the local intranet" Unrestricted="true" ID="Custom" SameSite="site" />
         <defaultAssemblyRequest permissionSetReference="Custom" />
       </applicationRequestMinimum>
       <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
-        <!--
-          UAC Manifest Options
-          If you want to change the Windows User Account Control level replace the 
-          requestedExecutionLevel node with one of the following.
+        <!-- UAC Manifest Options
+             If you want to change the Windows User Account Control level replace the 
+             requestedExecutionLevel node with one of the following.
 
         <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
         <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
         <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
 
-         If you want to utilize File and Registry Virtualization for backward 
-         compatibility then delete the requestedExecutionLevel node.
-    -->
+            Specifying requestedExecutionLevel element will disable file and registry virtualization. 
+            Remove this element if your application requires this virtualization for backwards
+            compatibility.
+        -->
         <requestedExecutionLevel level="asInvoker" uiAccess="false" />
       </requestedPrivileges>
     </security>
@@ -42,38 +42,38 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.dll" size="489472">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.dll" size="488448">
       <assemblyIdentity name="LeagueSharp" version="1.0.0.25" publicKeyToken="A41BA14F653257A6" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>HnpDuLE0WD5LnHWp+0jVrv/kLJOGm8B9g2RkMBL5SqA=</dsig:DigestValue>
+        <dsig:DigestValue>k01CkgG5wlu85UsbEF9J2/AHN0N2AVG0ox/wRaHL/KM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.Data.dll" size="4269568">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.Data.dll" size="4274176">
       <assemblyIdentity name="LeagueSharp.Data" version="1.1.0.1" publicKeyToken="7B6E8D26EAF0534F" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>szJXk9iY2DWa1r84GJ+rD+u4/8uINxteETDtn8Jf2sQ=</dsig:DigestValue>
+        <dsig:DigestValue>7FmZpt8OigQP41IH3fHgN9j+9c4x9SfxrsAufLeaR4o=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.SDKEx.dll" size="1426944">
-      <assemblyIdentity name="LeagueSharp.SDKEx" version="3.0.1.7" publicKeyToken="AE325B57D943987E" language="neutral" processorArchitecture="x86" />
+      <assemblyIdentity name="LeagueSharp.SDKEx" version="3.0.1.9" publicKeyToken="AE325B57D943987E" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>0SxYaMU8ho4/cf7zaDW4nLB5TIX6mzZrGwExph3lcwU=</dsig:DigestValue>
+        <dsig:DigestValue>b2ecrZwSJUD/OI4Vp2Gh1JRoPTKwBWmdget+jrNsimQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -90,14 +90,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Reforged Riven.exe" size="32256">
-      <assemblyIdentity name="Reforged Riven" version="6.15.0.0" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Reforged Riven.exe" size="33280">
+      <assemblyIdentity name="Reforged Riven" version="6.17.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>94U/ONZzH0AGo9Ob0wdQmsxlDxVmGUQagWgRd8iJLZ8=</dsig:DigestValue>
+        <dsig:DigestValue>139ayYD2/bB4bMTySDyI8cfM/y3Y2yUEKXFXK0zh+Cc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -134,4 +134,21 @@
       <dsig:DigestValue>1NgAxCSw4ibTXzWVy7D6Rw60Qih4Dn37KvGhG5Ora/s=</dsig:DigestValue>
     </hash>
   </file>
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- A list of the Windows versions that this application has been tested on and is
+           is designed to work with. Uncomment the appropriate elements and Windows will 
+           automatically selected the most compatible environment. -->
+      <!-- Windows Vista -->
+      <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />-->
+      <!-- Windows 7 -->
+      <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />-->
+      <!-- Windows 8 -->
+      <!--<supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}" />-->
+      <!-- Windows 8.1 -->
+      <!--<supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}" />-->
+      <!-- Windows 10 -->
+      <!--<supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />-->
+    </application>
+  </compatibility>
 </asmv1:assembly>

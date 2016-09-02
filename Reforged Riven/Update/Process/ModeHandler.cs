@@ -2,6 +2,7 @@
 
 using System;
 using System.Linq;
+using System.Windows.Forms;
 using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
@@ -15,6 +16,7 @@ namespace Reforged_Riven.Update.Process
 {
     internal class ModeHandler : Core
     {
+      
         public static void OnDoCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
             if (!sender.IsMe) return;
@@ -28,50 +30,60 @@ namespace Reforged_Riven.Update.Process
 
                     foreach (var m in minions)
                     {
-                        if (MenuConfig.LaneVisible && m.CountEnemyHeroesInRange(1500) > 0) continue;
-                        if (m.IsUnderEnemyTurret()) continue;
+                        if (MenuConfig.LaneVisible
+                            && m.CountEnemyHeroesInRange(1500) > 0 
+                            || !Spells.Q.IsReady() 
+                            || !MenuConfig.LaneQ
+                            || m.IsUnderEnemyTurret()) continue;
 
-                        if (!Spells.Q.IsReady() || !MenuConfig.LaneQ) continue;
-
+                        AttackMove(m);
                         Logic.ForceItem();
-                        Logic.ForceCastQ(m);
+                        Spells.Q.Cast(m);
                     }
                 }
 
                 // Turret
-                var turret = args.Target as Obj_AI_Turret;
+                var turret = GameObjects.EnemyTurrets.FirstOrDefault(x => x.IsValidTarget(360));
 
                 if (turret != null && MenuConfig.LaneQ)
                 {
-                    if (turret.IsValid && Spells.Q.IsReady())
+                    if (Spells.Q.IsReady())
                     {
+                        AttackMove(turret);
                         Logic.ForceCastQ(turret);
                     }
                 }
 
                 // Jungle
-                var mobs = GameObjects.Jungle.Where(x => x.IsValidTarget(Player.GetRealAutoAttackRange(Player)));
+                var mobs = GameObjects.Jungle.Where(x => x.IsValidTarget(Player.GetRealAutoAttackRange(Player) + 100));
 
                 foreach (var m in mobs)
                 {
-                    if (!m.IsValid) return;
+                    if (m.Health < Player.GetAutoAttackDamage(m))
+                    {
+                        return;
+                    }
 
                     if (Spells.Q.IsReady() && MenuConfig.JungleQ)
                     {
+                        AttackMove(m);
                         Logic.ForceItem();
                         Spells.Q.Cast(m);
                     }
 
-                    else if (!Spells.W.IsReady() || !MenuConfig.JungleW) return;
+                    else if (!Spells.W.IsReady() || !MenuConfig.JungleW)
+                    {
+                        return;
+                    }
 
                     Logic.ForceItem();
                     Spells.W.Cast(m);
                 }
             }
 
-            var a = GameObjects.EnemyHeroes.Where(x => x.IsValidTarget(Player.AttackRange + 360));
+            var heroes = GameObjects.EnemyHeroes.Where(x => x.IsValidTarget(Player.AttackRange + 260));
 
-            var targets = a as Obj_AI_Hero[] ?? a.ToArray();
+            var targets = heroes as Obj_AI_Hero[] ?? heroes.ToArray();
 
             if (Orbwalker.ActiveMode == OrbwalkingMode.Combo)
             {
@@ -79,8 +91,18 @@ namespace Reforged_Riven.Update.Process
                 {
                     if (!Spells.Q.IsReady() || !Logic.InWRange(target)) continue;
 
+                    AttackMove(target);
                     Logic.ForceItem();
-                    Logic.ForceCastQ(target);
+
+                    if (MenuConfig.QChase && !target.IsFacing(Player))
+                    {
+                        Logic.ForceCastQ(target);
+                    }
+                    else
+                    {
+                        Spells.Q.Cast(target);
+                    }
+                   
                 }
             }
 
@@ -88,6 +110,7 @@ namespace Reforged_Riven.Update.Process
 
             foreach (var target in targets)
             {
+                AttackMove(target);
                 Logic.ForceItem();
                 Logic.ForceCastQ(target);
             }

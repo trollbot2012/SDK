@@ -58,9 +58,12 @@ namespace Reforged_Riven.Draw
 
             if (!MenuConfig.DrawCombo) return;
 
-            if (Spells.Flash.IsReady() && Spells.R.IsReady() && MenuConfig.BurstKeyBind.Active)
+            if (Spells.Flash.IsReady() && MenuConfig.BurstKeyBind.Active)
             {
-                Render.Circle.DrawCircle(Player.Position, 425 + Spells.W.Range - 35, Color.Yellow, 5, true);
+                if (Spells.R.IsReady() || MenuConfig.FnoR)
+                {
+                    Render.Circle.DrawCircle(Player.Position, 425 + Spells.W.Range - 35, Color.Yellow, 4, true);
+                }
             }
 
            if (Spells.E.IsReady())

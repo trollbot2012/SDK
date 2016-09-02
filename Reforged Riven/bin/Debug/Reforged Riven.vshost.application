@@ -7,14 +7,14 @@
     <framework targetVersion="4.6.1" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Reforged Riven.exe.manifest" size="7578">
+    <dependentAssembly dependencyType="install" codebase="Reforged Riven.exe.manifest" size="8692">
       <assemblyIdentity name="Reforged Riven.exe" version="6.15.0.3" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>xdilfNrU5mgSGa6eUjBBBNW2Z/GF65sFbh2Cba4EAmM=</dsig:DigestValue>
+        <dsig:DigestValue>CaEBZiDI8EDAr7wzuhuWCIUMLv0VfNbqFToafDibRuM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

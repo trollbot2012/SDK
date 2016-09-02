@@ -19,18 +19,13 @@ namespace Reforged_Riven.Extras
             {
                 Items.UseItem(3077);
             }
-            Variables.Orbwalker.ResetSwingTimer();
         }
+
         public static void CastYoumoo()
         {
-            if (Items.CanUseItem(3142))
-            {
-                if (GameObjects.Player.IsWindingUp ||
-                    GameObjects.Player.IsCastingInterruptableSpell())
-                {
-                    Items.UseItem(3142);
-                }
-            }
+            if (!Items.CanUseItem(3142)) return;
+
+            Items.UseItem(3142);
         }
     }
 }

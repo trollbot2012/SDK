@@ -43,7 +43,7 @@ namespace Reforged_Riven.Extras
         {
             if (ForceQ && Spells.Q.IsReady() && Qtarget != null)
             {
-                Spells.Q.Cast(Qtarget.Position);
+                Spells.Q.Cast(Player.Position.Extend(Qtarget.Position, - 250));
             }
 
             if (_forceW)
@@ -104,7 +104,7 @@ namespace Reforged_Riven.Extras
             Items.UseItem(3142);
         }
 
-        public static List<string> targetedAntiSpell = new List<string>()
+        public static List<string> TargetedAntiSpell = new List<string>()
         {
             "MonkeyKingQAttack", "YasuoDash",
             "FizzPiercingStrike", "RengarQ",
@@ -113,7 +113,7 @@ namespace Reforged_Riven.Extras
             "FioraEAttack",
         };
 
-        public static List<string> eAntiSpell = new List<string>()
+        public static List<string> EAntiSpell = new List<string>()
         {
            "MonkeyKingSpinToWin",  "KatarinaRTrigger",
             "HungeringStrike", "TwitchEParticle",
@@ -126,7 +126,7 @@ namespace Reforged_Riven.Extras
            
         };
 
-        public static List<string> wAntiSpell = new List<string>()
+        public static List<string> WAntiSpell = new List<string>()
         {
             "RenektonPreExecute",
             "TalonCutthroat",

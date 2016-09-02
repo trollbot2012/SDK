@@ -25,12 +25,12 @@ namespace Reforged_Riven.Update
 
             if (Spells.E.IsReady())
             {
-                if(Logic.eAntiSpell.Contains(args.SData.Name) || (Logic.targetedAntiSpell.Contains(args.SData.Name) && args.Target.IsMe))
+                if(Logic.EAntiSpell.Contains(args.SData.Name) || (Logic.TargetedAntiSpell.Contains(args.SData.Name) && args.Target.IsMe))
 
                 Spells.E.Cast(epos);
             }
 
-            if (!Logic.wAntiSpell.Contains(args.SData.Name) || !Spells.W.IsReady()) return;
+            if (!Logic.WAntiSpell.Contains(args.SData.Name) || !Spells.W.IsReady()) return;
 
                Spells.W.Cast();
         }

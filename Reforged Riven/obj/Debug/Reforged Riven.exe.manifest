@@ -42,38 +42,38 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.dll" size="489472">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.dll" size="488448">
       <assemblyIdentity name="LeagueSharp" version="1.0.0.25" publicKeyToken="A41BA14F653257A6" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>rQiEQWVM5fsAcz86635pa5yOeXLBx+AlnYO4wqq2jmY=</dsig:DigestValue>
+        <dsig:DigestValue>k01CkgG5wlu85UsbEF9J2/AHN0N2AVG0ox/wRaHL/KM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.Data.dll" size="4269568">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.Data.dll" size="4274176">
       <assemblyIdentity name="LeagueSharp.Data" version="1.1.0.1" publicKeyToken="7B6E8D26EAF0534F" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>kpiaSM1FEzGC0AXii7ATsdZuJBwpaewTV8eEklFVqBU=</dsig:DigestValue>
+        <dsig:DigestValue>eLGucea5GhNHkEWkq+446fPdLxsNrlD9rfTIyURDZM0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LeagueSharp.SDKEx.dll" size="1426944">
-      <assemblyIdentity name="LeagueSharp.SDKEx" version="3.0.1.7" publicKeyToken="AE325B57D943987E" language="neutral" processorArchitecture="x86" />
+      <assemblyIdentity name="LeagueSharp.SDKEx" version="3.0.1.9" publicKeyToken="AE325B57D943987E" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>D+Bkib9JGdM/tsYRiCPgGMvO+ruU9YhoNh9WXM8r2Ik=</dsig:DigestValue>
+        <dsig:DigestValue>C1AB+n2uPSMePgLaEA9rCMrDny230EMPmaKES+8lVGk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -97,7 +97,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>tzLUiJ7kiCNbxUWQUdyqua0dnaEr4C7YSRS1d+P5zis=</dsig:DigestValue>
+        <dsig:DigestValue>+YdOsXGSuG7tRCQugP+hlnS9x4QumJHXnzzConv0aVw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
