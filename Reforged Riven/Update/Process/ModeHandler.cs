@@ -94,7 +94,10 @@ namespace Reforged_Riven.Update.Process
                     AttackMove(target);
                     Logic.ForceItem();
 
-                    if (MenuConfig.QChase && !target.IsFacing(Player))
+                    if (MenuConfig.QChase
+                        && !target.IsFacing(Player)
+                        && target.IsMoving
+                        && Player.IsFacing(target))
                     {
                         Logic.ForceCastQ(target);
                     }
@@ -102,7 +105,6 @@ namespace Reforged_Riven.Update.Process
                     {
                         Spells.Q.Cast(target);
                     }
-                   
                 }
             }
 
