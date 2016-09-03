@@ -9,7 +9,7 @@ namespace Reforged_Riven.Update
         {
             var target = args.Sender;
 
-            if (!target.IsEnemy || !Spells.W.IsReady() || target.IsZombie || target.IsInvulnerable) return;
+            if (!target.IsEnemy || !Spells.W.IsReady()) return;
 
             if (Logic.InWRange(target))
             {

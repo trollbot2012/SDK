@@ -58,8 +58,10 @@ namespace Reforged_Riven.Menu
             WallFlee = FleeMenu.Add(new MenuBool("WallFlee", "WallFlee"));
             FleeKey = FleeMenu.Add(new MenuKeyBind("FleeKey", "Flee Key", System.Windows.Forms.Keys.A, KeyBindType.Press));
 
-            MainMenu.Add(new MenuSeparator("Version", "Version: 6.17.1"));
-            MainMenu.Add(new MenuSeparator("Credits", "Developed by Nechrito"));
+            CreditsMenu = MainMenu.Add(new Menu("Version + Credits", "Credits"));
+            CreditsMenu.Add(new MenuSeparator("Version", "Version: 6.17.1"));
+            CreditsMenu.Add(new MenuSeparator("Credits", "Developed by Nechrito"));
+            CreditsMenu.Add(new MenuSeparator("Credits2", "Resets by Brian"));
 
             MainMenu.Attach();
         }
@@ -71,7 +73,7 @@ namespace Reforged_Riven.Menu
         public static Menu MiscMenu;
         public static Menu DrawMenu;
         public static Menu FleeMenu;
-
+        public static Menu CreditsMenu;
        
         // Keybind
         public static MenuKeyBind FleeKey;

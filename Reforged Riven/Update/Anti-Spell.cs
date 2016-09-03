@@ -15,19 +15,12 @@ namespace Reforged_Riven.Update
 
             if (!(Player.Distance(sender.ServerPosition) <= args.SData.CastRange)) return;
 
-            //if (args.SData.TargettingType == SpellDataTargetType.SelfAoe && Spells.E.IsReady()) // Wasteful af.
-            //{
-            //    if (Orbwalker.ActiveMode == OrbwalkingMode.LastHit || Orbwalker.ActiveMode == OrbwalkingMode.LaneClear)
-            //    {
-            //       Spells.E.Cast(epos);
-            //    }
-            //}
-
             if (Spells.E.IsReady())
             {
-                if(Logic.EAntiSpell.Contains(args.SData.Name) || (Logic.TargetedAntiSpell.Contains(args.SData.Name) && args.Target.IsMe))
-
-                Spells.E.Cast(epos);
+                if (Logic.EAntiSpell.Contains(args.SData.Name) || (Logic.TargetedAntiSpell.Contains(args.SData.Name) && args.Target.IsMe))
+                {
+                    Spells.E.Cast(epos);
+                }
             }
 
             if (!Logic.WAntiSpell.Contains(args.SData.Name) || !Spells.W.IsReady()) return;

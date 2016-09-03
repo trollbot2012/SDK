@@ -20,8 +20,12 @@ namespace Reforged_Riven.Update
 
             if (target == null) return;
 
-            if (target.HasBuff("kindrednodeathbuff") || target.HasBuff("Undying Rage") ||
-                target.HasBuff("JudicatorIntervention")) return;
+            if (target.HasBuff("kindrednodeathbuff") 
+                || target.HasBuff("Undying Rage") 
+                || target.HasBuff("JudicatorIntervention"))
+            {
+                return;
+            }
 
             //if (Spells.Q.IsReady())
             //{

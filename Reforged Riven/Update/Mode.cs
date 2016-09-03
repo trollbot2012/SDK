@@ -89,20 +89,21 @@ namespace Reforged_Riven.Update
                 }
 
                 DelayAction.Add(30, Logic.ForceItem);
-                if (Logic.InWRange(target))
-                {
-                    DelayAction.Add(130, () => Spells.W.Cast());
-                }
+
+                //if (Logic.InWRange(target) && Qstack >= 2)
+                //{
+                //    DelayAction.Add(130, () => Spells.W.Cast());
+                //}
 
 
-                if (Qstack != 1)
-                {
-                    return;
-                }
-                    DelayAction.Add(160, () => Logic.ForceCastQ(target));
-                {
-                    return;
-                }
+                //if (Qstack != 1)
+                //{
+                //    return;
+                //}
+                //    DelayAction.Add(160, () => Logic.ForceCastQ(target));
+                //{
+                //    return;
+                //}
             }
 
             if (Spells.E.IsReady())
@@ -119,9 +120,9 @@ namespace Reforged_Riven.Update
                 Logic.ForceCastQ(target);
             }
 
-            if (Spells.W.IsReady() && Logic.InWRange(target))
+            if (Spells.W.IsReady() && Logic.InWRange(target) && Qstack > 1)
             {
-                Logic.ForceW();
+                Spells.W.Cast(target);
             }
         }
 

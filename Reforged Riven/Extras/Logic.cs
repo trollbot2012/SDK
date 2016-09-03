@@ -46,11 +46,6 @@ namespace Reforged_Riven.Extras
                 Spells.Q.Cast(Player.Position.Extend(Qtarget.Position, - 250));
             }
 
-            if (_forceW)
-            {
-                Spells.W.Cast();
-            }
-
             if (_forceR && Spells.R.Instance.Name == IsFirstR)
             {
                 Spells.R.Cast();
