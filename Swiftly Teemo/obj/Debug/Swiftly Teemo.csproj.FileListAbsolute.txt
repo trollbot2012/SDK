@@ -1,2 +1,9 @@
 C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Swiftly Teemo\Swiftly Teemo\bin\Debug\Swiftly Teemo.exe.config
 C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Swiftly Teemo\Swiftly Teemo\obj\Debug\Swiftly Teemo.csprojResolveAssemblyReference.cache
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Swiftly Teemo\Swiftly Teemo\bin\Debug\Swiftly Teemo.exe
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Swiftly Teemo\Swiftly Teemo\bin\Debug\Swiftly Teemo.pdb
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Swiftly Teemo\Swiftly Teemo\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Swiftly Teemo\Swiftly Teemo\bin\Debug\LeagueSharp.Data.pdb
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Swiftly Teemo\Swiftly Teemo\bin\Debug\LeagueSharp.SDKEx.pdb
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Swiftly Teemo\Swiftly Teemo\obj\Debug\Swiftly Teemo.exe
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Swiftly Teemo\Swiftly Teemo\obj\Debug\Swiftly Teemo.pdb

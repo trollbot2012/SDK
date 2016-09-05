@@ -13,9 +13,12 @@ namespace Swiftly_Teemo.Handler
     {
         public static void KillSteal()
         {
-            foreach (var target in GameObjects.EnemyHeroes.Where(x => x.IsValidTarget(Spells.Q.Range) && !x.IsDead && !x.IsZombie))
+            foreach (var target in GameObjects.EnemyHeroes.Where(x => x.IsValidTarget(Spells.Q.Range)))
             {
-                if (!target.IsValidTarget()) continue;
+                if (target == null)
+                {
+                    return;
+                }
 
                 if (Spells.Q.IsReady() && target.Health < Spells.Q.GetDamage(target))
                 {
@@ -23,11 +26,19 @@ namespace Swiftly_Teemo.Handler
                 }
             }
 
-            if (!MenuConfig.KillStealSummoner) return;
+            if (!MenuConfig.KillStealSummoner || !Spells.Ignite.IsReady() || Spells.Ignite == SpellSlot.Unknown)
+            {
+                return;
+            }
 
             foreach (var target in GameObjects.EnemyHeroes.Where(t => t.IsValidTarget(600f)))
             {
-                if (target.Health < Dmg.IgniteDmg && Spells.Ignite.IsReady())
+                if (target == null)
+                {
+                    return;
+                }
+
+                if (target.Health < Dmg.IgniteDmg)
                 {
                     GameObjects.Player.Spellbook.CastSpell(Spells.Ignite, target);
                 }

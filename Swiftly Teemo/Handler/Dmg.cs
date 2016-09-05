@@ -17,15 +17,9 @@ namespace Swiftly_Teemo.Handler
 
             float dmg = 0;
 
-            if (MenuConfig.KillStealSummoner)
-            {
-                if (Spells.Ignite.IsReady())
-                {
-                    dmg = dmg + IgniteDmg;
-                }
-            }
-
-            dmg += (float)Player.GetAutoAttackDamage(enemy);
+            if (MenuConfig.KillStealSummoner && Spells.Ignite.IsReady()) dmg = dmg + IgniteDmg;
+          
+            if(!Player.IsWindingUp) dmg += (float)Player.GetAutoAttackDamage(enemy);
 
             if (Spells.E.IsReady()) dmg += Spells.E.GetDamage(enemy);
 

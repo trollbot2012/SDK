@@ -24,7 +24,7 @@ namespace Swiftly_Teemo.Menu
             DrawMenu = MainMenu.Add(new LeagueSharp.SDK.UI.Menu("Draw", "Draw"));
             Dind = DrawMenu.Add(new MenuBool("dind", "Damage Indicator", true));
             EngageDraw = DrawMenu.Add(new MenuBool("EngageDraw", "Draw Engage", true));
-            DrawR = DrawMenu.Add(new MenuBool("DrawR", "Draw R Prediction"));
+           // DrawR = DrawMenu.Add(new MenuBool("DrawR", "Draw R Prediction"));
 
             SkinMenu = MainMenu.Add(new LeagueSharp.SDK.UI.Menu("SkinChanger", "SkinChanger"));
             UseSkin = SkinMenu.Add(new MenuBool("UseSkin", "Use SkinChanger"));

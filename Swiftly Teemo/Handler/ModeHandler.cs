@@ -10,7 +10,10 @@ namespace Swiftly_Teemo.Handler
     {
         public static void OnDoCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            if (!sender.IsMe) return;
+            if (!sender.IsMe)
+            {
+                return;
+            }
 
             if (Orbwalker.ActiveMode == OrbwalkingMode.Combo || Orbwalker.ActiveMode == OrbwalkingMode.Hybrid)
             {
@@ -19,30 +22,34 @@ namespace Swiftly_Teemo.Handler
 
                 foreach (var target in targets)
                 {
-                    Spells.Q.Cast(target);
+                    Spells.Q.CastOnUnit(target);   
                 }
             }
 
-            if (Orbwalker.ActiveMode != OrbwalkingMode.LaneClear || !(args.Target is Obj_AI_Minion)) return;
+            if (Orbwalker.ActiveMode != OrbwalkingMode.LaneClear || !(args.Target is Obj_AI_Minion))
             {
-                var mobs = GameObjects.Jungle.Where(x => x.IsValidTarget(Spells.Q.Range));
+                return;
+            }
 
-                foreach (var m in mobs)
+            var mobs = GameObjects.JungleLarge.Where(x => x.IsValidTarget(Spells.Q.Range));
+
+            foreach (var m in mobs)
+            {
+                Spells.Q.CastOnUnit(m);
+            }
+
+            if (!MenuConfig.LaneQ) return;
+
+            var minions = GameObjects.EnemyMinions.Where(m => m.IsValidTarget(Spells.Q.Range));
+
+            foreach (var m in minions)
+            {
+                if (m.Health > Player.GetAutoAttackDamage(m) || Player.IsWindingUp)
                 {
-                    if(!m.IsValid) return;
-
-                    Spells.Q.Cast(m);
+                    return;
                 }
 
-                if (!MenuConfig.LaneQ) return;
-                var minions = GameObjects.EnemyMinions.Where(m => m.IsValidTarget(Spells.Q.Range));
-
-                foreach (var m in minions)
-                {
-                    if(m.Health > Spells.Q.GetDamage(m)) return;
-
-                    Spells.Q.Cast(m);
-                }
+                Spells.Q.CastOnUnit(m);
             }
         }
     }

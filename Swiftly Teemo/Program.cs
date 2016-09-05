@@ -30,8 +30,8 @@ namespace Swiftly_Teemo
                 return;
             }
 
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Swiftly Teemo</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Version: 5</font></b>");
-            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Compiling Error</font></b>");
+            Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Swiftly Teemo</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Version: 6.17</font></b>");
+          //  Game.PrintChat("<b><font color=\"#FFFFFF\">[</font></b><b><font color=\"#00e5e5\">Update</font></b><b><font color=\"#FFFFFF\">]</font></b><b><font color=\"#FFFFFF\"> Compiling Error</font></b>");
 
              Spells.Load();
              MenuConfig.Load();
@@ -51,7 +51,7 @@ namespace Swiftly_Teemo
             Killsteal.KillSteal();
             Mode.Skin();
             Mode.Flee();
-          
+
             switch (Orbwalker.ActiveMode)
             {
                 case OrbwalkingMode.LaneClear:

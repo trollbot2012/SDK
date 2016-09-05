@@ -13,7 +13,6 @@ namespace Swiftly_Teemo
     internal class Core
     {
         public static Orbwalker Orbwalker => Variables.Orbwalker;
-        public static Obj_AI_Hero Target => Variables.TargetSelector.GetTarget(Player.GetRealAutoAttackRange(), DamageType.Physical);
         public static Obj_AI_Hero Player => ObjectManager.Player;
        // public static bool NoxiousTrap => Target.Buffs.Any(x => x.Name.ToLower().Contains("Noxious Trap"));
     }

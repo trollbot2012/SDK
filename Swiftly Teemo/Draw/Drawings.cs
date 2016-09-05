@@ -26,17 +26,6 @@ namespace Swiftly_Teemo.Draw
                         ? System.Drawing.Color.DarkSlateGray
                         : System.Drawing.Color.LightGray);
             }
-
-            if (!MenuConfig.DrawR) return;
-
-            var target = Variables.TargetSelector.GetSelectedTarget();
-
-            if (!target.IsValidTarget() || target == null || target.IsDead) return;
-            if (!Spells.R.IsReady()) return;
-
-            var rPrediction = Spells.R.GetPrediction(target).UnitPosition;
-
-            Render.Circle.DrawCircle(rPrediction, 75, System.Drawing.Color.GhostWhite);
         }
     }
 }
