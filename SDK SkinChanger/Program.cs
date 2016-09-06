@@ -24,11 +24,6 @@ namespace SDK_SkinChanger
 
         private static void OnUpdate(EventArgs args)
         {
-            Skin();
-        }
-
-        public static void Skin()
-        {
            Player.SetSkin(Player.CharData.BaseSkinName, MenuConfig.UseSkin ? MenuConfig.SkinChanger.Index : Player.BaseSkinId);
         }
     }
