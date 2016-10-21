@@ -1,24 +1,27 @@
-﻿using System;
-using System.Linq;
-using LeagueSharp;
-using LeagueSharp.SDK;
-using SharpDX;
-using Preserved_Kassadin.Cores;
-
-namespace Preserved_Kassadin.Update.Draw
+﻿namespace Preserved_Kassadin.Update.Draw
 {
-    class DrawDmg
+    using System;
+    using System.Linq;
+
+    using LeagueSharp;
+    using LeagueSharp.SDK;
+
+    using Preserved_Kassadin.Cores;
+
+    using SharpDX;
+
+    internal class DrawDmg
     {
         private static readonly HpBarIndicator Indicator = new HpBarIndicator();
 
         public static void Draw(EventArgs args)
         {
-            foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().Where(ene => ene.IsValidTarget(1400) && !ene.IsZombie))
+            foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().Where(ene => ene.IsValidTarget(1500)))
             {
-                if (!MenuConfig.DrawDmg) continue;
+                if (!MenuConfig.DrawDmg) return;
 
-                Indicator.unit = enemy;
-                Indicator.drawDmg(Dmg.Damage(enemy), new ColorBGRA(255, 204, 0, 170));
+                Indicator.Unit = enemy;
+                Indicator.DrawDmg(Dmg.Damage(enemy), Color.LawnGreen);
             }
         }
     }

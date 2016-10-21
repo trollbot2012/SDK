@@ -1,11 +1,13 @@
-﻿using System;
-using LeagueSharp;
-using LeagueSharp.SDK;
-using Preserved_Kassadin.Cores;
-
-namespace Preserved_Kassadin.Update
+﻿namespace Preserved_Kassadin.Update
 {
-    class Trinket
+    using System;
+
+    using LeagueSharp;
+    using LeagueSharp.SDK;
+
+    using Preserved_Kassadin.Cores;
+
+    internal class Trinket
     {
         public static void Update(EventArgs args)
         {

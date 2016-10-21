@@ -1,9 +1,10 @@
-﻿using LeagueSharp.SDK;
-using System;
-
-namespace Preserved_Kassadin.Cores
+﻿namespace Preserved_Kassadin.Cores
 {
-    class Killsteal : Core
+    using System;
+
+    using LeagueSharp.SDK;
+
+    internal class Killsteal : Core
     {
         public static void Update(EventArgs args)
         {
@@ -23,9 +24,8 @@ namespace Preserved_Kassadin.Cores
             }
 
             if (Target.Health < Spells.R.GetDamage(Target)) Spells.R.Cast(Target);
-            
 
-            if(Spells.Ignite.IsReady() && Target.Health < Dmg.IgniteDmg) Player.Spellbook.CastSpell(Spells.Ignite, Target);
+            if (Spells.Ignite.IsReady() && Target.Health < Dmg.IgniteDmg) Player.Spellbook.CastSpell(Spells.Ignite, Target);
         }
     }
 }

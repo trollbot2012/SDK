@@ -1,22 +1,26 @@
-﻿using LeagueSharp;
-using LeagueSharp.SDK;
-using LeagueSharp.SDK.Enumerations;
-
-namespace Preserved_Kassadin.Cores
+﻿namespace Preserved_Kassadin.Cores
 {
-   internal class Spells
+    using LeagueSharp;
+    using LeagueSharp.SDK;
+    using LeagueSharp.SDK.Enumerations;
+
+    internal class Spells
     {
         public static SpellSlot Ignite { get; set; }
+
         public static Spell Q { get; set; }
+
         public static Spell W { get; set; }
+
         public static Spell E { get; set; }
+
         public static Spell R { get; set; }
 
         public static void Load()
         {
             Q = new Spell(SpellSlot.Q, 650);
             W = new Spell(SpellSlot.W, 200);
-            E = new Spell(SpellSlot.E, 700);
+            E = new Spell(SpellSlot.E, 650);
             R = new Spell(SpellSlot.R, 500);
 
             Q.SetTargetted(0.5f, 1400);

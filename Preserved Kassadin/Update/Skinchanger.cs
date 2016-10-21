@@ -1,10 +1,12 @@
-﻿using LeagueSharp;
-using Preserved_Kassadin.Cores;
-using System;
-
-namespace Preserved_Kassadin.Update
+﻿namespace Preserved_Kassadin.Update
 {
-    class Skinchanger
+    using System;
+
+    using LeagueSharp;
+
+    using Preserved_Kassadin.Cores;
+
+    internal class Skinchanger
     {
         public static void Update(EventArgs args)
         {

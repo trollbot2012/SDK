@@ -1,1 +1,2 @@
 c:\users\nechrito\documents\visual studio 2015\Projects\Preserved Kassadin\Preserved Kassadin\bin\Debug\Preserved Kassadin.exe.config
+C:\Users\Nechr\Documents\Visual Studio 2015\Projects\Preserved Kassadin\Preserved Kassadin\bin\Debug\Preserved Kassadin.exe.config
